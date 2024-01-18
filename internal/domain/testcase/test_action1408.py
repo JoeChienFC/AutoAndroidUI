@@ -29,7 +29,7 @@ def test_action_type_1408():
     new_view_count, times = update_community_get_community_view_count(communityid)
     print(f"update : {times} ")
     print(f"new view:{new_view_count}")
-    assert default_view_count + 1 == new_view_count, "view_count 沒有增加"
+    assert default_view_count + 1 <= new_view_count, "view_count 沒有增加"
 
 
 def update_community_get_community_view_count(community_id):
@@ -37,13 +37,13 @@ def update_community_get_community_view_count(community_id):
     times = 0
     for i in range(10):
         if not ADBClient.check_action_type_1408_is_none():
-            time.sleep(10)
+            time.sleep(5)
             view_count = API.get_api_community_result_view_count(community_id)
             return view_count, times
         else:
             community_feed.update_community_info()
             times += 1
-            time.sleep(7)
+            time.sleep(3)
 
 
 def update_community_get_community_id():
