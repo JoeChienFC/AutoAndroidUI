@@ -1,13 +1,58 @@
 import re
 import subprocess
 import time
+import json
 
-from internal.infra.pages.homefeed import HOMEFeed
+from internal.infra.pages.communityfeed import CommunityFeed
+from internal.infra.pages.homefeed import HomeFeed
 
 
 class ADBClient:
     def __init__(self):
         pass
+
+    @staticmethod
+    def grep_logcat_event_name(event_name):
+        # 組合 adb logcat 指令
+        command = rf'adb logcat -d | grep "event_name\":\"{event_name}\""'
+
+        # 使用 subprocess 執行指令
+        try:
+            print(command)
+            time.sleep(1)
+            # 使用 subprocess 執行指令，加上 stdout=subprocess.PIPE
+            result = subprocess.run(command, shell=True, capture_output=True, text=True)
+            print(result.stdout)
+
+            if rf'"event_name":"{event_name}"' in result.stdout:
+                return True
+            else:
+                return False
+
+        except subprocess.CalledProcessError as e:
+            print(f"Error executing command: {e}")
+
+    @staticmethod
+    def grep_logcat_event_name_content_type(event_name, content_type):
+        # 組合 adb logcat 指令
+        command = rf'adb logcat -d | grep "event_name\":\"{event_name}\""'
+
+        # 使用 subprocess 執行指令
+        try:
+            print(command)
+            time.sleep(1)
+            # 使用 subprocess 執行指令，加上 stdout=subprocess.PIPE
+            result = subprocess.run(command, shell=True, capture_output=True, text=True)
+            print(result.stdout)
+
+            if f'"event_name":"{event_name}"' and f'"content_type":"{content_type}"' in result.stdout:
+                return True
+
+            # 如果沒有符合的 event_name 和 content_type，返回 False
+            return False
+
+        except subprocess.CalledProcessError as e:
+            print(f"Error executing command: {e}")
 
     @staticmethod
     def start_playsee_app():
@@ -16,8 +61,8 @@ class ADBClient:
 
         # Execute the ADB command
         subprocess.run(cmd, shell=True)
-        time.sleep(2)
-        return HOMEFeed()
+        time.sleep(5)
+        return CommunityFeed()
 
     @staticmethod
     def stop_playsee_app():

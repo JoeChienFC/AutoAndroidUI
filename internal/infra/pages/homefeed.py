@@ -4,10 +4,22 @@ import time
 from internal.infra.pages.communityfeed import CommunityFeed
 
 
-class HOMEFeed:
+class HomeFeed:
 
     def __init__(self):
         self.d = u2.connect()
+        self.location_picker_xpath = '//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]'
+
+    def location_picker_click(self):
+        try:
+            if self.d(description="縮小").exists(5):
+                self.d(description="縮小").click()
+            # 點擊 location picker
+            self.d.xpath(self.location_picker_xpath).click()
+
+        except Exception as e:
+            print(f"進入 location_picker 失败: {e}")
+            assert False, "進入 location_picker 失败"
 
     def enter_community(self):
 
