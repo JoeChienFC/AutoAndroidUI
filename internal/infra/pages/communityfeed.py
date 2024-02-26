@@ -28,9 +28,9 @@ class CommunityFeed:
             if self.d(description="Tab 4 of 5").exists(5):
                 self.d(description="Tab 4 of 5").click()
                 print("成功進入 explore！")
-                time.sleep(2)
-                from internal.infra.pages.homefeed import HomeFeed
-                return HomeFeed()
+                # time.sleep(0.5)
+                # from internal.infra.pages.homefeed import HomeFeed
+                # return HomeFeed()
         except Exception as e:
             print(f"進入 explore 失败: {e}")
             assert False, "進入 explore 失败"

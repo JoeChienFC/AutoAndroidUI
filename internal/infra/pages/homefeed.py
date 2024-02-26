@@ -9,17 +9,61 @@ class HomeFeed:
     def __init__(self):
         self.d = u2.connect()
         self.location_picker_xpath = '//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]'
+        self.add_icon_xpath = '//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.widget.ImageView[3]'
+        self.home_feed_setup()
 
-    def location_picker_click(self):
+    def home_feed_setup(self):
         try:
             if self.d(description="縮小").exists(5):
                 self.d(description="縮小").click()
+        except Exception as e:
+            print(f"An error occurred during setup: {e}")
+
+    def btn_follow_click(self):
+        try:
+            if self.d(description="F​o​l​l​o​w").exists(2):
+                self.d(description="F​o​l​l​o​w").click()
+            else:
+                assert False, "沒有找到 follow 按鈕"
+
+        except Exception as e:
+            print(f"點擊 follow 失败: {e}")
+            assert False, "點擊 follow 失败"
+
+    def location_picker_click(self):
+        try:
             # 點擊 location picker
             self.d.xpath(self.location_picker_xpath).click()
+            time.sleep(1)
 
         except Exception as e:
             print(f"進入 location_picker 失败: {e}")
             assert False, "進入 location_picker 失败"
+
+    def icon_create_click(self):
+        try:
+            # 點擊 location picker
+            self.d.xpath(self.add_icon_xpath).click()
+            time.sleep(2)
+
+        except Exception as e:
+            print(f"進入 add_icon 失败: {e}")
+            assert False, "進入 add_icon 失败"
+
+    def btn_unfollow_click(self):
+        try:
+            if self.d(description="F​o​l​l​o​w​i​n​g").exists(2):
+                self.d(description="F​o​l​l​o​w​i​n​g").click()
+            else:
+                assert False, "沒有找到 following 按鈕"
+
+        except Exception as e:
+            print(f"點擊 following 失败: {e}")
+            assert False, "點擊 following 失败"
+
+    '''
+    -------------------------------------------
+    '''
 
     def enter_community(self):
 

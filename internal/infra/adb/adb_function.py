@@ -14,19 +14,20 @@ class ADBClient:
     @staticmethod
     def grep_logcat_event_name(event_name):
         # 組合 adb logcat 指令
-        command = rf'adb logcat -d | grep "event_name\":\"{event_name}\""'
+        command = rf'adb logcat -d | grep "\"event_name\":\"{event_name}\""'
 
         # 使用 subprocess 執行指令
         try:
             print(command)
-            time.sleep(1)
+            # time.sleep(1)
             # 使用 subprocess 執行指令，加上 stdout=subprocess.PIPE
             result = subprocess.run(command, shell=True, capture_output=True, text=True)
-            print(result.stdout)
+            print(f"logcat : {result.stdout}")
 
-            if rf'"event_name":"{event_name}"' in result.stdout:
+            if result.stdout:
                 return True
             else:
+                print(f"Error in logcat output: {result.stdout}")
                 return False
 
         except subprocess.CalledProcessError as e:
@@ -35,21 +36,19 @@ class ADBClient:
     @staticmethod
     def grep_logcat_event_name_content_type(event_name, content_type):
         # 組合 adb logcat 指令
-        command = rf'adb logcat -d | grep "event_name\":\"{event_name}\""'
-
+        command = rf'adb logcat -d | grep "\"event_name\":\"{event_name}\".*"content_type\":\"{content_type}\"'
         # 使用 subprocess 執行指令
         try:
-            print(command)
-            time.sleep(1)
+            print(f"adb command : {command}")
             # 使用 subprocess 執行指令，加上 stdout=subprocess.PIPE
             result = subprocess.run(command, shell=True, capture_output=True, text=True)
-            print(result.stdout)
+            print(f"logcat : {result.stdout}")
 
-            if f'"event_name":"{event_name}"' and f'"content_type":"{content_type}"' in result.stdout:
+            if result.stdout:
                 return True
-
-            # 如果沒有符合的 event_name 和 content_type，返回 False
-            return False
+            else:
+                print(f"Error in logcat output: {result.stdout}")
+                return False
 
         except subprocess.CalledProcessError as e:
             print(f"Error executing command: {e}")
