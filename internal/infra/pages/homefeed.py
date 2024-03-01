@@ -1,9 +1,6 @@
 import uiautomator2 as u2
 import time
 
-from internal.infra.pages.communityfeed import CommunityFeed
-from internal.infra.pages.share import Share
-
 
 class HomeFeed:
 
@@ -146,6 +143,7 @@ class HomeFeed:
             time.sleep(1)
             self.d.click(*self.share_icon_x_y)
             time.sleep(1)
+            from internal.infra.pages.share import Share
             return Share()
 
         except Exception as e:
@@ -186,6 +184,8 @@ class HomeFeed:
             # 點擊 location picker
             self.d.xpath(self.location_picker_xpath).click()
             time.sleep(1)
+            from internal.infra.pages.spot_location_picker import SpotLocationPicker
+            return SpotLocationPicker()
 
         except Exception as e:
             print(f"進入 location_picker 失败: {e}")
@@ -223,6 +223,8 @@ class HomeFeed:
                 self.d(description="Tab 2 of 5").click()
                 print("成功進入community！")
                 time.sleep(10)
+
+                from internal.infra.pages.communityfeed import CommunityFeed
                 return CommunityFeed()
         except Exception as e:
             print(f"進入community失败: {e}")
