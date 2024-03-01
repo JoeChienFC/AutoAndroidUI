@@ -12,6 +12,7 @@ class HomeFeed:
         self.location_picker_xpath = '//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]'
         self.add_icon_xpath = '//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.widget.ImageView[3]'
         self.like_icon_xpath = '//android.widget.Button'
+        self.icon_create_xpath = '//android.widget.FrameLayout[3]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.widget.ImageView[3]'
         self.comment_icon_x_y = (0.928, 0.725)
         self.share_icon_x_y = (0.934, 0.792)
         self.more_icon_x_y = (0.924, 0.855)
@@ -21,6 +22,7 @@ class HomeFeed:
         self.screen_mute_x_y = (0.503, 0.425)
         self.text_sharecommunity_x_y = (0.113, 0.823)
         self.text_caption_x_y = (0.061, 0.821)
+
         self.home_feed_setup()
 
     def home_feed_setup(self):
@@ -29,6 +31,15 @@ class HomeFeed:
                 self.d(description="縮小").click()
         except Exception as e:
             print(f"An error occurred during setup: {e}")
+
+    def icon_create_click(self):
+        try:
+            time.sleep(1)
+            self.d.xpath(self.icon_create_xpath).click()
+
+        except Exception as e:
+            print(f"點擊 icon_create 失败: {e}")
+            assert False, "點擊 icon_create 失败"
 
     def text_caption_click(self):
         try:

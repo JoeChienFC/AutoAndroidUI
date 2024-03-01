@@ -1,6 +1,7 @@
 from internal.infra.adb.adb_function import ADBClient
 from internal.infra.bigquery.get_bigquery_db import BigQueryFunction
 from internal.infra.pages.popUp import PopUp
+from internal.infra.validators.validators import Validators
 
 
 def test_bottom_tab_ai_click():
@@ -10,10 +11,7 @@ def test_bottom_tab_ai_click():
     result = BigQueryFunction().query_bigquery_dynamic_date()
     BigQueryFunction().display_query_result(result, 5)
 
-    assert result[0]['event_name'] == 'screen_view' or result[1][
-        'event_name'] == 'screen_view', "Test failed: event_name is not 'screen_view' in result"
-    assert result[1]['event_name'] == event_name or result[2][
-        'event_name'] == event_name, f"Test failed: event_name is not {event_name} in result"
+    Validators().validate_change_page(result, event_name)
 
 
 def test_bottom_tab_community_click():
@@ -23,8 +21,7 @@ def test_bottom_tab_community_click():
     result = BigQueryFunction().query_bigquery_dynamic_date()
     BigQueryFunction().display_query_result(result, 10)
 
-    assert any(item['event_name'] == event_name for item in
-               result[:10]), f"Test failed: event_name is not {event_name} in result"
+    Validators().validate_event_name_in_count(result, event_name, 10)
 
 
 def test_bottom_tab_explore_click():
@@ -34,10 +31,7 @@ def test_bottom_tab_explore_click():
     result = BigQueryFunction().query_bigquery_dynamic_date()
     BigQueryFunction().display_query_result(result, 5)
 
-    assert result[0]['event_name'] == 'screen_view' or result[1][
-        'event_name'] == 'screen_view', "Test failed: event_name is not 'screen_view' in result"
-    assert result[1]['event_name'] == event_name or result[2][
-        'event_name'] == event_name, f"Test failed: event_name is not {event_name} in result"
+    Validators().validate_change_page(result, event_name)
 
 
 def test_bottom_tab_my_profile_click():
@@ -48,10 +42,7 @@ def test_bottom_tab_my_profile_click():
     result = BigQueryFunction().query_bigquery_dynamic_date()
     BigQueryFunction().display_query_result(result, 5)
 
-    assert result[0]['event_name'] == 'screen_view' or result[1][
-        'event_name'] == 'screen_view', "Test failed: event_name is not 'screen_view' in result"
-    assert result[1]['event_name'] == event_name or result[2][
-        'event_name'] == event_name, f"Test failed: event_name is not {event_name} in result"
+    Validators().validate_change_page(result, event_name)
 
 
 def test_bottom_tab_spot_click():
@@ -61,10 +52,5 @@ def test_bottom_tab_spot_click():
     result = BigQueryFunction().query_bigquery_dynamic_date()
     BigQueryFunction().display_query_result(result, 5)
 
-    assert any(
-        item['event_name'] == 'screen_view' for item in result[:10]), "Test failed: 'screen_view' not found in result"
-    index_of_screen_view = next((i for i, item in enumerate(result[:10]) if item['event_name'] == 'screen_view'), None)
-    assert index_of_screen_view is not None, "Test failed: 'screen_view' not found in result"
-    assert any(item['event_name'] == event_name for item in
-               result[:index_of_screen_view]), f"Test failed: event_name is not {event_name} in result"
+    Validators().validate_change_page(result, event_name)
 
