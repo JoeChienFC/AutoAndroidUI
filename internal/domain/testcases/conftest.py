@@ -1,3 +1,5 @@
+import time
+
 import pytest
 
 from internal.infra.adb.adb_function import ADBClient
@@ -8,6 +10,7 @@ def restore_environment():
     ADBClient.stop_playsee_app()
     yield
     ADBClient.stop_playsee_app()
+    time.sleep(1)
 
 
 # 在 conftest.py 或者你的測試模塊中

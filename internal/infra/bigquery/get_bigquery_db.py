@@ -1,3 +1,5 @@
+import time
+
 from google.cloud import bigquery
 from datetime import datetime, timedelta
 
@@ -7,9 +9,9 @@ class BigQueryFunction:
         pass
 
     def query_bigquery_dynamic_date(self):
-
+        time.sleep(1)
         project_id = "framy-stage"
-        user_id = "1872312300450623488"
+        user_id = "1794709464127508481"
         # 設定 BigQuery 客戶端
         client = bigquery.Client(project=project_id)
 
@@ -23,7 +25,7 @@ class BigQueryFunction:
             WHERE user_id = '{user_id}'
               AND TIMESTAMP_TRUNC(event_timestamp, DAY) = TIMESTAMP("{today}")
             ORDER BY event_timestamp DESC
-            LIMIT 5
+            LIMIT 10
         """
 
         query_job = client.query(query)
@@ -54,3 +56,8 @@ class BigQueryFunction:
 
         # 返回結構化的數據列表
         return structured_data
+
+    def display_query_result(self, result, times):
+        for i in range(times):
+            print(f"bigquery : {result[i]}")
+
