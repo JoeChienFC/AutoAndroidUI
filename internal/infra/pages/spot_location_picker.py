@@ -1,3 +1,5 @@
+import os
+
 import uiautomator2 as u2
 import time
 
@@ -7,26 +9,100 @@ class SpotLocationPicker:
     def __init__(self):
         self.d = u2.connect()
 
-        self.like_icon_xpath = '//android.widget.Button'
+        self.icon_clear_x_y = (0.905, 0.118)
+        self.icon_close_x_y = (0.914, 0.06)
+        self.first_recent_x_y = (0.211, 0.223)
+        self.icon_remove_x_y = (0.932, 0.223)
+        self.list_spot_x_y = (0.2, 0.598)
+        self.list_result_spot_x_y = (0.367, 0.224)
 
-        self.community_name = (0.489, 0.061)
-        self.create_icon_x_y = (0.91, 0.059)
-        self.back_icon_x_y = (0.058, 0.061)
-        self.comment_icon_x_y = (0.928, 0.725)
-        self.share_icon_x_y = (0.934, 0.792)
-        self.more_icon_x_y = (0.924, 0.855)
-        self.headshot_pic_x_y = (0.089, 0.74)
-        self.username_text_x_y = (0.174, 0.743)
-        self.location_icon_x_y = (0.061, 0.857)
-        self.screen_mute_x_y = (0.503, 0.425)
-        self.text_sharecommunity_x_y = (0.113, 0.823)
-        self.text_caption_x_y = (0.061, 0.788)
 
     def bar_search_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.back_icon_x_y)
+            self.d.xpath('//android.widget.EditText').click()
 
         except Exception as e:
-            print(f"點擊 back_icon 失败: {e}")
-            assert False, "點擊 back_icon 失败"
+            print(f"點擊 bar_search 失败: {e}")
+            assert False, "點擊 bar_search 失败"
+
+    def bar_search_typing(self):
+        try:
+            time.sleep(1)
+            self.d.xpath('//android.widget.EditText').set_text("test")
+
+        except Exception as e:
+            print(f"點擊 bar_search_typing 失败: {e}")
+            assert False, "點擊 bar_search_typing 失败"
+
+    def icon_clear_click(self):
+        try:
+            time.sleep(1)
+            self.d.xpath('//android.widget.EditText').click()
+            time.sleep(0.5)
+            os.system('adb shell input text {}'.format('test'))
+            time.sleep(0.5)
+            self.d.click(*self.icon_clear_x_y)
+
+        except Exception as e:
+            print(f"點擊 icon_clear 失败: {e}")
+            assert False, "點擊 icon_clear 失败"
+
+    def icon_close_click(self):
+        try:
+            time.sleep(1)
+            self.d.click(*self.icon_close_x_y)
+
+        except Exception as e:
+            print(f"點擊 icon_close 失败: {e}")
+            assert False, "點擊 icon_close 失败"
+
+    def list_recent_click(self):
+        try:
+            time.sleep(1)
+            self.d.click(*self.first_recent_x_y)
+            time.sleep(0.5)
+
+        except Exception as e:
+            print(f"點擊 list_recent 失败: {e}")
+            assert False, "點擊 list_recent 失败"
+
+    def icon_remove_click(self):
+        try:
+            time.sleep(1)
+            self.d.click(*self.icon_remove_x_y)
+            time.sleep(0.5)
+
+        except Exception as e:
+            print(f"點擊 icon_remove 失败: {e}")
+            assert False, "點擊 icon_remove 失败"
+
+    def list_spot_click(self):
+        try:
+            time.sleep(1)
+            self.d.click(*self.list_spot_x_y)
+
+        except Exception as e:
+            print(f"點擊 list_spot 失败: {e}")
+            assert False, "點擊 list_spot 失败"
+
+    def list_result_spot_click(self):
+        try:
+            time.sleep(1)
+            self.d.xpath('//android.widget.EditText').set_text("test")
+            time.sleep(2)
+            self.d.click(*self.list_result_spot_x_y)
+
+        except Exception as e:
+            print(f"點擊 list_result_spot 失败: {e}")
+            assert False, "點擊 list_result_spot 失败"
+
+    def text_no_result_show(self):
+        try:
+            time.sleep(1)
+            self.d.xpath('//android.widget.EditText').set_text("lllll")
+
+        except Exception as e:
+            print(f"text_no_result_show 失败: {e}")
+            assert False, "text_no_result_show 失败"
+

@@ -183,7 +183,7 @@ class HomeFeed:
         try:
             # 點擊 location picker
             self.d.xpath(self.location_picker_xpath).click()
-            time.sleep(1)
+            time.sleep(2)
             from internal.infra.pages.spot_location_picker import SpotLocationPicker
             return SpotLocationPicker()
 

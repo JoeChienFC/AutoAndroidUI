@@ -15,9 +15,10 @@ class Validators:
             for item in result[index_of_screen_view:]
         ), f"Test failed: {event_name} appears after screen_view"
 
-    def validate_first_event_name(self, result, event_name, content_type):
+    def validate_first_event_name(self, result, event_name, content_type=None):
         assert result[0]['event_name'] == event_name, f"Test failed: {event_name} event in bigquery"
-        assert result[0]['parameters']["content_type"] == content_type, f"Test failed: {content_type} event in bigquery"
+        if content_type:
+            assert result[0]['parameters']["content_type"] == content_type, f"Test failed: {content_type} event in bigquery"
 
     def validate_event_name_in_count(self, result, event_name, expected_count):
         assert any(item['event_name'] == event_name for item in
@@ -28,3 +29,12 @@ class Validators:
                     content_type is None or item['parameters'].get('content_type') == content_type) for item in
                    result), f"Test failed: {event_name} not found in result"
 
+    def validate_change_page_and_position(self, result, event_name, content_type=None, position=None):
+        index_of_screen_view = self.validate_screen_view_and_index(result)
+        assert any(
+            item['event_name'] == event_name and (
+                    content_type is None or item['parameters'].get('content_type') == content_type) and (
+                position is None or item['parameters'].get('position') == position
+            )
+            for item in result[index_of_screen_view:]
+        ), f"Test failed: {event_name} appears after screen_view"
