@@ -2,12 +2,143 @@ import uiautomator2 as u2
 import time
 
 
-
-
 class CommunityFeed:
 
     def __init__(self):
         self.d = u2.connect()
+        self.btn_locationpicker_x_y = (0.417, 0.063)
+        self.icon_menu_x_y = (0.929, 0.06)
+        self.icon_create_x_y = (0.891, 0.836)
+        self.text_community_name_x_y = (0.291, 0.121)
+        self.pic_headshot_x_y = (0.091, 0.153)
+        self.text_username_x_y = (0.22, 0.151)
+        self.text_location_x_y = ()
+        self.comment_text_x_y = (0.076, 0.287)
+        self.comment_media_x_y = (0.523, 0.266)
+        self.icon_comment_xpath = '//android.widget.ScrollView/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.widget.ImageView[2]'
+        self.icon_share_xpath = '//android.widget.ScrollView/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.widget.ImageView[3]'
+        self.icon_like_xpath = '//android.widget.ScrollView/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.widget.ImageView[4]'
+        self.icon_more_xpath = '//android.widget.ScrollView/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.widget.ImageView[5]'
+
+    def btn_locationpicker_click(self):
+        try:
+            # 點擊 location picker
+            self.d.click(*self.btn_locationpicker_x_y)
+            time.sleep(2)
+            from internal.infra.pages.community_location_picker import CommunityLocationPicker
+            return CommunityLocationPicker()
+
+        except Exception as e:
+            print(f"點 locationpicker 失败: {e}")
+            assert False, "點 locationpicker 失败"
+
+    def icon_menu_click(self):
+        try:
+            self.d.click(*self.icon_menu_x_y)
+            time.sleep(1)
+
+        except Exception as e:
+            print(f"點 icon_menu 失败: {e}")
+            assert False, "點 icon_menu 失败"
+
+    def icon_create_click(self):
+        try:
+            self.d.click(*self.icon_create_x_y)
+            time.sleep(1)
+
+        except Exception as e:
+            print(f"點 icon_create 失败: {e}")
+            assert False, "點 icon_create 失败"
+
+    def text_communityname_click(self):
+        try:
+            self.d.click(*self.text_community_name_x_y)
+            time.sleep(1)
+
+        except Exception as e:
+            print(f"點 text_community_name 失败: {e}")
+            assert False, "點 text_community_name 失败"
+
+    def pic_headshot_click(self):
+        try:
+            self.d.click(*self.pic_headshot_x_y)
+            time.sleep(1)
+
+        except Exception as e:
+            print(f"點 pic_headshot 失败: {e}")
+            assert False, "點 pic_headshot 失败"
+
+    def text_username_click(self):
+        try:
+            self.d.click(*self.text_username_x_y)
+            time.sleep(1)
+
+        except Exception as e:
+            print(f"點 text_username 失败: {e}")
+            assert False, "點 text_username 失败"
+
+    def comment_text_click(self):
+        try:
+            self.d.click(*self.comment_text_x_y)
+            time.sleep(1)
+
+        except Exception as e:
+            print(f"點 comment_text 失败: {e}")
+            assert False, "點 comment_text 失败"
+
+    def comment_media_click(self):
+        try:
+            self.d.click(*self.comment_media_x_y)
+            time.sleep(1)
+
+        except Exception as e:
+            print(f"點 comment_media 失败: {e}")
+            assert False, "點 comment_media 失败"
+
+    def icon_comment_click(self):
+        try:
+            self.d.xpath(self.icon_comment_xpath).click()
+            time.sleep(1)
+
+        except Exception as e:
+            print(f"點 icon_comment 失败: {e}")
+            assert False, "點 icon_comment 失败"
+
+    def icon_share_click(self):
+        try:
+            self.d.xpath(self.icon_share_xpath).click()
+            time.sleep(1)
+
+        except Exception as e:
+            print(f"點 icon_share 失败: {e}")
+            assert False, "點 icon_share 失败"
+
+    def icon_like_click(self):
+        try:
+            self.d.xpath(self.icon_like_xpath).click()
+            time.sleep(1)
+
+        except Exception as e:
+            print(f"點 icon_like 失败: {e}")
+            assert False, "點 icon_like 失败"
+
+    def icon_more_click(self):
+        try:
+            self.d.xpath(self.icon_more_xpath).click()
+            time.sleep(1)
+
+        except Exception as e:
+            print(f"點 icon_more 失败: {e}")
+            assert False, "點 icon_more 失败"
+
+    def screen_swipeupanddown(self):
+        try:
+            time.sleep(1)
+            self.d.swipe_ext("up")
+
+        except Exception as e:
+            print(f"上滑 screen 失败: {e}")
+            assert False, "上滑 screen 失败"
 
     def myprofile_click(self):
         try:
@@ -71,36 +202,3 @@ class CommunityFeed:
             print(f"進入 community 失败: {e}")
             assert False, "進入 community 失败"
 
-    def enable_community_info(self):
-        try:
-            if self.d.xpath('//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.widget.ImageView[2]').exists:
-                self.d.xpath('//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.widget.ImageView[2]').click()
-                print("成功開啟community_info！")
-                time.sleep(10)
-        except Exception as e:
-            print(f"開啟community_info失败: {e}")
-            assert False, "開啟community_info失败"
-
-    def update_community_feed(self):
-        width, height = self.d.window_size()
-
-        # 定义起始和结束坐标，模拟下拉刷新操作
-        start_x = width // 2
-        start_y = height // 4
-        end_y = height * 3 // 4
-
-        # 模拟手指下滑操作
-        self.d.swipe(start_x, start_y, start_x, end_y)
-
-        # 等待一段时间以确保页面加载完成
-        time.sleep(30)  # 根据需要调整等待时间
-
-    def update_community_info(self):
-        time.sleep(3)
-        if self.d(description="Tab 1 of 5").exists(5):
-            self.d(description="Tab 1 of 5").click()
-        if self.d(description="Tab 2 of 5").exists(5):
-            self.d(description="Tab 2 of 5").click()
-
-    def click_first_community(self):
-        self.d.xpath('//android.widget.ScrollView/android.view.View[1]/android.view.View[1]/android.view.View[1]').exists_click(5)

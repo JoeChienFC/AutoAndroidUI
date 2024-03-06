@@ -60,7 +60,7 @@ class ADBClient:
 
         # Execute the ADB command
         subprocess.run(cmd, shell=True)
-        time.sleep(5)
+        time.sleep(6)
         return CommunityFeed()
 
     @staticmethod
