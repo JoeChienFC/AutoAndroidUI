@@ -9,7 +9,7 @@ class CommunityFeed:
         self.btn_locationpicker_x_y = (0.417, 0.063)
         self.icon_menu_x_y = (0.929, 0.06)
         self.icon_create_x_y = (0.891, 0.836)
-        self.text_community_name_x_y = (0.291, 0.121)
+        self.text_community_name_x_y = (0.173, 0.113)
         self.pic_headshot_x_y = (0.091, 0.153)
         self.text_username_x_y = (0.22, 0.151)
         self.text_location_x_y = ()

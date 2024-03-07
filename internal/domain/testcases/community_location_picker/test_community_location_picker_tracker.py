@@ -48,7 +48,7 @@ def test_icon_close_click():
     result = BigQueryFunction().query_bigquery_dynamic_date()
     BigQueryFunction().display_query_result(result, 5)
 
-    Validators().validate_event_name_in_count(result, event_name, 3)
+    Validators().validate_change_page(result, event_name)
 
 
 def test_list_recent_click():
@@ -56,9 +56,9 @@ def test_list_recent_click():
     go_to_community_location_picker().list_recent_click()
 
     result = BigQueryFunction().query_bigquery_dynamic_date()
-    BigQueryFunction().display_query_result(result, 5)
+    BigQueryFunction().display_query_result(result, 10)
 
-    Validators().validate_event_name_in_count(result, event_name, 5)
+    Validators().validate_change_page(result, event_name)
 
 
 def test_icon_remove_click():
@@ -72,24 +72,26 @@ def test_icon_remove_click():
 
 
 def test_list_spot_click():
-    event_name = "list_spot_click"
-    content_type = "spot"
-    position = 0
+    event_name = "list_community_click"
+    content_type = "community"
+    position = 1
 
-    go_to_community_location_picker().list_spot_click()
+    go_to_community_location_picker().list_community_click()
 
     result = BigQueryFunction().query_bigquery_dynamic_date()
     BigQueryFunction().display_query_result(result, 5)
 
+    CommunityLocationPicker().icon_remove_click()
+
     Validators().validate_change_page_and_position(result, event_name, content_type, position)
 
 
-def test_list_result_spot_click():
-    event_name = "list_result_spot_click"
-    content_type = "spot"
+def test_list_result_community_click():
+    event_name = "list_result_community_click"
+    content_type = "community"
     position = 0
 
-    go_to_community_location_picker().list_result_spot_click()
+    go_to_community_location_picker().list_result_community_click()
 
     result = BigQueryFunction().query_bigquery_dynamic_date()
     BigQueryFunction().display_query_result(result, 5)

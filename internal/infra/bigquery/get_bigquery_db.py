@@ -20,7 +20,7 @@ class BigQueryFunction:
 
         # 構建 SQL 查詢
         query = f"""
-            SELECT *
+            SELECT event_name, event_timestamp, parameters
             FROM `framy-stage.bi_raws.log_events`
             WHERE user_id = '{user_id}'
               AND TIMESTAMP_TRUNC(event_timestamp, DAY) = TIMESTAMP("{today}")
@@ -36,16 +36,12 @@ class BigQueryFunction:
 
         for row in results:
             # 提取欄位值
-            session_id = row[0]
-            user_id = row[1]
-            event_name = row[2]
-            event_timestamp = row[3]
-            parameters = row[4]
+            event_name = row[0]
+            event_timestamp = row[1]
+            parameters = row[2]
 
             # 將提取的值組合成一個結構化的數據字典
             data_entry = {
-                'session_id': session_id,
-                'user_id': user_id,
                 'event_name': event_name,
                 'event_timestamp': event_timestamp,
                 'parameters': parameters,

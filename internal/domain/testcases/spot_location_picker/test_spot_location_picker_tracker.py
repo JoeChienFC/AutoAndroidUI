@@ -48,7 +48,7 @@ def test_icon_close_click():
     result = BigQueryFunction().query_bigquery_dynamic_date()
     BigQueryFunction().display_query_result(result, 5)
 
-    Validators().validate_event_name_in_count(result, event_name, 3)
+    Validators().validate_change_page(result, event_name)
 
 
 def test_list_recent_click():

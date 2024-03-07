@@ -13,9 +13,8 @@ class CommunityLocationPicker:
         self.icon_close_x_y = (0.914, 0.06)
         self.first_recent_x_y = (0.211, 0.223)
         self.icon_remove_x_y = (0.932, 0.223)
-        self.list_spot_x_y = (0.2, 0.598)
-        self.list_result_spot_x_y = (0.367, 0.224)
-
+        self.list_community_x_y = (0.2, 0.598)
+        self.list_result_community_x_y = (0.367, 0.224)
 
     def bar_search_click(self):
         try:
@@ -77,25 +76,25 @@ class CommunityLocationPicker:
             print(f"點擊 icon_remove 失败: {e}")
             assert False, "點擊 icon_remove 失败"
 
-    def list_spot_click(self):
+    def list_community_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.list_spot_x_y)
+            self.d.click(*self.list_community_x_y)
 
         except Exception as e:
-            print(f"點擊 list_spot 失败: {e}")
-            assert False, "點擊 list_spot 失败"
+            print(f"點擊 list_community 失败: {e}")
+            assert False, "點擊 list_community 失败"
 
-    def list_result_spot_click(self):
+    def list_result_community_click(self):
         try:
             time.sleep(1)
             self.d.xpath('//android.widget.EditText').set_text("test")
             time.sleep(2)
-            self.d.click(*self.list_result_spot_x_y)
+            self.d.click(*self.list_result_community_x_y)
 
         except Exception as e:
-            print(f"點擊 list_result_spot 失败: {e}")
-            assert False, "點擊 list_result_spot 失败"
+            print(f"點擊 list_result_community 失败: {e}")
+            assert False, "點擊 list_result_community 失败"
 
     def text_no_result_show(self):
         try:
