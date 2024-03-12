@@ -90,7 +90,6 @@ class SpotPage:
             print(f"點擊 like 失败: {e}")
             assert False, "點擊 like 失败"
 
-
     def text_caption_click(self):
         try:
             time.sleep(1)
@@ -196,8 +195,8 @@ class SpotPage:
             time.sleep(1)
             self.d.click(*self.share_icon_x_y)
             time.sleep(1)
-            from internal.infra.pages.share import Share
-            return Share()
+            from internal.infra.pages.shareto_popup import ShareToPopup
+            return ShareToPopup()
 
         except Exception as e:
             print(f"點擊 share 失败: {e}")

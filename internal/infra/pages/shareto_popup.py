@@ -2,7 +2,7 @@ import uiautomator2 as u2
 import time
 
 
-class Share:
+class ShareToPopup:
 
     def __init__(self):
         self.d = u2.connect()

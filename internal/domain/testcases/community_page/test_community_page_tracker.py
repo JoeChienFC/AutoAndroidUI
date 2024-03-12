@@ -2,8 +2,12 @@ import time
 
 from internal.infra.adb.adb_function import ADBClient
 from internal.infra.bigquery.get_bigquery_db import BigQueryFunction
+from internal.infra.pages.bottom_tab import BottomTab
 from internal.infra.pages.community_page import CommunityPage
 from internal.infra.pages.create_comment import CreateComment
+from internal.infra.pages.create_comment_upload_album import CreateCommentUploadAlbum
+from internal.infra.pages.profile_page_activities import ProfilePageActivities
+from internal.infra.pages.shareto_popup import ShareToPopup
 from internal.infra.pages.spot_page import SpotPage
 from internal.infra.validators.validators import Validators
 
@@ -19,6 +23,15 @@ def create_a_location_comment():
     CreateComment().icon_location_pin_click().text_done_click()
     CreateComment().btn_comment_click()
     return CommunityPage()
+
+
+def create_a_media_comment():
+    CommunityPage().icon_create_click()
+    CreateComment().icon_album_click()
+    CreateCommentUploadAlbum().text_from_profile_click()
+    CreateComment().btn_comment_click()
+    return CommunityPage()
+
 
 def test_icon_back_click():
     event_name = "icon_back_click"
@@ -201,55 +214,16 @@ def test_text_location_click():
     Validators().validate_change_page(result, event_name, content_type)
 
 
-    # ---------
-def test_title_communityname_show():
-    event_name = "title_communityname_show"
+def test_comment_text_click():
+    event_name = "comment_text_click"
     content_type = "community_comment"
-    go_to_community_page()
+
+    go_to_community_page().comment_text_click()
 
     result = BigQueryFunction().query_bigquery_dynamic_date()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name, content_type)
-
-
-def test_title_communityname_click():
-    event_name = "title_communityname_click"
-    content_type = "community_comment"
-    go_to_community_page().title_communityname_click()
-
-    result = BigQueryFunction().query_bigquery_dynamic_date()
-    BigQueryFunction().display_query_result(result, 5)
-
-    Validators().validate_change_page(result, event_name, content_type)
-
-
-def test_btn_follow_click():
-    event_name = "btn_follow_click"
-    content_type = "community_comment"
-
-    go_to_community_page().btn_follow_click()
-
-    result = BigQueryFunction().query_bigquery_dynamic_date()
-    BigQueryFunction().display_query_result(result, 5)
-
-    SpotPage().btn_unfollow_click()
-
-    Validators().validate_first_event_name(result, event_name, content_type)
-
-
-def test_icon_like_click():
-    event_name = "icon_like_click"
-    content_type = "community_comment"
-
-    go_to_community_page().icon_like_click()
-
-    result = BigQueryFunction().query_bigquery_dynamic_date()
-    BigQueryFunction().display_query_result(result, 5)
-
-    SpotPage().icon_like_click()
-
-    Validators().validate_first_event_name(result, event_name, content_type)
 
 
 def test_icon_comment_click():
@@ -276,15 +250,51 @@ def test_icon_share_click():
     Validators().validate_change_page(result, event_name, content_type)
 
 
-def test_text_sharecommunity_show():
-    event_name = "text_sharecommunity_show"
+def test_icon_like_click():
+    event_name = "icon_like_click"
     content_type = "community_comment"
-    go_to_community_page()
+
+    go_to_community_page().icon_like_click()
+
+    result = BigQueryFunction().query_bigquery_dynamic_date()
+    BigQueryFunction().display_query_result(result, 5)
+
+    CommunityPage().icon_like_click()
+
+    Validators().validate_first_event_name(result, event_name, content_type)
+
+
+def test_comment_icon_more_click():
+    event_name = "icon_more_click"
+    content_type = "community_comment"
+
+    go_to_community_page().icon_more_click()
+
+    result = BigQueryFunction().query_bigquery_dynamic_date()
+    BigQueryFunction().display_query_result(result, 5)
+
+    Validators().validate_change_page(result, event_name, content_type)
+
+
+def test_comment_shared_show_and_comment_shared_click():
+    event_name = "comment_shared_show"
+    content_type = "community_comment"
+    go_to_community_page().icon_share_click().select_first_community()
+    ShareToPopup().share_click()
+    BottomTab().bottomtab_myprofile_click().activities_click()
+    ProfilePageActivities().community_click().title_communityname_click()
 
     result = BigQueryFunction().query_bigquery_dynamic_date()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_event_name_content_type_in_count(result, event_name, content_type)
+
+    event_name = "comment_shared_click"
+    CommunityPage().comment_click()
+    result = BigQueryFunction().query_bigquery_dynamic_date()
+    BigQueryFunction().display_query_result(result, 5)
+
+    Validators().validate_change_page(result, event_name, content_type)
 
 
 def test_text_sharecommunity_click():
@@ -297,77 +307,6 @@ def test_text_sharecommunity_click():
 
     Validators().validate_change_page(result, event_name, content_type)
 
-
-def test_text_caption_show():
-    event_name = "text_caption_show"
-    content_type = "community_comment"
-    go_to_community_page()
-
-    result = BigQueryFunction().query_bigquery_dynamic_date()
-    BigQueryFunction().display_query_result(result, 5)
-
-    Validators().validate_event_name_content_type_in_count(result, event_name, content_type)
-
-
-def test_text_caption_click():
-    event_name = "text_caption_click"
-    content_type = "community_comment"
-    go_to_community_page().text_caption_click()
-
-    result = BigQueryFunction().query_bigquery_dynamic_date()
-    BigQueryFunction().display_query_result(result, 5)
-
-    Validators().validate_change_page(result, event_name, content_type)
-
-
-def test_screen_click():
-    event_name = "screen_click"
-    content_type = "community_comment"
-
-    go_to_community_page().screen_click()
-
-    result = BigQueryFunction().query_bigquery_dynamic_date()
-    BigQueryFunction().display_query_result(result, 5)
-
-    Validators().validate_first_event_name(result, event_name, content_type)
-
-
-def test_screen_doubleclick():
-    event_name = "screen_doubleclick"
-    content_type = "community_comment"
-
-    go_to_community_page().screen_doubleclick()
-
-    result = BigQueryFunction().query_bigquery_dynamic_date()
-    BigQueryFunction().display_query_result(result, 5)
-
-    SpotPage().icon_like_click()
-
-    Validators().validate_first_event_name(result, event_name, content_type)
-
-
-def test_screen_longclick():
-    event_name = "screen_longclick"
-    content_type = "community_comment"
-
-    go_to_community_page().screen_longclick()
-
-    result = BigQueryFunction().query_bigquery_dynamic_date()
-    BigQueryFunction().display_query_result(result, 5)
-
-    Validators().validate_first_event_name(result, event_name, content_type)
-
-
-def test_screen_swipeleft():
-    event_name = "screen_swipeleft"
-    content_type = "community_comment"
-
-    go_to_community_page().screen_swipeleft()
-
-    result = BigQueryFunction().query_bigquery_dynamic_date()
-    BigQueryFunction().display_query_result(result, 5)
-
-    Validators().validate_change_page(result, event_name, content_type)
 
 
 

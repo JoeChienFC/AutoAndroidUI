@@ -21,11 +21,11 @@ class CommunityPage:
         self.share_btn_x_y = (0.914, 0.319)
         self.tab_activities_x_y = (0.235, 0.36)
         self.tab_spots_x_y = (0.75, 0.363)
-        self.comment_icon_x_y = (0.928, 0.725)
-        self.share_icon_x_y = (0.934, 0.792)
         self.headshot_pic_x_y = (0.091, 0.43)
         self.username_text_x_y = (0.202, 0.43)
         self.location_icon_x_y = (0.252, 0.483)
+        self.comment_text_x_y = (0.982, 0.43)
+        self.comment_xpath = '//android.widget.ScrollView/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[2]'
         self.screen_mute_x_y = (0.503, 0.425)
         self.text_sharecommunity_x_y = (0.113, 0.823)
         self.text_caption_x_y = (0.061, 0.788)
@@ -148,6 +148,24 @@ class CommunityPage:
             print(f"點擊 location_icon 失败: {e}")
             assert False, "點擊 location_icon 失败"
 
+    def comment_text_click(self):
+        try:
+            time.sleep(1.5)
+            self.d.click(*self.comment_text_x_y)
+
+        except Exception as e:
+            print(f"點擊 comment_text 失败: {e}")
+            assert False, "點擊 comment_text 失败"
+
+    def comment_click(self):
+        try:
+            time.sleep(1.5)
+            self.d.xpath(self.comment_xpath).click()
+
+        except Exception as e:
+            print(f"點擊 comment 失败: {e}")
+            assert False, "點擊 comment 失败"
+
     #-------------------
 
     def btn_follow_click(self):
@@ -250,7 +268,7 @@ class CommunityPage:
     def icon_more_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.more_icon_x_y)
+            self.d.xpath(self.more_icon_xpath).click()
 
         except Exception as e:
             print(f"點擊 more 失败: {e}")
@@ -259,10 +277,10 @@ class CommunityPage:
     def icon_share_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.share_icon_x_y)
+            self.d.xpath(self.share_icon_xpath).click()
             time.sleep(1)
-            from internal.infra.pages.share import Share
-            return Share()
+            from internal.infra.pages.shareto_popup import ShareToPopup
+            return ShareToPopup()
 
         except Exception as e:
             print(f"點擊 share 失败: {e}")
@@ -271,7 +289,7 @@ class CommunityPage:
     def icon_comment_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.comment_icon_x_y)
+            self.d.xpath(self.comment_icon_xpath).click()
 
         except Exception as e:
             print(f"點擊 comment 失败: {e}")

@@ -11,6 +11,7 @@ class MyProfile:
         self.comment_x_y = (0.551, 0.439)
         self.first_video_x_y = (0.16, 0.505)
 
+
     def first_video_click(self):
         try:
             time.sleep(1)
@@ -42,3 +43,6 @@ class MyProfile:
         except Exception as e:
             print(f"點擊 comment_video 失败: {e}")
             assert False, "點擊 comment_video 失败"
+
+
+

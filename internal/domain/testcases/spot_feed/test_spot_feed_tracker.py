@@ -3,7 +3,7 @@ import time
 from internal.infra.adb.adb_function import ADBClient
 from internal.infra.bigquery.get_bigquery_db import BigQueryFunction
 from internal.infra.pages.homefeed import HomeFeed
-from internal.infra.pages.share import Share
+from internal.infra.pages.shareto_popup import ShareToPopup
 from internal.infra.validators.validators import Validators
 
 
@@ -195,7 +195,7 @@ def test_text_sharecommunity_show():
     event_name = "text_sharecommunity_show"
     content_type = "spot"
     ADBClient.start_playsee_app().spot_click().icon_share_click().select_first_community()
-    Share().share_click()
+    ShareToPopup().share_click()
 
     result = BigQueryFunction().query_bigquery_dynamic_date()
     BigQueryFunction().display_query_result(result, 5)
@@ -207,7 +207,7 @@ def test_text_sharecommunity_click():
     event_name = "text_sharecommunity_click"
     content_type = "spot"
     ADBClient.start_playsee_app().spot_click().icon_share_click().select_first_community()
-    Share().share_click().text_sharecommunity_click()
+    ShareToPopup().share_click().text_sharecommunity_click()
 
     result = BigQueryFunction().query_bigquery_dynamic_date()
     BigQueryFunction().display_query_result(result, 5)

@@ -55,6 +55,9 @@ class CommunityFeed:
             self.d.click(*self.text_community_name_x_y)
             time.sleep(1)
 
+            from internal.infra.pages.community_page import CommunityPage
+            return CommunityPage()
+
         except Exception as e:
             print(f"點 text_community_name 失败: {e}")
             assert False, "點 text_community_name 失败"
