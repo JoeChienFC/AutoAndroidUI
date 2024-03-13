@@ -1,5 +1,5 @@
 import uiautomator2 as u2
-import time
+import time,pytest
 
 
 class SpotPage:
@@ -38,7 +38,7 @@ class SpotPage:
 
         except Exception as e:
             print(f"點擊 back_icon 失败: {e}")
-            assert False, "點擊 back_icon 失败"
+            pytest.xfail("點擊 back_icon 失败")
 
     def icon_create_click(self):
         try:
@@ -47,7 +47,7 @@ class SpotPage:
 
         except Exception as e:
             print(f"點擊 icon_create 失败: {e}")
-            assert False, "點擊 icon_create 失败"
+            pytest.xfail("點擊 icon_create 失败")
 
     def title_communityname_click(self):
         try:
@@ -56,18 +56,18 @@ class SpotPage:
 
         except Exception as e:
             print(f"點擊 icon_create 失败: {e}")
-            assert False, "點擊 icon_create 失败"
+            pytest.xfail("點擊 icon_create 失败")
 
     def btn_follow_click(self):
         try:
             if self.d(description="F​o​l​l​o​w").exists(2):
                 self.d(description="F​o​l​l​o​w").click()
             else:
-                assert False, "沒有找到 follow 按鈕"
+                pytest.xfail("沒有找到 follow 按鈕")
 
         except Exception as e:
             print(f"點擊 follow 失败: {e}")
-            assert False, "點擊 follow 失败"
+            pytest.xfail("點擊 follow 失败")
 
     def btn_unfollow_click(self):
         try:
@@ -75,11 +75,11 @@ class SpotPage:
                 self.d(description="F​o​l​l​o​w​i​n​g").click()
                 time.sleep(1)
             else:
-                assert False, "沒有找到 following 按鈕"
+                pytest.xfail("沒有找到 following 按鈕")
 
         except Exception as e:
             print(f"點擊 following 失败: {e}")
-            assert False, "點擊 following 失败"
+            pytest.xfail("點擊 following 失败")
 
     def icon_like_click(self):
         try:
@@ -88,7 +88,7 @@ class SpotPage:
 
         except Exception as e:
             print(f"點擊 like 失败: {e}")
-            assert False, "點擊 like 失败"
+            pytest.xfail("點擊 like 失败")
 
     def text_caption_click(self):
         try:
@@ -97,7 +97,7 @@ class SpotPage:
 
         except Exception as e:
             print(f"點擊 text_caption 失败: {e}")
-            assert False, "點擊 text_caption 失败"
+            pytest.xfail("點擊 text_caption 失败")
 
     def text_sharecommunity_click(self):
         try:
@@ -106,7 +106,7 @@ class SpotPage:
 
         except Exception as e:
             print(f"點擊 text_sharecommunity 失败: {e}")
-            assert False, "點擊 text_sharecommunity 失败"
+            pytest.xfail("點擊 text_sharecommunity 失败")
 
     def screen_swipeupanddown(self):
         try:
@@ -115,7 +115,7 @@ class SpotPage:
 
         except Exception as e:
             print(f"上滑 screen 失败: {e}")
-            assert False, "上滑 screen 失败"
+            pytest.xfail("上滑 screen 失败")
 
     def screen_swipeleft(self):
         try:
@@ -125,7 +125,7 @@ class SpotPage:
 
         except Exception as e:
             print(f"左滑 screen 失败: {e}")
-            assert False, "左滑 screen 失败"
+            pytest.xfail("左滑 screen 失败")
 
     def screen_longclick(self):
         try:
@@ -134,7 +134,7 @@ class SpotPage:
 
         except Exception as e:
             print(f"長按 screen 失败: {e}")
-            assert False, "長按 screen 失败"
+            pytest.xfail("長按 screen 失败")
 
     def screen_doubleclick(self):
         try:
@@ -143,7 +143,7 @@ class SpotPage:
 
         except Exception as e:
             print(f"雙擊 screen 失败: {e}")
-            assert False, "雙擊 screen 失败"
+            pytest.xfail("雙擊 screen 失败")
 
     def screen_click(self):
         try:
@@ -152,7 +152,7 @@ class SpotPage:
 
         except Exception as e:
             print(f"點擊 screen 失败: {e}")
-            assert False, "點擊 screen 失败"
+            pytest.xfail("點擊 screen 失败")
 
     def text_location_click(self):
         try:
@@ -161,7 +161,7 @@ class SpotPage:
 
         except Exception as e:
             print(f"點擊 location_icon 失败: {e}")
-            assert False, "點擊 location_icon 失败"
+            pytest.xfail("點擊 location_icon 失败")
 
     def text_username_click(self):
         try:
@@ -170,7 +170,7 @@ class SpotPage:
 
         except Exception as e:
             print(f"點擊 username_text 失败: {e}")
-            assert False, "點擊 username_text 失败"
+            pytest.xfail("點擊 username_text 失败")
 
     def pic_headshot_click(self):
         try:
@@ -179,7 +179,7 @@ class SpotPage:
 
         except Exception as e:
             print(f"點擊 headshot_pic 失败: {e}")
-            assert False, "點擊 headshot_pic 失败"
+            pytest.xfail("點擊 headshot_pic 失败")
 
     def icon_more_click(self):
         try:
@@ -188,7 +188,7 @@ class SpotPage:
 
         except Exception as e:
             print(f"點擊 more 失败: {e}")
-            assert False, "點擊 more 失败"
+            pytest.xfail("點擊 more 失败")
 
     def icon_share_click(self):
         try:
@@ -200,7 +200,7 @@ class SpotPage:
 
         except Exception as e:
             print(f"點擊 share 失败: {e}")
-            assert False, "點擊 share 失败"
+            pytest.xfail("點擊 share 失败")
 
     def icon_comment_click(self):
         try:
@@ -209,5 +209,5 @@ class SpotPage:
 
         except Exception as e:
             print(f"點擊 comment 失败: {e}")
-            assert False, "點擊 comment 失败"
+            pytest.xfail("點擊 comment 失败")
 

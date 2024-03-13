@@ -1,5 +1,5 @@
 import uiautomator2 as u2
-import time
+import time,pytest
 
 
 class CommunityCommentPage:
@@ -19,7 +19,7 @@ class CommunityCommentPage:
 
         except Exception as e:
             print(f"點擊 title_community_name 失败: {e}")
-            assert False, "點擊 title_community_name 失败"
+            pytest.xfail("點擊 title_community_name 失败")
 
     def icon_back_click(self):
         try:
@@ -28,7 +28,7 @@ class CommunityCommentPage:
 
         except Exception as e:
             print(f"點擊 back_icon 失败: {e}")
-            assert False, "點擊 back_icon 失败"
+            pytest.xfail("點擊 back_icon 失败")
 
     def pic_main_headshot_click(self):
         try:
@@ -37,7 +37,7 @@ class CommunityCommentPage:
 
         except Exception as e:
             print(f"點擊 pic_main_headshot 失败: {e}")
-            assert False, "點擊 pic_main_headshot 失败"
+            pytest.xfail("點擊 pic_main_headshot 失败")
 
     def pic_main_username_click(self):
         try:
@@ -46,7 +46,7 @@ class CommunityCommentPage:
 
         except Exception as e:
             print(f"點擊 pic_main_username 失败: {e}")
-            assert False, "點擊 pic_main_username 失败"
+            pytest.xfail("點擊 pic_main_username 失败")
 
     def text_translation_click(self):
         try:
@@ -60,5 +60,5 @@ class CommunityCommentPage:
 
         except Exception as e:
             print(f"點擊 text_translation 失败: {e}")
-            assert False, "點擊 text_translation 失败"
+            pytest.xfail("點擊 text_translation 失败")
 

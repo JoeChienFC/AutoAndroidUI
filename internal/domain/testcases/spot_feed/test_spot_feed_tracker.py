@@ -86,7 +86,7 @@ def test_icon_more_click():
     event_name = "icon_more_click"
     content_type = "spot"
 
-    ADBClient.start_playsee_app().spot_click().icon_more_click()
+    ADBClient.start_playsee_app().spot_click().comment_icon_more_click()
 
     result = BigQueryFunction().query_bigquery_dynamic_date()
     BigQueryFunction().display_query_result(result, 5)
@@ -188,7 +188,7 @@ def test_screen_swipeupanddown():
     result = BigQueryFunction().query_bigquery_dynamic_date()
     BigQueryFunction().display_query_result(result, 5)
 
-    Validators().validate_first_event_name(result, event_name, content_type)
+    Validators().validate_event_name_content_type_in_count(result, event_name, content_type)
 
 
 def test_text_sharecommunity_show():
@@ -222,7 +222,7 @@ def test_text_caption_show():
     result = BigQueryFunction().query_bigquery_dynamic_date()
     BigQueryFunction().display_query_result(result, 5)
 
-    Validators().validate_first_event_name(result, event_name, content_type)
+    Validators().validate_event_name_content_type_in_count(result, event_name, content_type)
 
 
 def test_text_caption_click():

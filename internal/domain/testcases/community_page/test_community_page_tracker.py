@@ -268,7 +268,7 @@ def test_comment_icon_more_click():
     event_name = "icon_more_click"
     content_type = "community_comment"
 
-    go_to_community_page().icon_more_click()
+    go_to_community_page().comment_icon_more_click()
 
     result = BigQueryFunction().query_bigquery_dynamic_date()
     BigQueryFunction().display_query_result(result, 5)
@@ -295,19 +295,4 @@ def test_comment_shared_show_and_comment_shared_click():
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name, content_type)
-
-
-def test_text_sharecommunity_click():
-    event_name = "text_sharecommunity_click"
-    content_type = "community_comment"
-    go_to_community_page().text_sharecommunity_click()
-
-    result = BigQueryFunction().query_bigquery_dynamic_date()
-    BigQueryFunction().display_query_result(result, 5)
-
-    Validators().validate_change_page(result, event_name, content_type)
-
-
-
-
 

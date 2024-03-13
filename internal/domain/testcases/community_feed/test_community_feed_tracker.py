@@ -47,7 +47,7 @@ def test_text_communityname_click():
     result = BigQueryFunction().query_bigquery_dynamic_date()
     BigQueryFunction().display_query_result(result, 10)
 
-    Validators().validate_first_event_name(result, event_name, content_type)
+    Validators().validate_change_page(result, event_name, content_type)
 
 
 def test_pic_headshot_click():
@@ -59,7 +59,7 @@ def test_pic_headshot_click():
     result = BigQueryFunction().query_bigquery_dynamic_date()
     BigQueryFunction().display_query_result(result, 5)
 
-    Validators().validate_first_event_name(result, event_name, content_type)
+    Validators().validate_change_page(result, event_name, content_type)
 
 
 def test_text_username_click():
@@ -152,7 +152,7 @@ def test_icon_more_click():
     event_name = "icon_more_click"
     content_type = "community_comment"
 
-    ADBClient.start_playsee_app().icon_more_click()
+    ADBClient.start_playsee_app().comment_icon_more_click()
 
     result = BigQueryFunction().query_bigquery_dynamic_date()
     BigQueryFunction().display_query_result(result, 5)

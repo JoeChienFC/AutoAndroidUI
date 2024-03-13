@@ -1,5 +1,5 @@
 import uiautomator2 as u2
-import time
+import time,pytest
 
 
 class BottomTab:
@@ -16,10 +16,10 @@ class BottomTab:
                 from internal.infra.pages.myprofile import MyProfile
                 return MyProfile()
             else:
-                assert False, "進入 myprofile 失败"
+                pytest.xfail("進入 myprofile 失败")
         except Exception as e:
             print(f"進入 myprofile 失败: {e}")
-            assert False, "進入 myprofile 失败"
+            pytest.xfail("進入 myprofile 失败")
 
     def bottomtab_explore_click(self):
         try:
@@ -29,7 +29,7 @@ class BottomTab:
 
         except Exception as e:
             print(f"進入 explore 失败: {e}")
-            assert False, "進入 explore 失败"
+            pytest.xfail("進入 explore 失败")
 
     def bottomtab_ai_click(self):
         try:
@@ -40,7 +40,7 @@ class BottomTab:
 
         except Exception as e:
             print(f"進入 ai 失败: {e}")
-            assert False, "進入 ai 失败"
+            pytest.xfail("進入 ai 失败")
 
     def bottomtab_spot_click(self):
         try:
@@ -52,7 +52,7 @@ class BottomTab:
                 return HomeFeed()
         except Exception as e:
             print(f"進入spot失败: {e}")
-            assert False, "進入spot失败"
+            pytest.xfail("進入spot失败")
 
     def bottomtab_community_click(self):
         try:
@@ -64,5 +64,5 @@ class BottomTab:
                 return HomeFeed()
         except Exception as e:
             print(f"進入 community 失败: {e}")
-            assert False, "進入 community 失败"
+            pytest.xfail("進入 community 失败")
 

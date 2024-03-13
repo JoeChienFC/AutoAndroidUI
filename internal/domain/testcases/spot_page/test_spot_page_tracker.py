@@ -45,7 +45,7 @@ def test_title_communityname_show():
     result = BigQueryFunction().query_bigquery_dynamic_date()
     BigQueryFunction().display_query_result(result, 5)
 
-    Validators().validate_change_page(result, event_name, content_type)
+    Validators().validate_event_name_content_type_in_count(result, event_name, content_type)
 
 
 def test_title_communityname_click():

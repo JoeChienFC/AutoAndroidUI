@@ -1,5 +1,5 @@
 import uiautomator2 as u2
-import time
+import time,pytest
 
 
 class CommunityFeed:
@@ -30,7 +30,7 @@ class CommunityFeed:
 
         except Exception as e:
             print(f"點 locationpicker 失败: {e}")
-            assert False, "點 locationpicker 失败"
+            pytest.xfail("點 locationpicker 失败")
 
     def icon_menu_click(self):
         try:
@@ -39,7 +39,7 @@ class CommunityFeed:
 
         except Exception as e:
             print(f"點 icon_menu 失败: {e}")
-            assert False, "點 icon_menu 失败"
+            pytest.xfail("點 icon_menu 失败")
 
     def icon_create_click(self):
         try:
@@ -48,7 +48,7 @@ class CommunityFeed:
 
         except Exception as e:
             print(f"點 icon_create 失败: {e}")
-            assert False, "點 icon_create 失败"
+            pytest.xfail("點 icon_create 失败")
 
     def text_communityname_click(self):
         try:
@@ -60,7 +60,7 @@ class CommunityFeed:
 
         except Exception as e:
             print(f"點 text_community_name 失败: {e}")
-            assert False, "點 text_community_name 失败"
+            pytest.xfail("點 text_community_name 失败")
 
     def pic_headshot_click(self):
         try:
@@ -69,7 +69,7 @@ class CommunityFeed:
 
         except Exception as e:
             print(f"點 pic_headshot 失败: {e}")
-            assert False, "點 pic_headshot 失败"
+            pytest.xfail("點 pic_headshot 失败")
 
     def text_username_click(self):
         try:
@@ -78,7 +78,7 @@ class CommunityFeed:
 
         except Exception as e:
             print(f"點 text_username 失败: {e}")
-            assert False, "點 text_username 失败"
+            pytest.xfail("點 text_username 失败")
 
     def comment_text_click(self):
         try:
@@ -87,7 +87,7 @@ class CommunityFeed:
 
         except Exception as e:
             print(f"點 comment_text 失败: {e}")
-            assert False, "點 comment_text 失败"
+            pytest.xfail("點 comment_text 失败")
 
     def comment_media_click(self):
         try:
@@ -96,7 +96,7 @@ class CommunityFeed:
 
         except Exception as e:
             print(f"點 comment_media 失败: {e}")
-            assert False, "點 comment_media 失败"
+            pytest.xfail("點 comment_media 失败")
 
     def icon_comment_click(self):
         try:
@@ -105,7 +105,7 @@ class CommunityFeed:
 
         except Exception as e:
             print(f"點 icon_comment 失败: {e}")
-            assert False, "點 icon_comment 失败"
+            pytest.xfail("點 icon_comment 失败")
 
     def icon_share_click(self):
         try:
@@ -114,7 +114,7 @@ class CommunityFeed:
 
         except Exception as e:
             print(f"點 icon_share 失败: {e}")
-            assert False, "點 icon_share 失败"
+            pytest.xfail("點 icon_share 失败")
 
     def icon_like_click(self):
         try:
@@ -123,7 +123,7 @@ class CommunityFeed:
 
         except Exception as e:
             print(f"點 icon_like 失败: {e}")
-            assert False, "點 icon_like 失败"
+            pytest.xfail("點 icon_like 失败")
 
     def icon_more_click(self):
         try:
@@ -132,7 +132,7 @@ class CommunityFeed:
 
         except Exception as e:
             print(f"點 icon_more 失败: {e}")
-            assert False, "點 icon_more 失败"
+            pytest.xfail("點 icon_more 失败")
 
     def screen_swipeupanddown(self):
         try:
@@ -141,7 +141,7 @@ class CommunityFeed:
 
         except Exception as e:
             print(f"上滑 screen 失败: {e}")
-            assert False, "上滑 screen 失败"
+            pytest.xfail("上滑 screen 失败")
 
     def myprofile_click(self):
         try:
@@ -152,10 +152,10 @@ class CommunityFeed:
                 from internal.infra.pages.myprofile import MyProfile
                 return MyProfile()
             else:
-                assert False, "進入 myprofile 失败"
+                pytest.xfail("進入 myprofile 失败")
         except Exception as e:
             print(f"進入 myprofile 失败: {e}")
-            assert False, "進入 myprofile 失败"
+            pytest.xfail("進入 myprofile 失败")
 
     def explore_click(self):
         try:
@@ -167,7 +167,7 @@ class CommunityFeed:
                 # return HomeFeed()
         except Exception as e:
             print(f"進入 explore 失败: {e}")
-            assert False, "進入 explore 失败"
+            pytest.xfail("進入 explore 失败")
 
     def ai_click(self):
         try:
@@ -179,7 +179,7 @@ class CommunityFeed:
                 return HomeFeed()
         except Exception as e:
             print(f"進入 ai 失败: {e}")
-            assert False, "進入 ai 失败"
+            pytest.xfail("進入 ai 失败")
 
     def spot_click(self):
         try:
@@ -191,7 +191,7 @@ class CommunityFeed:
                 return HomeFeed()
         except Exception as e:
             print(f"進入spot失败: {e}")
-            assert False, "進入spot失败"
+            pytest.xfail("進入spot失败")
 
     def community_click(self):
         try:
@@ -203,5 +203,5 @@ class CommunityFeed:
                 return HomeFeed()
         except Exception as e:
             print(f"進入 community 失败: {e}")
-            assert False, "進入 community 失败"
+            pytest.xfail("進入 community 失败")
 

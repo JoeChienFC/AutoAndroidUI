@@ -26,7 +26,7 @@ def test_icon_back_click():
 def test_pic_main_headshot_click():
     event_name = "pic_main_headshot_click"
     content_type = "community_comment"
-    go_to_community_comment_page().pic_main_username_click()
+    go_to_community_comment_page().pic_main_headshot_click()
 
     result = BigQueryFunction().query_bigquery_dynamic_date()
     BigQueryFunction().display_query_result(result, 5)

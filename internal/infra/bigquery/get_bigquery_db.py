@@ -54,6 +54,7 @@ class BigQueryFunction:
         return structured_data
 
     def display_query_result(self, result, times):
+        print("------ 以下為 tracker 結果越上面時間越新 -----------")
         for i in range(times):
             print(f"bigquery : {result[i]}")
 
