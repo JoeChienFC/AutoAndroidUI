@@ -2,7 +2,7 @@ import time
 
 from internal.infra.adb.adb_function import ADBClient
 from internal.infra.bigquery.get_bigquery_db import BigQueryFunction
-from internal.infra.pages.homefeed import HomeFeed
+from internal.infra.pages.spotfeed import SpotFeed
 from internal.infra.pages.shareto_popup import ShareToPopup
 from internal.infra.validators.validators import Validators
 
@@ -30,7 +30,7 @@ def test_icon_create_click():
     Validators().validate_change_page(result, event_name, content_type)
 
 
-def test_btn_follow_click():
+def test_btn_follow_click_and_btn_unfollow_click():
     event_name = "btn_follow_click"
     content_type = "spot"
 
@@ -39,12 +39,17 @@ def test_btn_follow_click():
     result = BigQueryFunction().query_bigquery_dynamic_date()
     BigQueryFunction().display_query_result(result, 5)
 
-    HomeFeed().btn_unfollow_click()
+    SpotFeed().btn_unfollow_click()
 
-    Validators().validate_first_event_name(result, event_name, content_type)
+    Validators().validate_event_name_content_type_in_count(result, event_name, content_type)
+
+    event_name = "btn_unfollow_click"
+    result = BigQueryFunction().query_bigquery_dynamic_date()
+    BigQueryFunction().display_query_result(result, 5)
+    Validators().validate_event_name_content_type_in_count(result, event_name, content_type)
 
 
-def test_icon_like_click():
+def test_icon_like_click_and_icon_unlike_click():
     event_name = "icon_like_click"
     content_type = "spot"
 
@@ -53,8 +58,13 @@ def test_icon_like_click():
     result = BigQueryFunction().query_bigquery_dynamic_date()
     BigQueryFunction().display_query_result(result, 5)
 
-    HomeFeed().icon_like_click()
+    SpotFeed().icon_like_click()
 
+    Validators().validate_first_event_name(result, event_name, content_type)
+
+    event_name = "icon_unlike_click"
+    result = BigQueryFunction().query_bigquery_dynamic_date()
+    BigQueryFunction().display_query_result(result, 5)
     Validators().validate_first_event_name(result, event_name, content_type)
 
 
@@ -151,7 +161,7 @@ def test_screen_doubleclick():
     result = BigQueryFunction().query_bigquery_dynamic_date()
     BigQueryFunction().display_query_result(result, 5)
 
-    HomeFeed().icon_like_click()
+    SpotFeed().icon_like_click()
 
     Validators().validate_first_event_name(result, event_name, content_type)
 

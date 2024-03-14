@@ -58,3 +58,5 @@ class BigQueryFunction:
         for i in range(times):
             print(f"bigquery : {result[i]}")
 
+        print("------------------------------------------------")
+

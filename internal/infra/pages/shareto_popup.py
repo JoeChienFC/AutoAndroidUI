@@ -23,8 +23,8 @@ class ShareToPopup:
             self.d(description="Share").click()
             time.sleep(1)
 
-            from internal.infra.pages.homefeed import HomeFeed
-            return HomeFeed()
+            from internal.infra.pages.spotfeed import SpotFeed
+            return SpotFeed()
 
         except Exception as e:
             print(f"點擊 Share 失败: {e}")

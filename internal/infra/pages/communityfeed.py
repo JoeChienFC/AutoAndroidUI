@@ -175,8 +175,8 @@ class CommunityFeed:
                 self.d(description="Tab 3 of 5").click()
                 print("成功進入ai！")
                 time.sleep(2)
-                from internal.infra.pages.homefeed import HomeFeed
-                return HomeFeed()
+                from internal.infra.pages.spotfeed import SpotFeed
+                return SpotFeed()
         except Exception as e:
             print(f"進入 ai 失败: {e}")
             pytest.xfail("進入 ai 失败")
@@ -187,8 +187,8 @@ class CommunityFeed:
                 self.d(description="Tab 2 of 5").click()
                 print("成功進入spot！")
                 time.sleep(2)
-                from internal.infra.pages.homefeed import HomeFeed
-                return HomeFeed()
+                from internal.infra.pages.spotfeed import SpotFeed
+                return SpotFeed()
         except Exception as e:
             print(f"進入spot失败: {e}")
             pytest.xfail("進入spot失败")
@@ -199,8 +199,8 @@ class CommunityFeed:
                 self.d(description="Tab 1 of 5").click()
                 print("成功進入community！")
                 time.sleep(2)
-                from internal.infra.pages.homefeed import HomeFeed
-                return HomeFeed()
+                from internal.infra.pages.spotfeed import SpotFeed
+                return SpotFeed()
         except Exception as e:
             print(f"進入 community 失败: {e}")
             pytest.xfail("進入 community 失败")

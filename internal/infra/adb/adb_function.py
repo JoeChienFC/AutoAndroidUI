@@ -4,7 +4,7 @@ import time
 import json
 
 from internal.infra.pages.communityfeed import CommunityFeed
-from internal.infra.pages.homefeed import HomeFeed
+from internal.infra.pages.spotfeed import SpotFeed
 
 
 class ADBClient:

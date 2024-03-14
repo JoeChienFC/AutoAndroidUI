@@ -2,12 +2,12 @@ import uiautomator2 as u2
 import time, pytest
 
 
-class HomeFeed:
+class SpotFeed:
 
     def __init__(self):
         self.d = u2.connect()
 
-        self.like_icon_xpath = '//android.widget.Button'
+        self.like_icon_xpath = '//android.widget.Button/android.widget.ImageView[1]'
 
         self.icon_create_x_y = (0.911, 0.059)
         self.location_picker_x_y = (0.467, 0.066)
@@ -162,7 +162,7 @@ class HomeFeed:
 
     def icon_like_click(self):
         try:
-            time.sleep(1)
+            time.sleep(2)
             self.d.xpath(self.like_icon_xpath).click()
 
         except Exception as e:
