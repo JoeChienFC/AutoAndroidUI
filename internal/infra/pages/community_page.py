@@ -69,7 +69,8 @@ class CommunityPage:
     def btn_join_click(self):
         try:
             time.sleep(1)
-            self.d(description="Join").click()
+            if self.d(description="Join").exists:
+                self.d(description="Join").click()
 
         except Exception as e:
             print(f"點擊 btn_join 失败: {e}")
@@ -77,8 +78,9 @@ class CommunityPage:
 
     def btn_unjoin_click(self):
         try:
-            time.sleep(1)
-            self.d(description="Joined").click()
+            time.sleep(2)
+            if self.d(description="Joined").exists:
+                self.d(description="Joined").click()
 
         except Exception as e:
             print(f"點擊 btn_unjoin 失败: {e}")

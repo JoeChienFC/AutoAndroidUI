@@ -74,14 +74,13 @@ def test_icon_remove_click():
 def test_list_spot_click():
     event_name = "list_spot_click"
     content_type = "spot"
-    position = 0
 
     go_to_spot_location_picker().list_spot_click()
 
     result = BigQueryFunction().query_bigquery_dynamic_date()
     BigQueryFunction().display_query_result(result, 5)
 
-    Validators().validate_change_page_and_position(result, event_name, content_type, position)
+    Validators().validate_change_page(result, event_name, content_type)
 
 
 def test_list_result_spot_click():

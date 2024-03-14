@@ -152,7 +152,7 @@ def test_icon_more_click():
     event_name = "icon_more_click"
     content_type = "community_comment"
 
-    ADBClient.start_playsee_app().comment_icon_more_click()
+    ADBClient.start_playsee_app().icon_more_click()
 
     result = BigQueryFunction().query_bigquery_dynamic_date()
     BigQueryFunction().display_query_result(result, 5)
