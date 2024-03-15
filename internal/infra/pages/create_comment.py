@@ -6,8 +6,36 @@ class CreateComment:
 
     def __init__(self):
         self.d = u2.connect()
+        self.icon_close_xpath = '//android.widget.FrameLayout[3]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.widget.ImageView[2]'
+        self.icon_close_x_y = (0.925, 0.705)
+        self.btn_community_x_y = (0.086, 0.743)
+        self.textfields_comment_xpath = '//android.widget.EditText'
         self.location_pin_x_y = (0.182, 0.867)
         self.icon_album_x_y = (0.061, 0.867)
+
+    def icon_close_click(self):
+        try:
+            self.d.click(*self.icon_close_x_y)
+            time.sleep(1)
+
+        except Exception as e:
+            pytest.xfail(f"點 icon_close 失败: {e}")
+
+    def btn_community_click(self):
+        try:
+            self.d.click(*self.btn_community_x_y)
+            time.sleep(1)
+
+        except Exception as e:
+            pytest.xfail(f"點 btn_community 失败: {e}")
+
+    def textfields_comment_click(self):
+        try:
+            self.d.xpath(self.textfields_comment_xpath).click()
+            time.sleep(1)
+
+        except Exception as e:
+            pytest.xfail(f"點 textfields_comment 失败: {e}")
 
     def icon_location_pin_click(self):
         try:

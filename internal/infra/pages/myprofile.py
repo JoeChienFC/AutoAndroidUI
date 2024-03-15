@@ -9,7 +9,7 @@ class MyProfile:
         self.activities_page_x_y = (0.756, 0.356)
 
         self.comment_x_y = (0.551, 0.439)
-        self.first_video_x_y = (0.16, 0.505)
+        self.first_video_x_y = (0.169, 0.524)
 
 
     def first_video_click(self):

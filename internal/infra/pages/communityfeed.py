@@ -145,7 +145,7 @@ class CommunityFeed:
 
     def myprofile_click(self):
         try:
-            if self.d(description="Tab 5 of 5").exists(5):
+            if self.d(description="Tab 5 of 5").exists(7):
                 self.d(description="Tab 5 of 5").click()
                 print("成功進入 myprofile！")
                 time.sleep(2)
@@ -162,9 +162,9 @@ class CommunityFeed:
             if self.d(description="Tab 4 of 5").exists(5):
                 self.d(description="Tab 4 of 5").click()
                 print("成功進入 explore！")
+                from internal.infra.pages.explore import Explore
+                return Explore()
 
-                # from internal.infra.pages.homefeed import HomeFeed
-                # return HomeFeed()
         except Exception as e:
             print(f"進入 explore 失败: {e}")
             pytest.xfail("進入 explore 失败")

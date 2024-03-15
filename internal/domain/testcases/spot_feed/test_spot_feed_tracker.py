@@ -245,3 +245,76 @@ def test_text_caption_click():
 
     Validators().validate_change_page(result, event_name, content_type)
 
+
+def btn_collect_click_and_btn_uncollect_click():
+    event_name = "btn_collect_click"
+    content_type = "spot"
+    ADBClient.start_playsee_app().spot_click().icon_more_click().btn_collect_click()
+
+    result = BigQueryFunction().query_bigquery_dynamic_date()
+    BigQueryFunction().display_query_result(result, 5)
+
+    Validators().validate_change_page(result, event_name, content_type)
+    event_name = "btn_uncollect_click"
+    SpotFeed().icon_more_click().btn_uncollect_click()
+
+    result = BigQueryFunction().query_bigquery_dynamic_date()
+    BigQueryFunction().display_query_result(result, 5)
+
+    Validators().validate_change_page(result, event_name, content_type)
+
+
+def btn_download_click():
+    event_name = "btn_download_click"
+    content_type = "spot"
+    ADBClient.start_playsee_app().spot_click().icon_more_click().btn_download_click()
+
+    result = BigQueryFunction().query_bigquery_dynamic_date()
+    BigQueryFunction().display_query_result(result, 5)
+
+    Validators().validate_change_page(result, event_name, content_type)
+
+
+def btn_not_interested_click():
+    event_name = "btn_not_interested_click"
+    content_type = "spot"
+    ADBClient.start_playsee_app().spot_click().icon_more_click().btn_not_interested_click()
+
+    result = BigQueryFunction().query_bigquery_dynamic_date()
+    BigQueryFunction().display_query_result(result, 5)
+
+    Validators().validate_change_page(result, event_name, content_type)
+
+
+def btn_report_click():
+    event_name = "btn_report_click"
+    content_type = "spot"
+    ADBClient.start_playsee_app().spot_click().icon_more_click().btn_report_click()
+
+    result = BigQueryFunction().query_bigquery_dynamic_date()
+    BigQueryFunction().display_query_result(result, 5)
+
+    Validators().validate_change_page(result, event_name, content_type)
+
+
+def test_content_view_start():
+    event_name = "content_view_start"
+    content_type = "spot"
+    ADBClient.start_playsee_app().spot_click()
+
+    result = BigQueryFunction().query_bigquery_dynamic_date()
+    BigQueryFunction().display_query_result(result, 5)
+
+    Validators().validate_event_name_content_type_in_count(result, event_name, content_type)
+
+
+def test_content_view_pause():
+    event_name = "content_view_pause"
+    content_type = "spot"
+    ADBClient.start_playsee_app().spot_click().icon_more_click()
+
+    result = BigQueryFunction().query_bigquery_dynamic_date()
+    BigQueryFunction().display_query_result(result, 5)
+
+    Validators().validate_event_name_content_type_in_count(result, event_name, content_type)
+

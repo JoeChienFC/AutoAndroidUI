@@ -77,7 +77,7 @@ def test_text_members_click():
     result = BigQueryFunction().query_bigquery_dynamic_date()
     BigQueryFunction().display_query_result(result, 5)
 
-    Validators().validate_first_event_name(result, event_name, content_type)
+    Validators().validate_event_name_content_type_in_count(result, event_name, content_type)
 
 
 def test_btn_join_click():

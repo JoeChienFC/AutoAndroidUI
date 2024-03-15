@@ -135,6 +135,8 @@ class SpotFeed:
             time.sleep(1)
             self.d.click(*self.more_icon_x_y)
 
+            from internal.infra.pages.spot_more_popup import SpotMorePopup
+            return SpotMorePopup()
         except Exception as e:
             print(f"點擊 more 失败: {e}")
             pytest.xfail("點擊 more 失败")

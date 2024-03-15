@@ -15,6 +15,10 @@ def go_to_spot_page():
     return SpotPage()
 
 
+def go_to_explore_spot_page():
+    ADBClient.start_playsee_app().explore_click().pic_spot_s_click()
+    return SpotPage()
+
 def test_icon_create_click():
     event_name = "icon_create_click"
     content_type = "spot"
@@ -59,7 +63,7 @@ def test_title_communityname_click():
     Validators().validate_change_page(result, event_name, content_type)
 
 
-def test_btn_follow_click():
+def test_btn_follow_click_and_btn_unfollow_click():
     event_name = "btn_follow_click"
     content_type = "spot"
 
@@ -71,9 +75,12 @@ def test_btn_follow_click():
     SpotPage().btn_unfollow_click()
 
     Validators().validate_first_event_name(result, event_name, content_type)
+    event_name = "btn_unfollow_click"
+    result = BigQueryFunction().query_bigquery_dynamic_date()
+    BigQueryFunction().display_query_result(result, 5)
+    Validators().validate_first_event_name(result, event_name, content_type)
 
-
-def test_icon_like_click():
+def test_icon_like_click_and_icon_unlike_click():
     event_name = "icon_like_click"
     content_type = "spot"
 
@@ -85,7 +92,10 @@ def test_icon_like_click():
     SpotPage().icon_like_click()
 
     Validators().validate_first_event_name(result, event_name, content_type)
-
+    event_name = "icon_unlike_click"
+    result = BigQueryFunction().query_bigquery_dynamic_date()
+    BigQueryFunction().display_query_result(result, 5)
+    Validators().validate_first_event_name(result, event_name, content_type)
 
 def test_icon_comment_click():
     event_name = "icon_comment_click"
@@ -257,7 +267,80 @@ def test_screen_swipeupanddown():
     event_name = "screen_swipeupanddown"
     content_type = "spot"
 
-    go_to_spot_page().screen_swipeupanddown()
+    go_to_explore_spot_page().screen_swipeupanddown()
+
+    result = BigQueryFunction().query_bigquery_dynamic_date()
+    BigQueryFunction().display_query_result(result, 5)
+
+    Validators().validate_event_name_content_type_in_count(result, event_name, content_type)
+
+
+def btn_collect_click_and_btn_uncollect_click():
+    event_name = "btn_collect_click"
+    content_type = "spot"
+    go_to_spot_page().icon_more_click().btn_collect_click()
+
+    result = BigQueryFunction().query_bigquery_dynamic_date()
+    BigQueryFunction().display_query_result(result, 5)
+
+    Validators().validate_change_page(result, event_name, content_type)
+    event_name = "btn_uncollect_click"
+    go_to_spot_page().icon_more_click().btn_uncollect_click()
+
+    result = BigQueryFunction().query_bigquery_dynamic_date()
+    BigQueryFunction().display_query_result(result, 5)
+
+    Validators().validate_change_page(result, event_name, content_type)
+
+
+def btn_download_click():
+    event_name = "btn_download_click"
+    content_type = "spot"
+    go_to_spot_page().icon_more_click().btn_download_click()
+
+    result = BigQueryFunction().query_bigquery_dynamic_date()
+    BigQueryFunction().display_query_result(result, 5)
+
+    Validators().validate_change_page(result, event_name, content_type)
+
+
+def btn_not_interested_click():
+    event_name = "btn_not_interested_click"
+    content_type = "spot"
+    go_to_spot_page().icon_more_click().btn_not_interested_click()
+
+    result = BigQueryFunction().query_bigquery_dynamic_date()
+    BigQueryFunction().display_query_result(result, 7)
+
+    Validators().validate_change_page(result, event_name, content_type)
+
+
+def btn_report_click():
+    event_name = "btn_report_click"
+    content_type = "spot"
+    go_to_spot_page().icon_more_click().btn_report_click()
+
+    result = BigQueryFunction().query_bigquery_dynamic_date()
+    BigQueryFunction().display_query_result(result, 5)
+
+    Validators().validate_change_page(result, event_name, content_type)
+
+
+def test_content_view_start():
+    event_name = "content_view_start"
+    content_type = "spot"
+    go_to_spot_page()
+
+    result = BigQueryFunction().query_bigquery_dynamic_date()
+    BigQueryFunction().display_query_result(result, 5)
+
+    Validators().validate_event_name_content_type_in_count(result, event_name, content_type)
+
+
+def test_content_view_pause():
+    event_name = "content_view_pause"
+    content_type = "spot"
+    go_to_spot_page().icon_more_click()
 
     result = BigQueryFunction().query_bigquery_dynamic_date()
     BigQueryFunction().display_query_result(result, 5)

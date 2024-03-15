@@ -1,3 +1,4 @@
+import datetime
 import time
 
 import pytest
@@ -13,13 +14,8 @@ def restore_environment():
     time.sleep(1)
 
 
-# 在 conftest.py 或者你的測試模塊中
-
+@pytest.hookimpl(tryfirst=True, hookwrapper=True)
 def pytest_runtest_protocol(item, nextitem):
-    # 檢查測試是否失敗
-    if nextitem is None and item.config.option.runxfail:
-        failed_tests = item.config.hook.pytest_runtest_protocol(item=item, nextitem=nextitem)
-        if failed_tests:
-            # 在這裡執行額外的操作
-            print("=======================")
-            print("測試失敗，執行額外的操作...")
+    timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    setattr(item.config, 'htmlpath', f'reports/report_{timestamp}.html')
+    yield
