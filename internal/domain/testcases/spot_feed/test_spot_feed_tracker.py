@@ -12,7 +12,7 @@ def test_btn_location_picker_click():
     content_type = "spot"
     ADBClient.start_playsee_app().spot_click().location_picker_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name, content_type)
@@ -23,7 +23,7 @@ def test_icon_create_click():
     content_type = "spot"
     ADBClient.start_playsee_app().spot_click().icon_create_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     # 會觸發其他 tracker
     BigQueryFunction().display_query_result(result, 5)
 
@@ -36,7 +36,7 @@ def test_btn_follow_click_and_btn_unfollow_click():
 
     ADBClient.start_playsee_app().spot_click().btn_follow_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     SpotFeed().btn_unfollow_click()
@@ -44,7 +44,7 @@ def test_btn_follow_click_and_btn_unfollow_click():
     Validators().validate_event_name_content_type_in_count(result, event_name, content_type)
 
     event_name = "btn_unfollow_click"
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
     Validators().validate_event_name_content_type_in_count(result, event_name, content_type)
 
@@ -55,7 +55,7 @@ def test_icon_like_click_and_icon_unlike_click():
 
     ADBClient.start_playsee_app().spot_click().icon_like_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     SpotFeed().icon_like_click()
@@ -63,7 +63,7 @@ def test_icon_like_click_and_icon_unlike_click():
     Validators().validate_first_event_name(result, event_name, content_type)
 
     event_name = "icon_unlike_click"
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
     Validators().validate_first_event_name(result, event_name, content_type)
 
@@ -74,7 +74,7 @@ def test_icon_comment_click():
 
     ADBClient.start_playsee_app().spot_click().icon_comment_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name, content_type)
@@ -86,7 +86,7 @@ def test_icon_share_click():
 
     ADBClient.start_playsee_app().spot_click().icon_share_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name, content_type)
@@ -98,7 +98,7 @@ def test_icon_more_click():
 
     ADBClient.start_playsee_app().spot_click().icon_more_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name, content_type)
@@ -110,7 +110,7 @@ def test_pic_headshot_click():
 
     ADBClient.start_playsee_app().spot_click().pic_headshot_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name, content_type)
@@ -122,7 +122,7 @@ def test_text_username_click():
 
     ADBClient.start_playsee_app().spot_click().text_username_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name, content_type)
@@ -134,7 +134,7 @@ def test_text_location_click():
 
     ADBClient.start_playsee_app().spot_click().text_location_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name, content_type)
@@ -146,7 +146,7 @@ def test_screen_click():
 
     ADBClient.start_playsee_app().spot_click().screen_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_first_event_name(result, event_name, content_type)
@@ -158,7 +158,7 @@ def test_screen_doubleclick():
 
     ADBClient.start_playsee_app().spot_click().screen_doubleclick()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     SpotFeed().icon_like_click()
@@ -172,7 +172,7 @@ def test_screen_longclick():
 
     ADBClient.start_playsee_app().spot_click().screen_longclick()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_first_event_name(result, event_name, content_type)
@@ -184,7 +184,7 @@ def test_screen_swipeleft():
 
     ADBClient.start_playsee_app().spot_click().screen_swipeleft()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name, content_type)
@@ -195,7 +195,7 @@ def test_screen_swipeupanddown():
 
     ADBClient.start_playsee_app().spot_click().screen_swipeupanddown()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_event_name_content_type_in_count(result, event_name, content_type)
@@ -207,7 +207,7 @@ def test_text_sharecommunity_show():
     ADBClient.start_playsee_app().spot_click().icon_share_click().select_first_community()
     ShareToPopup().share_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_first_event_name(result, event_name, content_type)
@@ -219,7 +219,7 @@ def test_text_sharecommunity_click():
     ADBClient.start_playsee_app().spot_click().icon_share_click().select_first_community()
     ShareToPopup().share_click().text_sharecommunity_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name, content_type)
@@ -229,7 +229,7 @@ def test_text_caption_show():
     content_type = "spot"
     ADBClient.start_playsee_app().spot_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_event_name_content_type_in_count(result, event_name, content_type)
@@ -240,7 +240,7 @@ def test_text_caption_click():
     content_type = "spot"
     ADBClient.start_playsee_app().spot_click().text_caption_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name, content_type)
@@ -251,14 +251,14 @@ def btn_collect_click_and_btn_uncollect_click():
     content_type = "spot"
     ADBClient.start_playsee_app().spot_click().icon_more_click().btn_collect_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name, content_type)
     event_name = "btn_uncollect_click"
     SpotFeed().icon_more_click().btn_uncollect_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name, content_type)
@@ -269,7 +269,7 @@ def btn_download_click():
     content_type = "spot"
     ADBClient.start_playsee_app().spot_click().icon_more_click().btn_download_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name, content_type)
@@ -280,7 +280,7 @@ def btn_not_interested_click():
     content_type = "spot"
     ADBClient.start_playsee_app().spot_click().icon_more_click().btn_not_interested_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name, content_type)
@@ -291,7 +291,7 @@ def btn_report_click():
     content_type = "spot"
     ADBClient.start_playsee_app().spot_click().icon_more_click().btn_report_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name, content_type)
@@ -302,7 +302,7 @@ def test_content_view_start():
     content_type = "spot"
     ADBClient.start_playsee_app().spot_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_event_name_content_type_in_count(result, event_name, content_type)
@@ -313,7 +313,7 @@ def test_content_view_pause():
     content_type = "spot"
     ADBClient.start_playsee_app().spot_click().icon_more_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_event_name_content_type_in_count(result, event_name, content_type)

@@ -16,7 +16,7 @@ def test_icon_close_click():
     event_name = "icon_close_click"
     go_to_create_comment().icon_close_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name)
@@ -26,7 +26,7 @@ def test_btn_community_click():
     event_name = "btn_community_click"
     go_to_create_comment().btn_community_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name)
@@ -38,7 +38,7 @@ def test_textfields_comment_click():
     System().back_click()
     CreateComment().textfields_comment_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_first_event_name(result, event_name)
@@ -48,7 +48,7 @@ def test_textfields_comment_typing_and_btn_comment_click_and_publish_comment_suc
     event_name = "textfields_comment_typing"
     go_to_create_comment().textfields_comment_typing()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_event_name_in_count(result, event_name, 3)
@@ -59,7 +59,7 @@ def test_textfields_comment_typing_and_btn_comment_click_and_publish_comment_suc
     content_type_2 = "community_comment"
 
     CreateComment().btn_comment_click()
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name, content_type)
@@ -70,7 +70,7 @@ def test_icon_album_click():
     event_name = "icon_album_click"
     go_to_create_comment().icon_album_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name)
@@ -80,7 +80,7 @@ def test_icon_location_pin_click():
     event_name = "icon_location_pin_click"
     go_to_create_comment().icon_location_pin_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name)

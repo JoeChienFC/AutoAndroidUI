@@ -8,7 +8,7 @@ class BigQueryFunction:
     def __init__(self):
         pass
 
-    def query_bigquery_dynamic_date(self):
+    def fetch_user_operation_tracker(self):
         time.sleep(1)
         project_id = "framy-stage"
         user_id = "1794709464127508481"

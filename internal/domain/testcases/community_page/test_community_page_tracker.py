@@ -38,7 +38,7 @@ def test_icon_back_click():
     content_type = "community"
     go_to_community_page().icon_back_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name, content_type)
@@ -50,7 +50,7 @@ def test_icon_more_click():
 
     go_to_community_page().icon_more_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name, content_type)
@@ -62,7 +62,7 @@ def test_text_communitylocation_click():
 
     go_to_community_page().text_communitylocation_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_first_event_name(result, event_name, content_type)
@@ -74,7 +74,7 @@ def test_text_members_click():
 
     go_to_community_page().text_members_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_event_name_content_type_in_count(result, event_name, content_type)
@@ -86,7 +86,7 @@ def test_btn_join_click():
 
     go_to_community_page().btn_join_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     CommunityPage().btn_unjoin_click()
@@ -99,7 +99,7 @@ def test_btn_share_click():
 
     go_to_community_page().btn_share_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name, content_type)
@@ -111,7 +111,7 @@ def test_tab_activities_click():
 
     go_to_community_page().tab_activities_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_first_event_name(result, event_name, content_type)
@@ -123,7 +123,7 @@ def test_tab_spots_click():
 
     go_to_community_page().tab_spots_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name, content_type)
@@ -134,7 +134,7 @@ def test_icon_create_click():
     content_type = "community"
     go_to_community_page().icon_create_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name, content_type)
@@ -146,7 +146,7 @@ def test_screen_swipeupanddown():
 
     go_to_community_page().screen_swipeupanddown()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_event_name_content_type_in_count(result, event_name, content_type)
@@ -158,7 +158,7 @@ def test_content_view_load():
 
     go_to_community_page().screen_swipeupanddown()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_event_name_content_type_in_count(result, event_name, content_type)
@@ -170,7 +170,7 @@ def test_pic_headshot_click():
 
     go_to_community_page().pic_headshot_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 8)
 
     Validators().validate_change_page(result, event_name, content_type)
@@ -182,7 +182,7 @@ def test_text_username_click():
 
     go_to_community_page().text_username_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name, content_type)
@@ -195,7 +195,7 @@ def test_text_location_show():
     go_to_community_page()
     create_a_location_comment()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_event_name_content_type_in_count(result, event_name, content_type)
@@ -208,7 +208,7 @@ def test_text_location_click():
     go_to_community_page()
     create_a_location_comment().text_location_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name, content_type)
@@ -220,7 +220,7 @@ def test_comment_text_click():
 
     go_to_community_page().comment_text_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name, content_type)
@@ -232,7 +232,7 @@ def test_icon_comment_click():
 
     go_to_community_page().icon_comment_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name, content_type)
@@ -244,7 +244,7 @@ def test_icon_share_click():
 
     go_to_community_page().icon_share_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name, content_type)
@@ -256,7 +256,7 @@ def test_icon_like_click():
 
     go_to_community_page().icon_like_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     CommunityPage().icon_like_click()
@@ -270,7 +270,7 @@ def test_comment_icon_more_click():
 
     go_to_community_page().comment_icon_more_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name, content_type)
@@ -284,14 +284,14 @@ def test_comment_shared_show_and_comment_shared_click():
     BottomTab().bottomtab_myprofile_click().activities_click()
     ProfilePageActivities().community_click().title_communityname_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_event_name_content_type_in_count(result, event_name, content_type)
 
     event_name = "comment_shared_click"
     CommunityPage().comment_click()
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name, content_type)

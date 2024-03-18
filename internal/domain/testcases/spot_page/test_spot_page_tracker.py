@@ -24,7 +24,7 @@ def test_icon_create_click():
     content_type = "spot"
     go_to_spot_page().icon_create_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name, content_type)
@@ -35,7 +35,7 @@ def test_icon_back_click():
     content_type = "spot"
     go_to_spot_page().icon_back_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name, content_type)
@@ -46,7 +46,7 @@ def test_title_communityname_show():
     content_type = "spot"
     go_to_spot_page()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_event_name_content_type_in_count(result, event_name, content_type)
@@ -57,7 +57,7 @@ def test_title_communityname_click():
     content_type = "spot"
     go_to_spot_page().title_communityname_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name, content_type)
@@ -69,14 +69,14 @@ def test_btn_follow_click_and_btn_unfollow_click():
 
     go_to_spot_page().btn_follow_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     SpotPage().btn_unfollow_click()
 
     Validators().validate_first_event_name(result, event_name, content_type)
     event_name = "btn_unfollow_click"
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
     Validators().validate_first_event_name(result, event_name, content_type)
 
@@ -86,14 +86,14 @@ def test_icon_like_click_and_icon_unlike_click():
 
     go_to_spot_page().icon_like_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     SpotPage().icon_like_click()
 
     Validators().validate_first_event_name(result, event_name, content_type)
     event_name = "icon_unlike_click"
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
     Validators().validate_first_event_name(result, event_name, content_type)
 
@@ -103,7 +103,7 @@ def test_icon_comment_click():
 
     go_to_spot_page().icon_comment_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name, content_type)
@@ -115,7 +115,7 @@ def test_icon_share_click():
 
     go_to_spot_page().icon_share_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name, content_type)
@@ -127,7 +127,7 @@ def test_icon_more_click():
 
     go_to_spot_page().icon_more_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name, content_type)
@@ -139,7 +139,7 @@ def test_pic_headshot_click():
 
     go_to_spot_page().pic_headshot_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 8)
 
     Validators().validate_change_page(result, event_name, content_type)
@@ -151,7 +151,7 @@ def test_text_username_click():
 
     go_to_spot_page().text_username_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name, content_type)
@@ -162,7 +162,7 @@ def test_text_sharecommunity_show():
     content_type = "spot"
     go_to_spot_page()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_event_name_content_type_in_count(result, event_name, content_type)
@@ -173,7 +173,7 @@ def test_text_sharecommunity_click():
     content_type = "spot"
     go_to_spot_page().text_sharecommunity_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name, content_type)
@@ -185,7 +185,7 @@ def test_text_location_click():
 
     go_to_spot_page().text_location_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name, content_type)
@@ -196,7 +196,7 @@ def test_text_caption_show():
     content_type = "spot"
     go_to_spot_page()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_event_name_content_type_in_count(result, event_name, content_type)
@@ -207,7 +207,7 @@ def test_text_caption_click():
     content_type = "spot"
     go_to_spot_page().text_caption_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name, content_type)
@@ -219,7 +219,7 @@ def test_screen_click():
 
     go_to_spot_page().screen_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_first_event_name(result, event_name, content_type)
@@ -231,7 +231,7 @@ def test_screen_doubleclick():
 
     go_to_spot_page().screen_doubleclick()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     SpotPage().icon_like_click()
@@ -245,7 +245,7 @@ def test_screen_longclick():
 
     go_to_spot_page().screen_longclick()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_first_event_name(result, event_name, content_type)
@@ -257,7 +257,7 @@ def test_screen_swipeleft():
 
     go_to_spot_page().screen_swipeleft()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name, content_type)
@@ -269,7 +269,7 @@ def test_screen_swipeupanddown():
 
     go_to_explore_spot_page().screen_swipeupanddown()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_event_name_content_type_in_count(result, event_name, content_type)
@@ -280,14 +280,14 @@ def btn_collect_click_and_btn_uncollect_click():
     content_type = "spot"
     go_to_spot_page().icon_more_click().btn_collect_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name, content_type)
     event_name = "btn_uncollect_click"
     go_to_spot_page().icon_more_click().btn_uncollect_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name, content_type)
@@ -298,7 +298,7 @@ def btn_download_click():
     content_type = "spot"
     go_to_spot_page().icon_more_click().btn_download_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name, content_type)
@@ -309,7 +309,7 @@ def btn_not_interested_click():
     content_type = "spot"
     go_to_spot_page().icon_more_click().btn_not_interested_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 7)
 
     Validators().validate_change_page(result, event_name, content_type)
@@ -320,7 +320,7 @@ def btn_report_click():
     content_type = "spot"
     go_to_spot_page().icon_more_click().btn_report_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name, content_type)
@@ -331,7 +331,7 @@ def test_content_view_start():
     content_type = "spot"
     go_to_spot_page()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_event_name_content_type_in_count(result, event_name, content_type)
@@ -342,7 +342,7 @@ def test_content_view_pause():
     content_type = "spot"
     go_to_spot_page().icon_more_click()
 
-    result = BigQueryFunction().query_bigquery_dynamic_date()
+    result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_event_name_content_type_in_count(result, event_name, content_type)
