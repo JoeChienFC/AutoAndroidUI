@@ -35,6 +35,9 @@ class SpotFeed:
             time.sleep(1)
             self.d.click(*self.icon_create_x_y)
 
+            from internal.infra.pages.create_spot_upload_album import CreateSpotUploadAlbum
+            return CreateSpotUploadAlbum()
+
         except Exception as e:
             print(f"點擊 icon_create 失败: {e}")
             pytest.xfail("點擊 icon_create 失败")
