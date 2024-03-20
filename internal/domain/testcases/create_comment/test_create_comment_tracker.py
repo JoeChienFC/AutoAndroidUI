@@ -175,7 +175,7 @@ def test_pic_video_preview_show_icon_video_preview_close_click():
     CreateCommentUploadAlbum().change_video_album()
     CreateCommentUploadAlbum().pic_profile_video_click()
     CreateCommentUploadAlbum().text_btn_select_click()
-    CreateSpotPublish().btn_post_click()
+    CreateSpotPublish().btn_post_click_comment()
 
     result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)

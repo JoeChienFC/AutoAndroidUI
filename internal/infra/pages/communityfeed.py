@@ -186,7 +186,7 @@ class CommunityFeed:
             if self.d(description="Tab 2 of 5").exists(5):
                 self.d(description="Tab 2 of 5").click()
                 print("成功進入spot！")
-                time.sleep(2)
+                time.sleep(1)
                 from internal.infra.pages.spotfeed import SpotFeed
                 return SpotFeed()
         except Exception as e:

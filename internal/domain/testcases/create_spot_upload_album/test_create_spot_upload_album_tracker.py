@@ -70,4 +70,12 @@ def test_icon_select_click():
     Validators().validate_change_page(result, event_name)
 
 
+def test_tip_exceededlength_show():
+    event_name = "tip_exceededlength_show"
+    go_to_create_spot_upload_album_page().icon_select_click()
+    CreateSpotUploadAlbum().second_item_select_click()
 
+    result = BigQueryFunction().fetch_user_operation_tracker()
+    BigQueryFunction().display_query_result(result, 5)
+
+    Validators().validate_event_name_in_count(result, event_name, 3)
