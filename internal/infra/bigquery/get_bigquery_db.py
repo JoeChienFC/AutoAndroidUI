@@ -11,7 +11,7 @@ class BigQueryFunction:
     def fetch_user_operation_tracker(self):
         time.sleep(1)
         project_id = "framy-stage"
-        user_id = "1794709464127508481"
+        user_id = "1882483329737359360"
         # 設定 BigQuery 客戶端
         client = bigquery.Client(project=project_id)
 

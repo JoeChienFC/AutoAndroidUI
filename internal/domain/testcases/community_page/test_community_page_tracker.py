@@ -281,7 +281,7 @@ def test_comment_shared_show_and_comment_shared_click():
     content_type = "community_comment"
     go_to_community_page().icon_share_click().select_first_community()
     ShareToPopup().share_click()
-    BottomTab().bottomtab_myprofile_click().activities_click()
+    BottomTab().bottomtab_myprofile_click().tab_activities_click()
     ProfilePageActivities().community_click().title_communityname_click()
 
     result = BigQueryFunction().fetch_user_operation_tracker()

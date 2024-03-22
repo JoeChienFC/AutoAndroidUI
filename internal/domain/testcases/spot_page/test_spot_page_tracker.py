@@ -10,7 +10,7 @@ from internal.infra.validators.validators import Validators
 
 
 def go_to_spot_page():
-    ADBClient.start_playsee_app().myprofile_click().activities_click()
+    ADBClient.start_playsee_app().myprofile_click().tab_activities_click()
     ProfilePage().comment_click().comment_video_click()
     return SpotPage()
 
