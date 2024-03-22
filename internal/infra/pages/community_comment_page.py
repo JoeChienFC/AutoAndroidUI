@@ -5,6 +5,10 @@ import time,pytest
 class CommunityCommentPage:
 
     def __init__(self):
+        self.icon_main_more_xpath = '//android.widget.ScrollView/android.widget.ImageView[5]'
+        self.icon_main_like_xpath = '//android.widget.ScrollView/android.widget.ImageView[4]'
+        self.icon_main_share_xpath = '//android.widget.ScrollView/android.widget.ImageView[3]'
+        self.icon_main_comment_xpath = '//android.widget.ScrollView/android.widget.ImageView[2]'
         self.d = u2.connect()
         self.title_community_name = (0.502, 0.052)
         self.back_icon_x_y = (0.067, 0.06)
@@ -62,3 +66,42 @@ class CommunityCommentPage:
             print(f"點擊 text_translation 失败: {e}")
             pytest.xfail("點擊 text_translation 失败")
 
+    def icon_main_comment_click(self):
+        try:
+            time.sleep(1)
+            self.d.xpath(self.icon_main_comment_xpath).click()
+
+        except Exception as e:
+            print(f"點擊 icon_main_comment_click 失败: {e}")
+            pytest.xfail("點擊 icon_main_comment_click 失败")
+
+    def icon_main_share_click(self):
+        try:
+            time.sleep(1)
+            self.d.xpath(self.icon_main_share_xpath).click()
+
+        except Exception as e:
+            print(f"點擊 icon_main_share_click 失败: {e}")
+            pytest.xfail("點擊 icon_main_share_click 失败")
+
+    def icon_main_like_click(self):
+        try:
+            time.sleep(1)
+            self.d.xpath(self.icon_main_like_xpath).click()
+
+        except Exception as e:
+            print(f"點擊 icon_main_like_click 失败: {e}")
+            pytest.xfail("點擊 icon_main_like_click 失败")
+
+    def icon_main_more_click(self):
+        try:
+            time.sleep(1)
+            self.d.xpath(self.icon_main_more_xpath).click()
+            time.sleep(1)
+
+            from internal.infra.pages.comment_more_popup import CommentMorePopup
+            return CommentMorePopup()
+
+        except Exception as e:
+            print(f"點擊 icon_main_more_click 失败: {e}")
+            pytest.xfail("點擊 icon_main_more_click 失败")

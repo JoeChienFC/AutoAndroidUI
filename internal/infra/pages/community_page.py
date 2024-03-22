@@ -119,6 +119,9 @@ class CommunityPage:
             self.d.click(*self.create_icon_x_y)
             time.sleep(1)
 
+            from internal.infra.pages.create_comment import CreateComment
+            return CreateComment()
+
         except Exception as e:
             print(f"點擊 icon_create 失败: {e}")
             pytest.xfail("點擊 icon_create 失败")
@@ -278,8 +281,11 @@ class CommunityPage:
 
     def comment_icon_more_click(self):
         try:
-            time.sleep(1)
+            time.sleep(7)
             self.d.xpath(self.comment_more_icon_xpath).click()
+
+            from internal.infra.pages.comment_more_popup import CommentMorePopup
+            return CommentMorePopup()
 
         except Exception as e:
             print(f"點擊 more 失败: {e}")

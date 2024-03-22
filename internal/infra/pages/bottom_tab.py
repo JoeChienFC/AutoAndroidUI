@@ -13,8 +13,8 @@ class BottomTab:
                 self.d(description="Tab 5 of 5").click()
                 print("成功進入 myprofile！")
                 time.sleep(2)
-                from internal.infra.pages.myprofile import MyProfile
-                return MyProfile()
+                from internal.infra.pages.profile_page import ProfilePage
+                return ProfilePage()
             else:
                 pytest.xfail("進入 myprofile 失败")
         except Exception as e:

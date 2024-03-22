@@ -1,6 +1,6 @@
 from internal.infra.adb.adb_function import ADBClient
 from internal.infra.bigquery.get_bigquery_db import BigQueryFunction
-from internal.infra.pages.popUp import PopUp
+from internal.infra.pages.years_old_popup import YearsOldPopUp
 from internal.infra.validators.validators import Validators
 
 
@@ -37,7 +37,7 @@ def test_bottom_tab_explore_click():
 def test_bottom_tab_my_profile_click():
     event_name = "bottomtab_myprofile_click"
     ADBClient.start_playsee_app().myprofile_click()
-    PopUp().pop_up_13_years_old()
+    YearsOldPopUp().pop_up_13_years_old()
 
     result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)

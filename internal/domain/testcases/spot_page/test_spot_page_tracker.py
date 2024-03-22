@@ -3,7 +3,7 @@ import time
 from internal.infra.adb.adb_function import ADBClient
 from internal.infra.bigquery.get_bigquery_db import BigQueryFunction
 from internal.infra.pages.spotfeed import SpotFeed
-from internal.infra.pages.myprofile import MyProfile
+from internal.infra.pages.profile_page import ProfilePage
 from internal.infra.pages.shareto_popup import ShareToPopup
 from internal.infra.pages.spot_page import SpotPage
 from internal.infra.validators.validators import Validators
@@ -11,7 +11,7 @@ from internal.infra.validators.validators import Validators
 
 def go_to_spot_page():
     ADBClient.start_playsee_app().myprofile_click().activities_click()
-    MyProfile().comment_click().comment_video_click()
+    ProfilePage().comment_click().comment_video_click()
     return SpotPage()
 
 

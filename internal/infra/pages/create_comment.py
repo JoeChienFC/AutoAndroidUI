@@ -73,6 +73,16 @@ class CreateComment:
             print(f"點 textfields_comment_typing 失败: {e}")
             pytest.xfail("點 textfields_comment_typing 失败")
 
+    def textfields_comment_typing_chinese(self):
+        try:
+            time.sleep(1)
+            self.d.xpath('//android.widget.EditText').set_text("你好")
+            time.sleep(1)
+
+        except Exception as e:
+            print(f"點 textfields_comment_typing_chinese 失败: {e}")
+            pytest.xfail("點 textfields_comment_typing_chinese 失败")
+
     def textfields_comment_typing_at_user(self):
         try:
             time.sleep(1)

@@ -2,16 +2,28 @@ import uiautomator2 as u2
 import time,pytest
 
 
-class MyProfile:
+class ProfilePage:
 
     def __init__(self):
         self.d = u2.connect()
-        self.activities_page_x_y = (0.756, 0.356)
 
+        self.icon_dm_x_y = (0.675, 0.061)
+        self.activities_page_x_y = (0.756, 0.356)
         self.comment_x_y = (0.551, 0.439)
         self.first_video_x_y = (0.169, 0.524)
 
+    def icon_dm_click(self):
+        try:
+            time.sleep(1)
+            self.d.click(*self.icon_dm_x_y)
 
+            from internal.infra.pages.dm_list import DmList
+            return DmList()
+
+        except Exception as e:
+            print(f"點擊 icon_dm_click 失败: {e}")
+            pytest.xfail("點擊 icon_dm_click 失败")
+            
     def first_video_click(self):
         try:
             time.sleep(1)

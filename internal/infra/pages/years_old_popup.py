@@ -2,7 +2,7 @@ import uiautomator2 as u2
 import time,pytest
 
 
-class PopUp:
+class YearsOldPopUp:
 
     def __init__(self):
         self.d = u2.connect()
