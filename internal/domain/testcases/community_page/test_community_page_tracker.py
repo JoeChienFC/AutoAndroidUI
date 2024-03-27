@@ -8,7 +8,6 @@ from internal.infra.pages.create_comment import CreateComment
 from internal.infra.pages.create_comment_upload_album import CreateCommentUploadAlbum
 from internal.infra.pages.profile_page_activities import ProfilePageActivities
 from internal.infra.pages.shareto_popup import ShareToPopup
-from internal.infra.pages.spot_page import SpotPage
 from internal.infra.validators.validators import Validators
 
 
@@ -28,7 +27,7 @@ def create_a_location_comment():
 def create_a_media_comment():
     CommunityPage().icon_create_click()
     CreateComment().icon_album_click()
-    CreateCommentUploadAlbum().text_from_profile_click()
+    CreateCommentUploadAlbum().select_video_from_profile_click()
     CreateComment().btn_comment_click()
     return CommunityPage()
 

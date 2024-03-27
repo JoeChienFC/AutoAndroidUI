@@ -37,6 +37,9 @@ class CommunityFeed:
             self.d.click(*self.icon_menu_x_y)
             time.sleep(1)
 
+            from internal.infra.pages.community_feed_dropdown_menu import CommunityFeedDropdownMenu
+            return CommunityFeedDropdownMenu()
+
         except Exception as e:
             print(f"點 icon_menu 失败: {e}")
             pytest.xfail("點 icon_menu 失败")
@@ -45,6 +48,9 @@ class CommunityFeed:
         try:
             self.d.click(*self.icon_create_x_y)
             time.sleep(1)
+
+            from internal.infra.pages.create_comment import CreateComment
+            return CreateComment()
 
         except Exception as e:
             print(f"點 icon_create 失败: {e}")

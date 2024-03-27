@@ -29,7 +29,8 @@ class SpotLocationPicker:
     def bar_search_typing(self):
         try:
             time.sleep(1)
-            self.d.xpath('//android.widget.EditText').set_text("test")
+            # self.d.xpath('//android.widget.EditText').set_text("test")
+            os.system('adb shell input text {}'.format("test"))
 
         except Exception as e:
             pytest.xfail(f"點擊 bar_search_typing 失败: {e}")
@@ -83,7 +84,8 @@ class SpotLocationPicker:
     def list_result_spot_click(self):
         try:
             time.sleep(1)
-            self.d.xpath('//android.widget.EditText').set_text("test")
+            # self.d.xpath('//android.widget.EditText').set_text("test")
+            os.system('adb shell input text {}'.format("test"))
             time.sleep(2)
             self.d.click(*self.list_result_spot_x_y)
 
@@ -93,7 +95,8 @@ class SpotLocationPicker:
     def text_no_result_show(self):
         try:
             time.sleep(1)
-            self.d.xpath('//android.widget.EditText').set_text("lllll")
+            # self.d.xpath('//android.widget.EditText').set_text("lllll")
+            os.system('adb shell input text {}'.format("lllll"))
 
         except Exception as e:
             pytest.xfail(f"text_no_result_show 失败:{e}")

@@ -1,5 +1,6 @@
 import uiautomator2 as u2
 import time, pytest
+import os
 
 
 class CreateComment:
@@ -19,6 +20,7 @@ class CreateComment:
         self.btn_at_user_x_y = (0.232, 0.729)
         self.btn_hashtag_x_y = (0.232, 0.729)
         self.btn_add_x_y = (0.13, 0.737)
+
     def icon_close_click(self):
         try:
             self.d.click(*self.icon_close_x_y)
@@ -66,7 +68,8 @@ class CreateComment:
     def textfields_comment_typing(self):
         try:
             time.sleep(1)
-            self.d.xpath('//android.widget.EditText').set_text("test")
+            # self.d.xpath('//android.widget.EditText').set_text("test")
+            os.system('adb shell input text {}'.format("test"))
             time.sleep(1)
 
         except Exception as e:
@@ -77,6 +80,7 @@ class CreateComment:
         try:
             time.sleep(1)
             self.d.xpath('//android.widget.EditText').set_text("你好")
+            os.system('adb shell input text {}'.format("你好"))
             time.sleep(1)
 
         except Exception as e:
@@ -86,7 +90,8 @@ class CreateComment:
     def textfields_comment_typing_at_user(self):
         try:
             time.sleep(1)
-            self.d.xpath('//android.widget.EditText').set_text("@te")
+            # self.d.xpath('//android.widget.EditText').set_text("@te")
+            os.system('adb shell input text {}'.format("@te"))
             time.sleep(1)
 
         except Exception as e:
@@ -96,7 +101,8 @@ class CreateComment:
     def textfields_comment_typing_hashtag(self):
         try:
             time.sleep(1)
-            self.d.xpath('//android.widget.EditText').set_text("#te")
+            # self.d.xpath('//android.widget.EditText').set_text("#te")
+            os.system('adb shell input text {}'.format("#te"))
             time.sleep(1)
 
         except Exception as e:
@@ -185,7 +191,8 @@ class CreateComment:
     def comment_url_typing(self):
         try:
             time.sleep(1)
-            self.d.xpath('//android.widget.EditText').set_text("https://www.google.com")
+            # self.d.xpath('//android.widget.EditText').set_text("https://www.google.com")
+            os.system('adb shell input text {}'.format("https://www.google.com"))
             time.sleep(1)
 
         except Exception as e:
