@@ -9,6 +9,7 @@ class Validators:
 
     def validate_change_page(self, result, event_name, content_type=None):
         index_of_screen_view = self.validate_screen_view_and_index(result)
+        print(f"screen view index : {index_of_screen_view}")
         assert any(
             item['event_name'] == event_name and (
                     content_type is None or item['parameters'].get('content_type') == content_type)
@@ -39,3 +40,26 @@ class Validators:
             )
             for item in result[index_of_screen_view:]
         ), f"Test failed: 換頁tracker 錯誤 screen_view 要出現在 {event_name} 之後 "
+
+    def validate_change_page_and_content_id(self, result, event_name, content_type=None, content_id=None):
+        index_of_screen_view = self.validate_screen_view_and_index(result)
+        assert any(
+            item['event_name'] == event_name and (
+                    content_type is None or item['parameters'].get('content_type') == content_type) and (
+                    content_id is None or item['parameters'].get('content_id') == content_id
+            )
+            for item in result[index_of_screen_view:]
+        ), f"Test failed: 換頁tracker 錯誤 screen_view 要出現在 {event_name} 之後 "
+
+    def validate_change_page_and_content_id_and_key_word(self, result, event_name, content_type=None, content_id=None,
+                                                         keyword=None):
+        index_of_screen_view = self.validate_screen_view_and_index(result)
+        assert any(
+            item['event_name'] == event_name and
+            (content_type is None or item['parameters'].get('content_type') == content_type) and
+            (content_id is None or item['parameters'].get('content_id') == content_id) and
+            (keyword is None or item['parameters'].get('keyword') == keyword)
+            for item in result[index_of_screen_view:]
+        ), f"Test failed: 換頁 tracker 錯誤 screen_view 要出現在 {event_name} 之後, 而且 {event_name} 的參數必須包含 {'content_type' if content_type is not None else ''}, {'content_id' if content_id is not None else ''}, {'keyword' if keyword is not None else ''}"
+
+

@@ -23,7 +23,8 @@ class AiFeed:
     def bar_message_typing(self):
         try:
             time.sleep(1)
-            os.system('adb shell input text {}'.format('test'))
+            # os.system('adb shell input text {}'.format('test'))
+            self.d.shell('input text "test"')
 
         except Exception as e:
             print(f"點擊 bar_message_typing 失败: {e}")

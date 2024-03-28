@@ -50,6 +50,7 @@ class CreateSpotPublish:
 
     def textfields_caption_click(self):
         try:
+            time.sleep(5)
             self.d.xpath('//android.widget.EditText').click()
             time.sleep(1)
 

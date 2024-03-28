@@ -77,6 +77,9 @@ class CreateSpotUploadAlbum:
             self.d.click(*self.btn_select_x_y)
             time.sleep(1)
 
+            from internal.infra.pages.create_spot_publish import CreateSpotPublish
+            return CreateSpotPublish()
+
         except Exception as e:
             print(f"點 btn_select 失败: {e}")
             pytest.xfail("點 btn_select 失败")

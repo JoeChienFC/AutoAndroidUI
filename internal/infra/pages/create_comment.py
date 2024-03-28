@@ -69,7 +69,8 @@ class CreateComment:
         try:
             time.sleep(1)
             # self.d.xpath('//android.widget.EditText').set_text("test")
-            os.system('adb shell input text {}'.format("test"))
+            # os.system('adb shell input text {}'.format("test"))
+            self.d.shell('input text "test"')
             time.sleep(1)
 
         except Exception as e:
