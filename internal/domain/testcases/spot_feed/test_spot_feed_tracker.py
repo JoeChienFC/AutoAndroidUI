@@ -278,7 +278,7 @@ def btn_download_click():
 def btn_not_interested_click():
     event_name = "btn_not_interested_click"
     content_type = "spot"
-    ADBClient.start_playsee_app().spot_click().icon_more_click().btn_not_interested_click()
+    ADBClient.start_playsee_app().spot_click().icon_more_click().btn_notinterested_click()
 
     result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)

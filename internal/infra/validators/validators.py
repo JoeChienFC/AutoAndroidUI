@@ -24,7 +24,7 @@ class Validators:
 
     def validate_event_name_in_count(self, result, event_name, expected_count):
         assert any(item['event_name'] == event_name for item in
-                   result[:expected_count]), f"Test failed: {event_name} tracker 沒有找到"
+                   result[:expected_count]), f"Test failed: {event_name} tracker 沒有在前 {expected_count} 中找到"
 
     def validate_event_name_content_type_in_count(self, result, event_name, content_type):
         assert any(item['event_name'] == event_name and (

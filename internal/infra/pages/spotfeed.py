@@ -137,6 +137,7 @@ class SpotFeed:
         try:
             time.sleep(1)
             self.d.click(*self.more_icon_x_y)
+            time.sleep(4)
 
             from internal.infra.pages.spot_more_popup import SpotMorePopup
             return SpotMorePopup()
