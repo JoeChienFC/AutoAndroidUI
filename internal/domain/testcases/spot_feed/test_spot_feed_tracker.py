@@ -204,8 +204,8 @@ def test_screen_swipeupanddown():
 def test_text_sharecommunity_show():
     event_name = "text_sharecommunity_show"
     content_type = "spot"
-    ADBClient.start_playsee_app().spot_click().icon_share_click().select_first_community()
-    ShareToPopup().share_click()
+    ADBClient.start_playsee_app().spot_click().icon_share_click().list_community_click()
+    ShareToPopup().btn_share_click()
 
     result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
@@ -216,8 +216,8 @@ def test_text_sharecommunity_show():
 def test_text_sharecommunity_click():
     event_name = "text_sharecommunity_click"
     content_type = "spot"
-    ADBClient.start_playsee_app().spot_click().icon_share_click().select_first_community()
-    ShareToPopup().share_click().text_sharecommunity_click()
+    ADBClient.start_playsee_app().spot_click().icon_share_click().list_community_click()
+    ShareToPopup().btn_share_click().text_sharecommunity_click()
 
     result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)

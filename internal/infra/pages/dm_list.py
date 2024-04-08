@@ -35,6 +35,9 @@ class DmList:
             time.sleep(1)
             self.d.click(*self.list_dm_x_y)
 
+            from internal.infra.pages.chatroom import Chatroom
+            return Chatroom()
+
         except Exception as e:
             pytest.xfail(f"點擊 list_dm_click 失败 : {e}")
 

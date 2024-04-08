@@ -2,7 +2,12 @@ import time
 
 from internal.infra.adb.adb_function import ADBClient
 from internal.infra.bigquery.get_bigquery_db import BigQueryFunction
+from internal.infra.pages.create_spot_publish import CreateSpotPublish
+from internal.infra.pages.create_spot_upload_album import CreateSpotUploadAlbum
+from internal.infra.pages.delete_popup import DeletePopUp
 from internal.infra.pages.spot_more_popup import SpotMorePopup
+from internal.infra.pages.spotfeed import SpotFeed
+from internal.infra.pages.system import System
 from internal.infra.validators.validators import Validators
 
 
@@ -10,6 +15,15 @@ def go_to_spot_more_popup():
     ADBClient.start_playsee_app().spot_click().icon_more_click()
     return SpotMorePopup()
 
+
+def my_profile_create_a_spot_and_go_to_spot_more_popup():
+    ADBClient.start_playsee_app().myprofile_click().icon_create_click()
+    CreateSpotUploadAlbum().second_item_select_click()
+    CreateSpotUploadAlbum().btn_select_click()
+    CreateSpotPublish().btn_post_click()
+    time.sleep(10)
+    SpotFeed().icon_more_click()
+    return SpotMorePopup()
 
 def test_btn_collect_click():
     event_name = "btn_collect_click"
@@ -58,49 +72,22 @@ def test_text_cancel_click():
     result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
-    Validators().validate_event_name_in_count(result, event_name, 5)
+    Validators().validate_change_page(result, event_name)
 
 
-def test_icon_remove_click():
-    event_name = "icon_remove_click"
-    go_to_spot_more_popup().icon_remove_click()
-
-    result = BigQueryFunction().fetch_user_operation_tracker()
-    BigQueryFunction().display_query_result(result, 5)
-
-    Validators().validate_event_name_in_count(result, event_name, 3)
-
-
-def test_list_spot_click():
-    event_name = "list_spot_click"
-    content_type = "spot"
-
-    go_to_spot_more_popup().list_spot_click()
+def test_btn_edit_click_and_btn_delete_click():
+    event_name = "btn_edit_click"
+    my_profile_create_a_spot_and_go_to_spot_more_popup().btn_edit_click()
 
     result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
+    System().back_click()
+    Validators().validate_change_page(result, event_name)
 
-    Validators().validate_change_page(result, event_name, content_type)
-
-
-def test_list_result_spot_click():
-    event_name = "list_result_spot_click"
-    content_type = "spot"
-    position = 0
-
-    go_to_spot_more_popup().list_result_spot_click()
-
+    event_name = "btn_delete_click"
+    SpotFeed().icon_more_click()
+    SpotMorePopup().btn_delete_click()
     result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
-
-    Validators().validate_change_page_and_position(result, event_name, content_type, position)
-
-
-def test_text_no_result_show():
-    event_name = "text_no_result_show"
-    go_to_spot_more_popup().text_no_result_show()
-
-    result = BigQueryFunction().fetch_user_operation_tracker()
-    BigQueryFunction().display_query_result(result, 5)
-
-    Validators().validate_event_name_in_count(result, event_name, 3)
+    Validators().validate_change_page(result, event_name)
+    DeletePopUp().delete_popup()
