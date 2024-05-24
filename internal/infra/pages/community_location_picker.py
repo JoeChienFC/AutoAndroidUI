@@ -9,17 +9,18 @@ class CommunityLocationPicker:
     def __init__(self):
         self.d = u2.connect()
 
-        self.icon_clear_x_y = (0.905, 0.118)
-        self.icon_close_x_y = (0.914, 0.06)
-        self.first_recent_x_y = (0.402, 0.305)
-        self.icon_remove_x_y = (0.932, 0.309)
-        self.list_community_x_y = (0.2, 0.598)
+        self.bar_search = 'bar_search'
+        self.icon_clear = 'icon_clear'
+        self.icon_close = 'icon_close'
+        self.list_recent = 'list_recent'
+        self.icon_remove = 'icon_remove'
+        self.list_community = 'list_community'
         self.list_result_community_x_y = (0.367, 0.224)
 
     def bar_search_click(self):
         try:
             time.sleep(1)
-            self.d.xpath('//android.widget.EditText').click()
+            self.d(description=self.bar_search, index=1).click()
 
         except Exception as e:
             print(f"點擊 bar_search 失败: {e}")
@@ -28,6 +29,8 @@ class CommunityLocationPicker:
     def bar_search_typing(self):
         try:
             time.sleep(1)
+            self.bar_search_click()
+            time.sleep(0.5)
             # self.d.xpath('//android.widget.EditText').set_text("test")
             # os.system('adb shell input text {}'.format("test"))
             self.d.shell('input text "test"')
@@ -39,12 +42,9 @@ class CommunityLocationPicker:
     def icon_clear_click(self):
         try:
             time.sleep(1)
-            self.d.xpath('//android.widget.EditText').click()
+            self.bar_search_typing()
             time.sleep(0.5)
-            # os.system('adb shell input text {}'.format('test'))
-            self.d.shell('input text "test"')
-            time.sleep(0.5)
-            self.d.click(*self.icon_clear_x_y)
+            self.d(description=self.icon_clear).click()
 
         except Exception as e:
             print(f"點擊 icon_clear 失败: {e}")
@@ -53,7 +53,7 @@ class CommunityLocationPicker:
     def icon_close_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.icon_close_x_y)
+            self.d(description=self.icon_close).click()
 
         except Exception as e:
             print(f"點擊 icon_close 失败: {e}")
@@ -62,7 +62,10 @@ class CommunityLocationPicker:
     def list_recent_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.first_recent_x_y)
+            if self.d(description='Recent').exists(3):
+                self.d(description=self.list_recent).click()
+            else:
+                self.list_community_click()
             time.sleep(0.5)
 
         except Exception as e:
@@ -72,7 +75,7 @@ class CommunityLocationPicker:
     def icon_remove_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.icon_remove_x_y)
+            self.d(description=self.icon_remove).click()
             time.sleep(0.5)
 
         except Exception as e:
@@ -82,7 +85,7 @@ class CommunityLocationPicker:
     def list_community_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.list_community_x_y)
+            self.d(description=self.list_community).click()
 
         except Exception as e:
             print(f"點擊 list_community 失败: {e}")
@@ -92,7 +95,7 @@ class CommunityLocationPicker:
         try:
             time.sleep(1)
             # os.system('adb shell input text {}'.format("test"))
-            self.d.shell('input text "test"')
+            self.bar_search_typing()
             time.sleep(2)
             self.d.click(*self.list_result_community_x_y)
 
@@ -104,7 +107,10 @@ class CommunityLocationPicker:
         try:
             time.sleep(1)
             # self.d.xpath('//android.widget.EditText').set_text("lllll")
-            os.system('adb shell input text {}'.format("lllll"))
+            # os.system('adb shell input text {}'.format("lllll"))
+            self.bar_search_click()
+            time.sleep(0.5)
+            self.d.shell('input text "lllll"')
 
         except Exception as e:
             print(f"text_no_result_show 失败: {e}")

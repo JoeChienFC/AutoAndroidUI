@@ -6,19 +6,22 @@ import os
 class Searching:
 
     def __init__(self):
+        self.d = u2.connect()
+
         self.select_first_hashtag_x_y = (0.377, 0.187)
         self.select_second_x_y = (0.285, 0.211)
         self.select_first_x_y = (0.357, 0.167)
-        self.icon_back_x_y = (0.065, 0.062)
-        self.icon_remove_x_y = (0.934, 0.169)
-        self.icon_clear_x_y = (0.779, 0.06)
-        self.d = u2.connect()
-        self.icon_close_x_y = (0.925, 0.705)
-        self.btn_community_x_y = (0.086, 0.743)
+        self.icon_back = "icon_back"
+        self.icon_remove = "icon_remove"
+        self.icon_clear = "icon_clear"
+        self.icon_close = "icon_close"
+        self.bar_search = "bar_search"
+        self.list_community = "list_community"
+        self.text_cancel = "text_cancel"
 
     def text_cancel_click(self):
         try:
-            self.d(description="Cancel").click()
+            self.d(description=self.text_cancel).click()
             time.sleep(1)
 
         except Exception as e:
@@ -26,10 +29,7 @@ class Searching:
 
     def bar_search_click(self):
         try:
-            self.list_keyword_click()
-            time.sleep(1)
-            self.d(text="taipei").click()
-            time.sleep(1)
+            self.d(description=self.bar_search).click()
 
         except Exception as e:
             pytest.xfail(f"點 bar_search_click 失败: {e}")
@@ -47,7 +47,7 @@ class Searching:
     def icon_clear_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.icon_clear_x_y)
+            self.d(description=self.icon_clear).click()
             time.sleep(1)
 
         except Exception as e:
@@ -57,7 +57,7 @@ class Searching:
     def icon_remove_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.icon_remove_x_y)
+            self.d(description=self.icon_remove).click()
             time.sleep(1)
 
         except Exception as e:
@@ -67,7 +67,7 @@ class Searching:
     def icon_back_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.icon_back_x_y)
+            self.d(description=self.icon_back).click()
             time.sleep(1)
 
         except Exception as e:

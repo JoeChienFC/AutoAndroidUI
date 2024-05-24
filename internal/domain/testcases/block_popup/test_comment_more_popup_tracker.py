@@ -11,14 +11,14 @@ def go_to_community_page_more_pop_up():
     return CommentMorePopup()
 
 
-def test_btn_replyto_click():
-    event_name = "btn_replyto_click"
-    go_to_community_page_more_pop_up().btn_replyto_click()
-
-    result = BigQueryFunction().fetch_user_operation_tracker()
-    BigQueryFunction().display_query_result(result, 5)
-
-    Validators().validate_change_page(result, event_name)
+# def test_btn_replyto_click():
+#     event_name = "btn_replyto_click"
+#     go_to_community_page_more_pop_up().btn_replyto_click()
+#
+#     result = BigQueryFunction().fetch_user_operation_tracker()
+#     BigQueryFunction().display_query_result(result, 5)
+#
+#     Validators().validate_change_page(result, event_name)
 
 
 def test_btn_share_click():

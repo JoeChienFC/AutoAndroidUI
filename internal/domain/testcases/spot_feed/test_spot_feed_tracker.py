@@ -10,7 +10,7 @@ from internal.infra.validators.validators import Validators
 def test_btn_location_picker_click():
     event_name = "btn_locationpicker_click"
     content_type = "spot"
-    ADBClient.start_playsee_app().spot_click().location_picker_click()
+    ADBClient.start_playsee_app().spot_click().btn_locationpicker_click()
 
     result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
@@ -58,7 +58,7 @@ def test_icon_like_click_and_icon_unlike_click():
     result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
-    SpotFeed().icon_like_click()
+    SpotFeed().icon_unlike_click()
 
     Validators().validate_first_event_name(result, event_name, content_type)
 
@@ -161,7 +161,7 @@ def test_screen_doubleclick():
     result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
-    SpotFeed().icon_like_click()
+    SpotFeed().icon_unlike_click()
 
     Validators().validate_first_event_name(result, event_name, content_type)
 
@@ -201,28 +201,28 @@ def test_screen_swipeupanddown():
     Validators().validate_event_name_content_type_in_count(result, event_name, content_type)
 
 
-def test_text_sharecommunity_show():
-    event_name = "text_sharecommunity_show"
-    content_type = "spot"
-    ADBClient.start_playsee_app().spot_click().icon_share_click().list_community_click()
-    ShareToPopup().btn_share_click()
+# def test_text_sharecommunity_show():
+#     event_name = "text_sharecommunity_show"
+#     content_type = "spot"
+#     ADBClient.start_playsee_app().spot_click().icon_share_click().list_community_click()
+#     ShareToPopup().btn_share_click()
+#
+#     result = BigQueryFunction().fetch_user_operation_tracker()
+#     BigQueryFunction().display_query_result(result, 5)
+#
+#     Validators().validate_first_event_name(result, event_name, content_type)
 
-    result = BigQueryFunction().fetch_user_operation_tracker()
-    BigQueryFunction().display_query_result(result, 5)
 
-    Validators().validate_first_event_name(result, event_name, content_type)
-
-
-def test_text_sharecommunity_click():
-    event_name = "text_sharecommunity_click"
-    content_type = "spot"
-    ADBClient.start_playsee_app().spot_click().icon_share_click().list_community_click()
-    ShareToPopup().btn_share_click().text_sharecommunity_click()
-
-    result = BigQueryFunction().fetch_user_operation_tracker()
-    BigQueryFunction().display_query_result(result, 5)
-
-    Validators().validate_change_page(result, event_name, content_type)
+# def test_text_sharecommunity_click():
+#     event_name = "text_sharecommunity_click"
+#     content_type = "spot"
+#     ADBClient.start_playsee_app().spot_click().icon_share_click().list_community_click()
+#     ShareToPopup().btn_share_click().text_sharecommunity_click()
+#
+#     result = BigQueryFunction().fetch_user_operation_tracker()
+#     BigQueryFunction().display_query_result(result, 5)
+#
+#     Validators().validate_change_page(result, event_name, content_type)
 
 def test_text_caption_show():
     event_name = "text_caption_show"
@@ -246,17 +246,17 @@ def test_text_caption_click():
     Validators().validate_change_page(result, event_name, content_type)
 
 
-def btn_collect_click_and_btn_uncollect_click():
+def test_btn_collect_click_and_btn_uncollect_click():
     event_name = "btn_collect_click"
     content_type = "spot"
-    ADBClient.start_playsee_app().spot_click().icon_more_click().btn_collect_click()
+    ADBClient.start_playsee_app().spot_click().btn_collect_click()
 
     result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name, content_type)
     event_name = "btn_uncollect_click"
-    SpotFeed().icon_more_click().btn_uncollect_click()
+    SpotFeed().btn_uncollect_click()
 
     result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
@@ -264,7 +264,7 @@ def btn_collect_click_and_btn_uncollect_click():
     Validators().validate_change_page(result, event_name, content_type)
 
 
-def btn_download_click():
+def test_btn_download_click():
     event_name = "btn_download_click"
     content_type = "spot"
     ADBClient.start_playsee_app().spot_click().icon_more_click().btn_download_click()

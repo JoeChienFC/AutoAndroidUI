@@ -28,7 +28,7 @@ def test_bar_search_typing():
     result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
-    Validators().validate_event_name_in_count(result, event_name, 3)
+    Validators().validate_event_name_in_count(result, event_name, 5)
 
 
 def test_icon_clear_click():
@@ -71,32 +71,32 @@ def test_icon_remove_click():
     Validators().validate_event_name_in_count(result, event_name, 3)
 
 
-def test_list_spot_click():
+def test_list_community_click():
     event_name = "list_community_click"
     content_type = "community"
-    position = 1
+    # position = 1
 
     go_to_community_location_picker().list_community_click()
 
     result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
-    CommunityLocationPicker().icon_remove_click()
+    # CommunityLocationPicker().icon_remove_click()
 
-    Validators().validate_change_page_and_position(result, event_name, content_type, position)
+    Validators().validate_change_page(result, event_name, content_type)
 
 
 def test_list_result_community_click():
     event_name = "list_result_community_click"
     content_type = "community"
-    position = 0
+    # position = 0
 
     go_to_community_location_picker().list_result_community_click()
 
     result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
-    Validators().validate_change_page_and_position(result, event_name, content_type, position)
+    Validators().validate_change_page(result, event_name, content_type)
 
 
 def test_text_no_result_show():

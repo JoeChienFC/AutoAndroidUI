@@ -5,32 +5,34 @@ import time,pytest
 class ProfilePage:
 
     def __init__(self):
-        self.text_url_x_y = (0.059, 0.294)
-        self.btn_contact_xpath = '//*[@content-desc="Contact"]'
-        self.card_addprofilepicture_x_y = (0.473, 0.255)
-        self.btn_share_x_y = (0.91, 0.339)
-        self.btn_editprofile_xpath = '//*[@content-desc="Edit Profile"]'
-        self.text_bio_x_y = (0.056, 0.27)
-        self.text_profile_name_x_y = (0.065, 0.244)
-        self.text_joined_x_y = (0.892, 0.149)
-        self.text_following_x_y = (0.66, 0.151)
-        self.text_followers_x_y = (0.44, 0.147)
-        self.pic_l_headshot_x_y = (0.169, 0.152)
-        self.icon_create_x_y = (0.877, 0.828)
-        self.icon_menu_x_y = (0.937, 0.062)
-        self.icon_notification_x_y = (0.803, 0.064)
-        self.title_username_x_y = (0.154, 0.061)
         self.d = u2.connect()
 
-        self.icon_dm_x_y = (0.675, 0.061)
-        self.activities_page_x_y = (0.756, 0.356)
+        self.text_url_x_y = (0.059, 0.294)
+        self.btn_contact = 'btn_contact'
+        self.card_addprofilepicture_x_y = (0.473, 0.255)
+        self.btn_share = "btn_share"
+        self.btn_editprofile = 'btn_editprofile'
+        self.text_bio = "text_bio"
+        self.text_profile_name = "text_profile_name"
+        self.text_joined = "text_joined"
+        self.text_following = "text_following"
+        self.text_followers = "text_followers"
+        self.pic_l_headshot = "pic_l_headshot"
+        self.icon_create = "icon_create"
+        self.icon_menu = "icon_menu"
+        self.icon_notification_x_y = (0.803, 0.064)
+        self.title_username = "title_username"
+
+        self.icon_dm = "icon_dm"
+        self.tab_spots = "tab_spots"
+        self.tab_activities = "tab_activities"
         self.comment_x_y = (0.551, 0.439)
         self.first_video_x_y = (0.169, 0.524)
 
     def title_username_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.title_username_x_y)
+            self.d(description=self.title_username).click()
 
         except Exception as e:
             print(f"點擊 title_username_click 失败: {e}")
@@ -39,7 +41,7 @@ class ProfilePage:
     def icon_dm_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.icon_dm_x_y)
+            self.d(description=self.icon_dm).click()
 
             from internal.infra.pages.dm_list import DmList
             return DmList()
@@ -60,7 +62,7 @@ class ProfilePage:
     def icon_menu_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.icon_menu_x_y)
+            self.d(description=self.icon_menu).click()
 
         except Exception as e:
             print(f"點擊 icon_menu_click 失败: {e}")
@@ -69,7 +71,7 @@ class ProfilePage:
     def icon_create_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.icon_create_x_y)
+            self.d(description=self.icon_create).click()
 
         except Exception as e:
             print(f"點擊 icon_create_click 失败: {e}")
@@ -78,7 +80,7 @@ class ProfilePage:
     def pic_l_headshot_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.pic_l_headshot_x_y)
+            self.d(description=self.pic_l_headshot).click()
 
         except Exception as e:
             print(f"點擊 pic_l_headshot_click 失败: {e}")
@@ -87,7 +89,7 @@ class ProfilePage:
     def text_followers_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.text_followers_x_y)
+            self.d(description=self.text_followers).click()
 
         except Exception as e:
             print(f"點擊 text_followers_click 失败: {e}")
@@ -96,7 +98,7 @@ class ProfilePage:
     def text_following_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.text_following_x_y)
+            self.d(description=self.text_following).click()
 
         except Exception as e:
             print(f"點擊 text_following_click 失败: {e}")
@@ -105,7 +107,7 @@ class ProfilePage:
     def text_joined_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.text_joined_x_y)
+            self.d(description=self.text_joined).click()
 
         except Exception as e:
             print(f"點擊 text_joined_click 失败: {e}")
@@ -114,7 +116,7 @@ class ProfilePage:
     def text_profile_name_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.text_profile_name_x_y)
+            self.d(description=self.text_profile_name).click()
 
         except Exception as e:
             print(f"點擊 text_profile_name_click 失败: {e}")
@@ -123,7 +125,7 @@ class ProfilePage:
     def text_bio_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.text_bio_x_y)
+            self.d(description=self.text_bio).click()
 
         except Exception as e:
             print(f"點擊 text_bio_click 失败: {e}")
@@ -132,7 +134,7 @@ class ProfilePage:
     def btn_editprofile_click(self):
         try:
             time.sleep(1)
-            self.d.xpath(self.btn_editprofile_xpath).click()
+            self.d(description=self.btn_editprofile).click()
 
         except Exception as e:
             print(f"點擊 btn_editprofile_click 失败: {e}")
@@ -141,7 +143,7 @@ class ProfilePage:
     def btn_share_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.btn_share_x_y)
+            self.d(description=self.btn_share).click()
 
         except Exception as e:
             print(f"點擊 btn_share_click 失败: {e}")
@@ -150,7 +152,7 @@ class ProfilePage:
     def btn_contact_click(self):
         try:
             time.sleep(1)
-            self.d.xpath(self.btn_contact_xpath).click()
+            self.d(description=self.btn_contact).click()
 
         except Exception as e:
             print(f"點擊 btn_contact_click 失败: {e}")

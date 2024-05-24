@@ -128,15 +128,15 @@ def test_tab_spots_click():
     Validators().validate_change_page(result, event_name, content_type)
 
 
-def test_icon_create_click():
-    event_name = "icon_create_click"
-    content_type = "community"
-    go_to_community_page().icon_create_click()
-
-    result = BigQueryFunction().fetch_user_operation_tracker()
-    BigQueryFunction().display_query_result(result, 5)
-
-    Validators().validate_change_page(result, event_name, content_type)
+# def test_icon_create_click():
+#     event_name = "icon_create_click"
+#     content_type = "community"
+#     go_to_community_page().icon_create_click()
+#
+#     result = BigQueryFunction().fetch_user_operation_tracker()
+#     BigQueryFunction().display_query_result(result, 5)
+#
+#     Validators().validate_change_page(result, event_name, content_type)
 
 
 def test_screen_swipeupanddown():

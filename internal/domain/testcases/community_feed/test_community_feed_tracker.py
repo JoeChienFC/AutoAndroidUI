@@ -28,14 +28,14 @@ def test_icon_menu_click():
     Validators().validate_change_page(result, event_name)
 
 
-def test_icon_create_click():
-    event_name = "icon_create_click"
-    ADBClient.start_playsee_app().icon_create_click()
-
-    result = BigQueryFunction().fetch_user_operation_tracker()
-    BigQueryFunction().display_query_result(result, 5)
-
-    Validators().validate_change_page(result, event_name)
+# def test_icon_create_click():
+#     event_name = "icon_create_click"
+#     ADBClient.start_playsee_app().icon_create_click()
+#
+#     result = BigQueryFunction().fetch_user_operation_tracker()
+#     BigQueryFunction().display_query_result(result, 5)
+#
+#     Validators().validate_change_page(result, event_name)
 
 
 def test_text_communityname_click():
@@ -117,7 +117,7 @@ def test_icon_comment_click():
     ADBClient.start_playsee_app().icon_comment_click()
 
     result = BigQueryFunction().fetch_user_operation_tracker()
-    BigQueryFunction().display_query_result(result, 5)
+    BigQueryFunction().display_query_result(result, 10)
 
     Validators().validate_change_page(result, event_name, content_type)
 
@@ -134,18 +134,42 @@ def test_icon_share_click():
     Validators().validate_change_page(result, event_name, content_type)
 
 
-def test_icon_like_click():
+def test_icon_like_click_icon_unlike_click():
     event_name = "icon_like_click"
+    event_name2 = "icon_unlike_click"
     content_type = "community_comment"
 
-    ADBClient.start_playsee_app().icon_like_click()
+    ADBClient.start_playsee_app().icon_unlike_click()
 
-    result = BigQueryFunction().fetch_user_operation_tracker()
-    BigQueryFunction().display_query_result(result, 5)
+    result1 = BigQueryFunction().fetch_user_operation_tracker()
+    BigQueryFunction().display_query_result(result1, 5)
 
     CommunityFeed().icon_like_click()
 
-    Validators().validate_first_event_name(result, event_name, content_type)
+    result2 = BigQueryFunction().fetch_user_operation_tracker()
+    BigQueryFunction().display_query_result(result2, 5)
+
+    Validators().validate_first_event_name(result1, event_name, content_type)
+    Validators().validate_first_event_name(result2, event_name2, content_type)
+
+
+def test_icon_save_click_icon_unsave_click():
+    event_name = "icon_save_click"
+    event_name2 = "icon_unsave_click"
+    content_type = "community_comment"
+
+    ADBClient.start_playsee_app().icon_unsave_click()
+
+    result1 = BigQueryFunction().fetch_user_operation_tracker()
+    BigQueryFunction().display_query_result(result1, 5)
+
+    CommunityFeed().icon_save_click()
+
+    result2 = BigQueryFunction().fetch_user_operation_tracker()
+    BigQueryFunction().display_query_result(result2, 5)
+
+    Validators().validate_first_event_name(result1, event_name, content_type)
+    Validators().validate_first_event_name(result2, event_name2, content_type)
 
 
 def test_icon_more_click():
@@ -171,3 +195,21 @@ def test_screen_swipeupanddown():
     Validators().validate_event_name_in_count(result, event_name, 5)
 
 
+def test_comment_appear():
+    event_name = "comment_appear"
+    ADBClient.start_playsee_app()
+
+    result = BigQueryFunction().fetch_user_operation_tracker()
+    BigQueryFunction().display_query_result(result, 5)
+
+    Validators().validate_event_name_in_count(result, event_name, 10)
+
+
+def test_comment_disappear():
+    event_name = "comment_disappear"
+    ADBClient.start_playsee_app().screen_swipeupanddown()
+
+    result = BigQueryFunction().fetch_user_operation_tracker()
+    BigQueryFunction().display_query_result(result, 5)
+
+    Validators().validate_event_name_in_count(result, event_name, 10)

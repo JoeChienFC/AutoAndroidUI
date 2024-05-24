@@ -7,19 +7,24 @@ class SpotFeed:
     def __init__(self):
         self.d = u2.connect()
 
-        self.like_icon_xpath = '//android.widget.Button/android.widget.ImageView[1]'
+        self.icon_comment = "icon_comment"
+        self.icon_share = "icon_share"
+        self.icon_like = "icon_like"
+        self.icon_unlike = "icon_unlike"
+        self.icon_more = "icon_more"
+        self.icon_unsave = "icon_unsave"
+        self.icon_save = "icon_save"
 
-        self.icon_create_x_y = (0.911, 0.059)
-        self.location_picker_x_y = (0.467, 0.066)
-        self.comment_icon_x_y = (0.928, 0.725)
-        self.share_icon_x_y = (0.934, 0.792)
-        self.more_icon_x_y = (0.924, 0.855)
-        self.headshot_pic_x_y = (0.089, 0.788)
-        self.username_text_x_y = (0.184, 0.775)
-        self.location_icon_x_y = (0.061, 0.857)
-        self.screen_mute_x_y = (0.503, 0.425)
-        self.text_sharecommunity_x_y = (0.113, 0.823)
-        self.text_caption_x_y = (0.061, 0.821)
+        self.icon_create = "icon_create"
+        self.btn_locationpicker = "btn_locationpicker"
+        self.pic_headshot = "pic_headshot"
+        self.text_username = "text_username"
+        self.text_location = "text_location"
+        self.screen_mute_x_y = (0.511, 0.457)
+        self.text_sharecommunity = "text_sharecommunity"
+        self.text_caption = "text_caption"
+        self.btn_follow = "btn_follow"
+        self.btn_unfollow = "btn_unfollow"
 
         self.home_feed_setup()
 
@@ -33,7 +38,7 @@ class SpotFeed:
     def icon_create_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.icon_create_x_y)
+            self.d(description=self.icon_create).click()
 
             from internal.infra.pages.create_spot_upload_album import CreateSpotUploadAlbum
             return CreateSpotUploadAlbum()
@@ -45,7 +50,7 @@ class SpotFeed:
     def text_caption_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.text_caption_x_y)
+            self.d(description=self.text_caption).click()
 
         except Exception as e:
             print(f"點擊 text_caption 失败: {e}")
@@ -54,7 +59,7 @@ class SpotFeed:
     def text_sharecommunity_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.text_sharecommunity_x_y)
+            self.d(description=self.text_sharecommunity).click()
 
         except Exception as e:
             print(f"點擊 text_sharecommunity 失败: {e}")
@@ -109,7 +114,7 @@ class SpotFeed:
     def text_location_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.location_icon_x_y)
+            self.d(description=self.text_location).click()
 
         except Exception as e:
             print(f"點擊 location_icon 失败: {e}")
@@ -118,7 +123,7 @@ class SpotFeed:
     def text_username_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.username_text_x_y)
+            self.d(description=self.text_username).click()
 
         except Exception as e:
             print(f"點擊 username_text 失败: {e}")
@@ -127,7 +132,7 @@ class SpotFeed:
     def pic_headshot_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.headshot_pic_x_y)
+            self.d(description=self.pic_headshot).click()
 
         except Exception as e:
             print(f"點擊 headshot_pic 失败: {e}")
@@ -136,7 +141,7 @@ class SpotFeed:
     def icon_more_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.more_icon_x_y)
+            self.d(description=self.icon_more).click()
             time.sleep(4)
 
             from internal.infra.pages.spot_more_popup import SpotMorePopup
@@ -148,7 +153,7 @@ class SpotFeed:
     def icon_share_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.share_icon_x_y)
+            self.d(description=self.icon_share).click()
             time.sleep(1)
             from internal.infra.pages.shareto_popup import ShareToPopup
             return ShareToPopup()
@@ -160,7 +165,7 @@ class SpotFeed:
     def icon_comment_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.comment_icon_x_y)
+            self.d(description=self.icon_comment).click()
 
         except Exception as e:
             print(f"點擊 comment 失败: {e}")
@@ -169,28 +174,42 @@ class SpotFeed:
     def icon_like_click(self):
         try:
             time.sleep(2)
-            self.d.xpath(self.like_icon_xpath).click()
+            self.d(description=self.icon_unlike).click()
 
         except Exception as e:
             print(f"點擊 like 失败: {e}")
             pytest.xfail("點擊 like 失败")
 
+    def icon_unlike_click(self):
+        try:
+            time.sleep(2)
+            self.d(description=self.icon_like).click()
+
+        except Exception as e:
+            print(f"點擊 unlike 失败: {e}")
+            pytest.xfail("點擊 unlike 失败")
+
     def btn_follow_click(self):
         try:
-            if self.d(description="F​o​l​l​o​w").exists(2):
-                self.d(description="F​o​l​l​o​w").click()
-            else:
-                pytest.xfail("沒有找到 follow 按鈕")
+            self.d(description=self.btn_follow).click()
 
         except Exception as e:
             print(f"點擊 follow 失败: {e}")
             pytest.xfail("點擊 follow 失败")
 
-    def location_picker_click(self):
+    def btn_unfollow_click(self):
+        try:
+            self.d(description=self.btn_unfollow).click()
+
+        except Exception as e:
+            print(f"點擊 unfollow 失败: {e}")
+            pytest.xfail("點擊 unfollow 失败")
+
+    def btn_locationpicker_click(self):
         try:
             # 點擊 location picker
-            self.d.click(*self.location_picker_x_y)
-            time.sleep(2)
+            self.d(description=self.btn_locationpicker).click()
+            time.sleep(1)
             from internal.infra.pages.spot_location_picker import SpotLocationPicker
             return SpotLocationPicker()
 
@@ -198,18 +217,20 @@ class SpotFeed:
             print(f"進入 location_picker 失败: {e}")
             pytest.xfail("進入 location_picker 失败")
 
-    def btn_unfollow_click(self):
+    def btn_collect_click(self):
         try:
-            if self.d(description="F​o​l​l​o​w​i​n​g").exists(2):
-                self.d(description="F​o​l​l​o​w​i​n​g").click()
-            else:
-                pytest.xfail("沒有找到 following 按鈕")
+            time.sleep(1)
+            self.d(description=self.icon_unsave).click()
 
         except Exception as e:
-            print(f"點擊 following 失败: {e}")
-            pytest.xfail("點擊 following 失败")
+            print(f"點擊 collect 失败: {e}")
+            pytest.xfail("點擊 collect 失败")
 
-    '''
-    -------------------------------------------
-    '''
+    def btn_uncollect_click(self):
+        try:
+            time.sleep(2)
+            self.d(description=self.icon_save).click()
 
+        except Exception as e:
+            print(f"點擊 uncollect 失败: {e}")
+            pytest.xfail("點擊 uncollect 失败")
