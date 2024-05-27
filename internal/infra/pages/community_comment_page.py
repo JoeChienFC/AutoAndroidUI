@@ -5,20 +5,21 @@ import time,pytest
 class CommunityCommentPage:
 
     def __init__(self):
-        self.icon_main_more_xpath = '//android.widget.ScrollView/android.widget.ImageView[5]'
-        self.icon_main_like_xpath = '//android.widget.ScrollView/android.widget.ImageView[4]'
-        self.icon_main_share_xpath = '//android.widget.ScrollView/android.widget.ImageView[3]'
-        self.icon_main_comment_xpath = '//android.widget.ScrollView/android.widget.ImageView[2]'
+        self.title_communityname = "title_communityname"
+        self.icon_back = "icon_back"
+        self.pic_main_headshot = "pic_main_headshot"
+        self.pic_main_username = "pic_main_username"
+        self.icon_main_comment = "icon_main_comment"
+        self.icon_main_share = "icon_main_share"
+        self.icon_main_like = "icon_main_like"
+        self.icon_main_more = "icon_main_more"
+
         self.d = u2.connect()
-        self.title_community_name = (0.502, 0.052)
-        self.back_icon_x_y = (0.067, 0.06)
-        self.pic_main_headshot_x_y = (0.091, 0.132)
-        self.pic_main_username_x_y = (0.167, 0.129)
 
     def title_communityname_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.title_community_name)
+            self.d(description=self.title_communityname).click()
             time.sleep(3)
 
         except Exception as e:
@@ -28,7 +29,7 @@ class CommunityCommentPage:
     def icon_back_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.back_icon_x_y)
+            self.d(description=self.icon_back).click()
 
         except Exception as e:
             print(f"點擊 back_icon 失败: {e}")
@@ -37,7 +38,7 @@ class CommunityCommentPage:
     def pic_main_headshot_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.pic_main_headshot_x_y)
+            self.d(description=self.pic_main_headshot).click()
 
         except Exception as e:
             print(f"點擊 pic_main_headshot 失败: {e}")
@@ -46,7 +47,7 @@ class CommunityCommentPage:
     def pic_main_username_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.pic_main_username_x_y)
+            self.d(description=self.pic_main_username).click()
 
         except Exception as e:
             print(f"點擊 pic_main_username 失败: {e}")
@@ -69,7 +70,7 @@ class CommunityCommentPage:
     def icon_main_comment_click(self):
         try:
             time.sleep(1)
-            self.d.xpath(self.icon_main_comment_xpath).click()
+            self.d(description=self.icon_main_comment).click()
 
         except Exception as e:
             print(f"點擊 icon_main_comment_click 失败: {e}")
@@ -78,7 +79,7 @@ class CommunityCommentPage:
     def icon_main_share_click(self):
         try:
             time.sleep(1)
-            self.d.xpath(self.icon_main_share_xpath).click()
+            self.d(description=self.icon_main_share).click()
 
         except Exception as e:
             print(f"點擊 icon_main_share_click 失败: {e}")
@@ -87,7 +88,7 @@ class CommunityCommentPage:
     def icon_main_like_click(self):
         try:
             time.sleep(1)
-            self.d.xpath(self.icon_main_like_xpath).click()
+            self.d(description=self.icon_main_like).click()
 
         except Exception as e:
             print(f"點擊 icon_main_like_click 失败: {e}")
@@ -96,7 +97,7 @@ class CommunityCommentPage:
     def icon_main_more_click(self):
         try:
             time.sleep(1)
-            self.d.xpath(self.icon_main_more_xpath).click()
+            self.d(description=self.icon_main_more).click()
             time.sleep(1)
 
             from internal.infra.pages.comment_more_popup import CommentMorePopup

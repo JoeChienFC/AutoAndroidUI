@@ -76,6 +76,9 @@ class CommunityFeed:
             self.d(description=self.pic_headshot).click()
             time.sleep(1)
 
+            from internal.infra.pages.profile_page import ProfilePage
+            return ProfilePage()
+
         except Exception as e:
             print(f"點 pic_headshot 失败: {e}")
             pytest.xfail("點 pic_headshot 失败")
@@ -241,3 +244,14 @@ class CommunityFeed:
             print(f"進入 community 失败: {e}")
             pytest.xfail("進入 community 失败")
 
+    def tab_notifications_click(self):
+        try:
+            if self.d(description="Tab 4 of 5").exists(5):
+                self.d(description="Tab 4 of 5").click()
+                print("成功進入 tab_notifications！")
+                time.sleep(2)
+                from internal.infra.pages.notifications import Notifications
+                return Notifications()
+        except Exception as e:
+            print(f"進入 tab_notifications 失败: {e}")
+            pytest.xfail("進入 tab_notifications 失败")

@@ -5,11 +5,19 @@ import time,pytest
 class ProfilePage:
 
     def __init__(self):
+        self.comment_media = "comment_media"
+        self.text_location = "text_location"
         self.d = u2.connect()
 
-        self.text_url_x_y = (0.059, 0.294)
+        self.pic_spot = "pic_spot"
+        self.text_translation = "text_translation"
+        self.btn_message = "btn_message"
+        self.btn_follow = "btn_follow"
+        self.icon_back = "icon_back"
+        self.text_url = "text_url"
         self.btn_contact = 'btn_contact'
-        self.card_addprofilepicture_x_y = (0.473, 0.255)
+        self.card_addprofilepicture = "card_addprofilepicture"
+        self.card_verifyyouremail = "card_verifyyouremail"
         self.btn_share = "btn_share"
         self.btn_editprofile = 'btn_editprofile'
         self.text_bio = "text_bio"
@@ -22,12 +30,23 @@ class ProfilePage:
         self.icon_menu = "icon_menu"
         self.icon_notification_x_y = (0.803, 0.064)
         self.title_username = "title_username"
+        self.text_sharespot = "text_sharespot"
+        self.comment_text = "comment_text"
 
         self.icon_dm = "icon_dm"
         self.tab_spots = "tab_spots"
         self.tab_activities = "tab_activities"
-        self.comment_x_y = (0.551, 0.439)
-        self.first_video_x_y = (0.169, 0.524)
+        self.icon_more = "icon_more"
+        self.icon_unlike = "icon_unlike"
+        self.icon_like = "icon_like"
+        self.icon_unsave = "icon_unsave"
+        self.icon_save = "icon_save"
+        self.icon_share = "icon_share"
+        self.icon_comment = "icon_comment"
+        self.text_username = "text_username"
+        self.pic_headshot = "pic_headshot"
+        self.text_communityname = "text_communityname"
+
 
     def title_username_click(self):
         try:
@@ -49,15 +68,6 @@ class ProfilePage:
         except Exception as e:
             print(f"點擊 icon_dm_click 失败: {e}")
             pytest.xfail("點擊 icon_dm_click 失败")
-
-    def icon_notification_click(self):
-        try:
-            time.sleep(1)
-            self.d.click(*self.icon_notification_x_y)
-
-        except Exception as e:
-            print(f"點擊 icon_notification_click 失败: {e}")
-            pytest.xfail("點擊 icon_notification_click 失败")
 
     def icon_menu_click(self):
         try:
@@ -161,7 +171,7 @@ class ProfilePage:
     def tab_activities_click(self):
         try:
             time.sleep(1)
-            self.d(description="""Activities
+            self.d(description="""tab_activities
 Tab 2 of 2""").click()
             time.sleep(1)
 
@@ -171,7 +181,7 @@ Tab 2 of 2""").click()
 
     def tab_spots_click(self):
         try:
-            self.d(description="""Spots
+            self.d(description="""tab_spots
 Tab 1 of 2""").click()
             time.sleep(1)
 
@@ -182,7 +192,7 @@ Tab 1 of 2""").click()
     def text_sharespot_click(self):
         try:
             time.sleep(1)
-            self.d(description="Share your first Spot").click()
+            self.d(description=self.text_sharespot).click()
 
         except Exception as e:
             print(f"點擊 text_sharespot_click 失败: {e}")
@@ -191,32 +201,238 @@ Tab 1 of 2""").click()
     def text_url_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.text_url_x_y)
+            self.d(description=self.text_url).click()
 
         except Exception as e:
             print(f"點擊 text_url_click 失败: {e}")
             pytest.xfail("點擊 text_url_click 失败")
 
-    def comment_click(self):
+    def comment_text_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.comment_x_y)
+            self.d(description=self.comment_text).click()
 
             from internal.infra.pages.comment import Comment
             return Comment()
 
         except Exception as e:
-            print(f"點擊 comment_video 失败: {e}")
-            pytest.xfail("點擊 comment_video 失败")
+            print(f"點擊 comment_text 失败: {e}")
+            pytest.xfail("點擊 comment_text 失败")
 
-    def first_video_click(self):
+    def text_communityname_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.first_video_x_y)
-            from internal.infra.pages.spot_page import SpotPage
-            return SpotPage()
+            self.d(description=self.text_communityname).click()
 
         except Exception as e:
-            print(f"點擊 first_video 失败: {e}")
-            pytest.xfail("點擊 first_video 失败")
+            print(f"點擊 text_communityname 失败: {e}")
+            pytest.xfail("點擊 text_communityname 失败")
 
+    def pic_headshot_click(self):
+        try:
+            time.sleep(1)
+            self.d(description=self.pic_headshot).click()
+
+        except Exception as e:
+            print(f"點擊 pic_headshot 失败: {e}")
+            pytest.xfail("點擊 pic_headshot 失败")
+
+    def text_username_click(self):
+        try:
+            time.sleep(1)
+            self.d(description=self.text_username).click()
+
+        except Exception as e:
+            print(f"點擊 text_username 失败: {e}")
+            pytest.xfail("點擊 text_username 失败")
+
+    def icon_comment_click(self):
+        try:
+            time.sleep(1)
+            self.d(description=self.icon_comment).click()
+
+        except Exception as e:
+            print(f"點擊 icon_comment 失败: {e}")
+            pytest.xfail("點擊 icon_comment 失败")
+
+    def icon_share_click(self):
+        try:
+            time.sleep(1)
+            self.d(description=self.icon_share).click()
+
+        except Exception as e:
+            print(f"點擊 icon_share 失败: {e}")
+            pytest.xfail("點擊 icon_share 失败")
+
+    def icon_save_click(self):
+        try:
+            time.sleep(1)
+            self.d(description=self.icon_unsave).click()
+
+        except Exception as e:
+            print(f"點擊 icon_save 失败: {e}")
+            pytest.xfail("點擊 icon_save 失败")
+
+    def icon_unsave_click(self):
+        try:
+            time.sleep(1)
+            self.d(description=self.icon_save).click()
+
+        except Exception as e:
+            print(f"點擊 icon_unsave 失败: {e}")
+            pytest.xfail("點擊 icon_unsave 失败")
+
+    def icon_like_click(self):
+        try:
+            time.sleep(1)
+            self.d(description=self.icon_unlike).click()
+
+        except Exception as e:
+            print(f"點擊 icon_like 失败: {e}")
+            pytest.xfail("點擊 icon_like 失败")
+
+    def icon_unlike_click(self):
+        try:
+            time.sleep(1)
+            self.d(description=self.icon_like).click()
+
+        except Exception as e:
+            print(f"點擊 icon_unlike 失败: {e}")
+            pytest.xfail("點擊 icon_unlike 失败")
+
+    def icon_more_click(self):
+        try:
+            time.sleep(1)
+            self.d(description=self.icon_more).click()
+
+        except Exception as e:
+            print(f"點擊 icon_more 失败: {e}")
+            pytest.xfail("點擊 icon_more 失败")
+
+    def screen_swipeupanddown(self):
+        try:
+            time.sleep(1)
+            self.d.swipe_ext("up")
+
+        except Exception as e:
+            print(f"上滑 screen 失败: {e}")
+            pytest.xfail("上滑 screen 失败")
+
+    def card_verifyyouremail_click(self):
+        try:
+            time.sleep(1)
+            self.d(description=self.card_verifyyouremail).click()
+
+        except Exception as e:
+            print(f"點擊 card_verifyyouremail 失败: {e}")
+            pytest.xfail("點擊 card_verifyyouremail 失败")
+
+    def card_addprofilepicture_click(self):
+        try:
+            time.sleep(1)
+            self.d(description=self.card_addprofilepicture).click()
+
+        except Exception as e:
+            print(f"點擊 card_addprofilepicture 失败: {e}")
+            pytest.xfail("點擊 card_addprofilepicture 失败")
+
+    def icon_back_click(self):
+        try:
+            time.sleep(1)
+            self.d(description=self.icon_back).click()
+
+        except Exception as e:
+            print(f"點擊 icon_back 失败: {e}")
+            pytest.xfail("點擊 icon_back 失败")
+
+    def btn_follow_click(self):
+        try:
+            time.sleep(1)
+            self.d(description=self.btn_follow).click()
+
+        except Exception as e:
+            print(f"點擊 btn_follow 失败: {e}")
+            pytest.xfail("點擊 btn_follow 失败")
+
+    def btn_message_click(self):
+        try:
+            time.sleep(1)
+            self.d(description=self.btn_message).click()
+
+        except Exception as e:
+            print(f"點擊 btn_message 失败: {e}")
+            pytest.xfail("點擊 btn_message 失败")
+
+    def text_translation_click(self):
+        try:
+            time.sleep(1)
+            i = 10
+            while i > 0:
+                time.sleep(1)
+                if self.d(description=self.text_translation).exists():
+                    self.d(description=self.text_translation).click()
+                    break
+                else:
+                    self.d(description=self.icon_back).click()
+                    self.screen_swipeupanddown()
+                    self.pic_headshot_click()
+                    i -= 1
+
+        except Exception as e:
+            print(f"點擊 text_translation 失败: {e}")
+            pytest.xfail("點擊 text_translation 失败或找不到 text_translation")
+
+    def pic_spot_click(self):
+        try:
+            time.sleep(1)
+            i = 10
+            while i > 0:
+                time.sleep(1)
+                if self.d(description=self.pic_spot).exists():
+                    self.d(description=self.pic_spot).click()
+                    break
+                else:
+                    self.d(description=self.icon_back).click()
+                    self.screen_swipeupanddown()
+                    self.pic_headshot_click()
+                    self.tab_spots_click()
+                    i -= 1
+
+
+        except Exception as e:
+            print(f"點擊 pic_spot 失败: {e}")
+            pytest.xfail("點擊 pic_spot 失败或找不到 pic_spot")
+
+    def text_location_click(self):
+        try:
+            time.sleep(1)
+            i = 10
+            while i > 0:
+                time.sleep(1)
+                if self.d(description=self.text_location).exists():
+                    self.d(description=self.text_location).click()
+                    break
+                else:
+                    self.screen_swipeupanddown()
+                    i -= 1
+
+        except Exception as e:
+            print(f"點擊 text_location 失败: {e}")
+            pytest.xfail("點擊 text_location 失败或找不到 text_location")
+
+    def comment_media_click(self):
+        try:
+            time.sleep(1)
+            i = 10
+            while i > 0:
+                time.sleep(1)
+                if self.d(description=self.comment_media).exists():
+                    self.d(description=self.comment_media).click()
+                    break
+                else:
+                    self.screen_swipeupanddown()
+                    i -= 1
+
+        except Exception as e:
+            print(f"點擊 comment_media 失败: {e}")
+            pytest.xfail("點擊 comment_media 失败或找不到 comment_media")
