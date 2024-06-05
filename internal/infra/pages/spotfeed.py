@@ -173,8 +173,7 @@ class SpotFeed:
 
     def icon_like_click(self):
         try:
-            time.sleep(2)
-            self.d(description=self.icon_unlike).click()
+            self.d(description=self.icon_unlike).click(timeout=2)
 
         except Exception as e:
             print(f"點擊 like 失败: {e}")

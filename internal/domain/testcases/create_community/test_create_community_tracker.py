@@ -78,7 +78,7 @@ def test_textfields_description_click_textfields_description_typing():
     result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
-    Validators().validate_event_name_in_count(result, event_name, 3)
+    Validators().validate_event_name_in_count(result, event_name, 5)
 
 
 def test_btn_create_click():

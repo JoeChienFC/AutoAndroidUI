@@ -5,17 +5,18 @@ import time, pytest
 class CreateCommunityUploadAlbum:
 
     def __init__(self):
+        self.icon_close = "icon_close"
         self.select_photo_x_y = (0.175, 0.18)
-        self.icon_close_x_y = (0.065, 0.06)
+
         self.d = u2.connect()
         
     def icon_close_click(self):
         try:
-            self.d.click(*self.icon_close_x_y)
+            self.d(description=self.icon_close).click(timeout=2)
             time.sleep(1)
 
         except Exception as e:
-            pytest.xfail(f"點 icon_close_click 失败: {e}")
+            pytest.xfail(f"點 icon_close 失败: {e}")
 
     def title_click(self):
         try:

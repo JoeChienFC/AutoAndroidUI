@@ -1,29 +1,28 @@
 import uiautomator2 as u2
 import time, pytest
-import os
 
 
 class CreateComment:
 
     def __init__(self):
+        self.icon_url_preview_close = "icon_url_preview_close"
+        self.icon_video_preview_close = "icon_video_preview_close"
+        self.icon_preview_close = "icon_preview_close"
+        self.pic_preview = "pic_preview"
+        self.btn_hashtag = "btn_hashtag"
+        self.btn_at_user = "btn_at_user"
+        self.icon_album = "icon_album"
+        self.btn_comment = "btn_comment"
+        self.icon_location_pin = "icon_location_pin"
+        self.textfields_comment = "textfields_comment"
+        self.btn_community = "btn_community"
+        self.icon_close = "icon_close"
+        self.btn_add = "btn_add"
         self.d = u2.connect()
-        self.icon_close_xpath = '//android.widget.FrameLayout[3]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.widget.ImageView[2]'
-        self.icon_preview_close_xpath = '//android.widget.FrameLayout[4]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[3]/android.view.View[1]/android.view.View[1]/android.widget.ImageView[1]'
-        self.pic_preview_xpath = '//android.widget.FrameLayout[4]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[3]'
-        self.icon_video_preview_close_xpath = '//android.widget.FrameLayout[4]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.widget.ImageView[4]'
-        self.icon_url_preview_close_xpath = '//android.widget.FrameLayout[3]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.widget.ImageView[3]'
-        self.icon_close_x_y = (0.925, 0.705)
-        self.btn_community_x_y = (0.086, 0.743)
-        self.textfields_comment_xpath = '//android.widget.EditText'
-        self.location_pin_x_y = (0.182, 0.867)
-        self.icon_album_x_y = (0.061, 0.867)
-        self.btn_at_user_x_y = (0.232, 0.729)
-        self.btn_hashtag_x_y = (0.232, 0.729)
-        self.btn_add_x_y = (0.13, 0.737)
 
     def icon_close_click(self):
         try:
-            self.d.click(*self.icon_close_x_y)
+            self.d(description=self.icon_close).click(timeout=2)
             time.sleep(1)
 
         except Exception as e:
@@ -31,7 +30,7 @@ class CreateComment:
 
     def btn_community_click(self):
         try:
-            self.d.click(*self.btn_community_x_y)
+            self.d(description=self.btn_community).click(timeout=2)
             time.sleep(1)
 
         except Exception as e:
@@ -39,7 +38,8 @@ class CreateComment:
 
     def textfields_comment_click(self):
         try:
-            self.d.xpath(self.textfields_comment_xpath).click()
+            time.sleep(1)
+            self.d(description=self.textfields_comment).click(timeout=2)
             time.sleep(1)
 
         except Exception as e:
@@ -47,7 +47,7 @@ class CreateComment:
 
     def icon_location_pin_click(self):
         try:
-            self.d.click(*self.location_pin_x_y)
+            self.d(description=self.icon_location_pin).click(timeout=2)
             time.sleep(1)
             from internal.infra.pages.create_comment_location import CreateCommentLocation
             return CreateCommentLocation()
@@ -58,7 +58,7 @@ class CreateComment:
 
     def btn_comment_click(self):
         try:
-            self.d(description="Comment").click()
+            self.d(description=self.btn_comment).click(timeout=2)
             time.sleep(1)
 
         except Exception as e:
@@ -68,8 +68,6 @@ class CreateComment:
     def textfields_comment_typing(self):
         try:
             time.sleep(1)
-            # self.d.xpath('//android.widget.EditText').set_text("test")
-            # os.system('adb shell input text {}'.format("test"))
             self.d.shell('input text "test"')
             time.sleep(1)
 
@@ -80,8 +78,9 @@ class CreateComment:
     def textfields_comment_typing_chinese(self):
         try:
             time.sleep(1)
-            self.d.xpath('//android.widget.EditText').set_text("你好")
-            os.system('adb shell input text {}'.format("你好"))
+            # self.d.xpath('//android.widget.EditText').set_text("你好")
+            # os.system('adb shell input text {}'.format("你好"))
+            self.d.shell('input text "你好"')
             time.sleep(1)
 
         except Exception as e:
@@ -92,7 +91,8 @@ class CreateComment:
         try:
             time.sleep(1)
             # self.d.xpath('//android.widget.EditText').set_text("@te")
-            os.system('adb shell input text {}'.format("@te"))
+            # os.system('adb shell input text {}'.format("@te"))
+            self.d.shell('input text "@te"')
             time.sleep(1)
 
         except Exception as e:
@@ -103,7 +103,8 @@ class CreateComment:
         try:
             time.sleep(1)
             # self.d.xpath('//android.widget.EditText').set_text("#te")
-            os.system('adb shell input text {}'.format("#te"))
+            # os.system('adb shell input text {}'.format("#te"))
+            self.d.shell('input text "#te"')
             time.sleep(1)
 
         except Exception as e:
@@ -112,7 +113,7 @@ class CreateComment:
 
     def icon_album_click(self):
         try:
-            self.d.click(*self.icon_album_x_y)
+            self.d(description=self.icon_album).click(timeout=2)
             time.sleep(6)
             from internal.infra.pages.create_comment_upload_album import CreateCommentUploadAlbum
             return CreateCommentUploadAlbum
@@ -124,7 +125,7 @@ class CreateComment:
     def btn_at_user_drag(self):
         try:
             time.sleep(1)
-            self.d.xpath('//android.widget.HorizontalScrollView').swipe("left")
+            self.d(description=self.btn_at_user).swipe("left")
             time.sleep(1)
 
         except Exception as e:
@@ -133,17 +134,17 @@ class CreateComment:
 
     def btn_at_user_click(self):
         try:
-            self.d.click(*self.btn_at_user_x_y)
+            self.d(description=self.btn_at_user).click(timeout=2)
             time.sleep(1)
 
         except Exception as e:
-            print(f"點 at_user_drag 失败: {e}")
-            pytest.xfail("點 at_user_drag 失败")
+            print(f"點 btn_at_user 失败: {e}")
+            pytest.xfail("點 btn_at_user 失败")
 
     def btn_hashtag_drag(self):
         try:
             time.sleep(1)
-            self.d.xpath('//android.widget.HorizontalScrollView').swipe("left")
+            self.d(description=self.btn_hashtag).swipe("left")
             time.sleep(1)
 
         except Exception as e:
@@ -152,7 +153,7 @@ class CreateComment:
 
     def btn_hashtag_click(self):
         try:
-            self.d.click(*self.btn_hashtag_x_y)
+            self.d(description=self.btn_hashtag).click(timeout=2)
             time.sleep(1)
 
         except Exception as e:
@@ -162,7 +163,7 @@ class CreateComment:
     def pic_preview_drag(self):
         try:
             time.sleep(1)
-            self.d.xpath(self.pic_preview_xpath).swipe("left")
+            self.d(description=self.pic_preview).swipe("left")
             time.sleep(1)
 
         except Exception as e:
@@ -172,7 +173,7 @@ class CreateComment:
     def icon_preview_close_click(self):
         try:
             time.sleep(1)
-            self.d.xpath(self.icon_preview_close_xpath).click()
+            self.d(description=self.icon_preview_close).click(timeout=2)
             time.sleep(1)
 
         except Exception as e:
@@ -181,8 +182,7 @@ class CreateComment:
 
     def icon_video_preview_close_click(self):
         try:
-            time.sleep(1)
-            self.d.xpath(self.icon_video_preview_close_xpath).click()
+            self.d(description=self.icon_video_preview_close).click(timeout=2)
             time.sleep(1)
 
         except Exception as e:
@@ -193,7 +193,8 @@ class CreateComment:
         try:
             time.sleep(1)
             # self.d.xpath('//android.widget.EditText').set_text("https://www.google.com")
-            os.system('adb shell input text {}'.format("https://www.google.com"))
+            # os.system('adb shell input text {}'.format("https://www.google.com"))
+            self.d.shell('input text "https://www.google.com"')
             time.sleep(1)
 
         except Exception as e:
@@ -202,8 +203,7 @@ class CreateComment:
 
     def icon_url_preview_close_click(self):
         try:
-            time.sleep(1)
-            self.d.xpath(self.icon_url_preview_close_xpath).click()
+            self.d(description=self.icon_url_preview_close).click(timeout=2)
             time.sleep(1)
 
         except Exception as e:
@@ -212,8 +212,7 @@ class CreateComment:
 
     def btn_add_click(self):
         try:
-            time.sleep(1)
-            self.d.click(*self.btn_add_x_y)
+            self.d(description=self.btn_add).click(timeout=2)
             time.sleep(1)
 
         except Exception as e:

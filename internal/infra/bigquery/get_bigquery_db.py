@@ -3,6 +3,8 @@ import time
 from google.cloud import bigquery
 from datetime import datetime, timedelta
 
+from internal.infra.adb.adb_function import ADBClient
+
 
 class BigQueryFunction:
     def __init__(self):
@@ -11,7 +13,10 @@ class BigQueryFunction:
     def fetch_user_operation_tracker(self):
         time.sleep(1)
         project_id = "framy-stage"
-        user_id = "1882483329737359360"
+        user_id = ADBClient().grep_logcat_userid()
+        print(f"user_id = {user_id}")
+        # if user_id:
+        #     user_id = "1882483329737359360"
         # 設定 BigQuery 客戶端
         client = bigquery.Client(project=project_id)
 
@@ -25,7 +30,7 @@ class BigQueryFunction:
             WHERE user_id = '{user_id}'
               AND TIMESTAMP_TRUNC(event_timestamp, DAY) = TIMESTAMP("{today}")
             ORDER BY event_timestamp DESC
-            LIMIT 10
+            LIMIT 15
         """
 
         query_job = client.query(query)

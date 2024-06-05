@@ -5,18 +5,19 @@ import time, pytest
 class CommunityFeedDropdownMenu:
 
     def __init__(self):
+        self.list_create = "list_create"
         self.d = u2.connect()
         
     def list_create_click(self):
         try:
-            self.d(description="Create a Community").click()
+            self.d(description=self.list_create).click()
             time.sleep(1)
 
             from internal.infra.pages.create_community import CreateCommunity
             return CreateCommunity()
 
         except Exception as e:
-            pytest.xfail(f"點 list_create_click 失败: {e}")
+            pytest.xfail(f"點 list_create 失败: {e}")
 
     def list_joined_click(self):
         try:

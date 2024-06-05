@@ -6,14 +6,18 @@ import os
 class Followers:
 
     def __init__(self):
-        self.icon_clear_x_y = (0.904, 0.12)
-        self.list_user_x_y = (0.226, 0.18)
+        self.icon_back = "icon_back"
+        self.list_user = "list_user"
+        self.text_follow = "text_follow"
+        self.text_following = "text_following"
+        self.bar_search = "bar_search"
+        self.icon_clear = "icon_clear"
+
         self.d = u2.connect()
-        self.icon_back_x_y = (0.062, 0.061)
 
     def icon_back_click(self):
         try:
-            self.d.click(*self.icon_back_x_y)
+            self.d(description=self.icon_back).click(timeout=2)
             time.sleep(1)
 
         except Exception as e:
@@ -21,7 +25,7 @@ class Followers:
 
     def list_user_click(self):
         try:
-            self.d.click(*self.list_user_x_y)
+            self.d(description=self.list_user).click(timeout=2)
             time.sleep(1)
 
         except Exception as e:
@@ -30,7 +34,7 @@ class Followers:
     def text_follow_click(self):
         try:
             time.sleep(1)
-            self.d(description="Follow").click()
+            self.d(description=self.text_follow).click(timeout=2)
             time.sleep(1)
 
         except Exception as e:
@@ -39,7 +43,7 @@ class Followers:
 
     def text_following_click(self):
         try:
-            self.d(description="Following").click()
+            self.d(description=self.text_following).click(timeout=2)
             time.sleep(1)
 
         except Exception as e:
@@ -47,7 +51,7 @@ class Followers:
 
     def bar_search_click(self):
         try:
-            self.d.xpath('//android.widget.EditText').click()
+            self.d(description=self.bar_search).click(timeout=2)
             time.sleep(1)
 
         except Exception as e:
@@ -67,7 +71,7 @@ class Followers:
     def icon_clear_click(self):
         try:
             time.sleep(3)
-            self.d.click(*self.icon_clear_x_y)
+            self.d(description=self.icon_clear).click(timeout=2)
             time.sleep(3)
 
         except Exception as e:

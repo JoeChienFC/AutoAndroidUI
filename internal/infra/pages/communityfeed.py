@@ -26,8 +26,8 @@ class CommunityFeed:
     def btn_locationpicker_click(self):
         try:
             # 點擊 location picker
-            self.d(description=self.btn_locationpicker).click()
-            time.sleep(2)
+            self.d(description=self.btn_locationpicker).click(timeout=2)
+            # time.sleep(2)
             from internal.infra.pages.community_location_picker import CommunityLocationPicker
             return CommunityLocationPicker()
 
@@ -62,7 +62,7 @@ class CommunityFeed:
     def text_communityname_click(self):
         try:
             self.d(description=self.text_community_name).click()
-            time.sleep(1)
+            time.sleep(2)
 
             from internal.infra.pages.community_page import CommunityPage
             return CommunityPage()
@@ -130,8 +130,7 @@ class CommunityFeed:
 
     def icon_like_click(self):
         try:
-            self.d(description=self.icon_like).click()
-            time.sleep(1)
+            self.d(description=self.icon_unlike).click(timeout=1)
 
         except Exception as e:
             print(f"點 icon_like 失败: {e}")
@@ -139,7 +138,7 @@ class CommunityFeed:
 
     def icon_unlike_click(self):
         try:
-            self.d(description=self.icon_unlike).click()
+            self.d(description=self.icon_like).click()
             time.sleep(1)
 
         except Exception as e:
@@ -148,7 +147,7 @@ class CommunityFeed:
 
     def icon_save_click(self):
         try:
-            self.d(description=self.icon_save).click()
+            self.d(description=self.icon_unsave).click()
             time.sleep(1)
 
         except Exception as e:
@@ -157,7 +156,7 @@ class CommunityFeed:
 
     def icon_unsave_click(self):
         try:
-            self.d(description=self.icon_unsave).click()
+            self.d(description=self.icon_save).click()
             time.sleep(1)
 
         except Exception as e:
@@ -184,10 +183,11 @@ class CommunityFeed:
 
     def myprofile_click(self):
         try:
-            if self.d(description="Tab 5 of 5").exists(7):
+            time.sleep(1)
+            if self.d(description="Tab 5 of 5").exists():
                 self.d(description="Tab 5 of 5").click()
                 print("成功進入 myprofile！")
-                time.sleep(2)
+                self.d(description="title_username").wait(timeout=10)
                 from internal.infra.pages.profile_page import ProfilePage
                 return ProfilePage()
             else:
@@ -198,7 +198,8 @@ class CommunityFeed:
 
     def explore_click(self):
         try:
-            if self.d(description="Tab 3 of 5").exists(5):
+            time.sleep(1)
+            if self.d(description="Tab 3 of 5").exists():
                 self.d(description="Tab 3 of 5").click()
                 print("成功進入 explore！")
                 from internal.infra.pages.explore import Explore
@@ -210,7 +211,8 @@ class CommunityFeed:
 
     def ai_click(self):
         try:
-            if self.d(description="Tab 3 of 5").exists(5):
+            time.sleep(1)
+            if self.d(description="Tab 3 of 5").exists():
                 self.d(description="Tab 3 of 5").click()
                 print("成功進入ai！")
                 time.sleep(2)
@@ -222,10 +224,11 @@ class CommunityFeed:
 
     def spot_click(self):
         try:
-            if self.d(description="Tab 2 of 5").exists(5):
+            time.sleep(1)
+            if self.d(description="Tab 2 of 5").exists():
                 self.d(description="Tab 2 of 5").click()
                 print("成功進入spot！")
-                time.sleep(1)
+                self.d(description="icon_create").wait(timeout=10)
                 from internal.infra.pages.spotfeed import SpotFeed
                 return SpotFeed()
         except Exception as e:
@@ -234,10 +237,11 @@ class CommunityFeed:
 
     def community_click(self):
         try:
-            if self.d(description="Tab 1 of 5").exists(5):
+            time.sleep(1)
+            if self.d(description="Tab 1 of 5").exists():
                 self.d(description="Tab 1 of 5").click()
                 print("成功進入community！")
-                time.sleep(2)
+                self.d(description="text_communityname").wait(timeout=10)
                 from internal.infra.pages.spotfeed import SpotFeed
                 return SpotFeed()
         except Exception as e:
@@ -249,7 +253,6 @@ class CommunityFeed:
             if self.d(description="Tab 4 of 5").exists(5):
                 self.d(description="Tab 4 of 5").click()
                 print("成功進入 tab_notifications！")
-                time.sleep(2)
                 from internal.infra.pages.notifications import Notifications
                 return Notifications()
         except Exception as e:

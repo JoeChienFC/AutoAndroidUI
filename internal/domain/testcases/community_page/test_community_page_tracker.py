@@ -62,9 +62,9 @@ def test_text_communitylocation_click():
     go_to_community_page().text_communitylocation_click()
 
     result = BigQueryFunction().fetch_user_operation_tracker()
-    BigQueryFunction().display_query_result(result, 5)
+    BigQueryFunction().display_query_result(result, 10)
 
-    Validators().validate_first_event_name(result, event_name, content_type)
+    Validators().validate_change_page(result, event_name, content_type)
 
 
 def test_text_members_click():
@@ -79,8 +79,12 @@ def test_text_members_click():
     Validators().validate_event_name_content_type_in_count(result, event_name, content_type)
 
 
-def test_btn_join_click():
+def test_btn_join_click_icon_create_click_popup_leave_community_show_btn_leave_community_popup_cancel_click_btn_leave_community_popup_leave_this_community_click():
     event_name = "btn_join_click"
+    event_name1 = "popup_leave_community_show"
+    event_name2 = "btn_leave_community_popup_cancel_click"
+    event_name3 = "btn_leave_community_popup_leave_this_community_click"
+    event_name4 = "icon_create_click"
     content_type = "community"
 
     go_to_community_page().btn_join_click()
@@ -88,8 +92,34 @@ def test_btn_join_click():
     result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
+    Validators().validate_event_name_content_type_in_count(result, event_name, content_type)
+
+    CommunityPage().icon_create_click()
+    result = BigQueryFunction().fetch_user_operation_tracker()
+    BigQueryFunction().display_query_result(result, 5)
+
+    Validators().validate_change_page(result, event_name4, 10)
+
+    CreateComment().icon_close_click()
     CommunityPage().btn_unjoin_click()
-    Validators().validate_first_event_name(result, event_name, content_type)
+    result = BigQueryFunction().fetch_user_operation_tracker()
+    BigQueryFunction().display_query_result(result, 5)
+
+    Validators().validate_event_name_in_count(result, event_name1, 10)
+
+    CommunityPage().btn_leave_community_popup_cancel_click()
+    result = BigQueryFunction().fetch_user_operation_tracker()
+    BigQueryFunction().display_query_result(result, 5)
+
+    Validators().validate_event_name_in_count(result, event_name2, 10)
+
+    CommunityPage().btn_unjoin_click()
+    CommunityPage().btn_leave_community_popup_leave_this_community_click()
+
+    result = BigQueryFunction().fetch_user_operation_tracker()
+    BigQueryFunction().display_query_result(result, 5)
+
+    Validators().validate_event_name_in_count(result, event_name3, 10)
 
 
 def test_btn_share_click():
@@ -113,7 +143,7 @@ def test_tab_activities_click():
     result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
-    Validators().validate_first_event_name(result, event_name, content_type)
+    Validators().validate_event_name_content_type_in_count(result, event_name, content_type)
 
 
 def test_tab_spots_click():
@@ -128,31 +158,8 @@ def test_tab_spots_click():
     Validators().validate_change_page(result, event_name, content_type)
 
 
-# def test_icon_create_click():
-#     event_name = "icon_create_click"
-#     content_type = "community"
-#     go_to_community_page().icon_create_click()
-#
-#     result = BigQueryFunction().fetch_user_operation_tracker()
-#     BigQueryFunction().display_query_result(result, 5)
-#
-#     Validators().validate_change_page(result, event_name, content_type)
-
-
 def test_screen_swipeupanddown():
     event_name = "screen_swipeupanddown"
-    content_type = "community"
-
-    go_to_community_page().screen_swipeupanddown()
-
-    result = BigQueryFunction().fetch_user_operation_tracker()
-    BigQueryFunction().display_query_result(result, 5)
-
-    Validators().validate_event_name_content_type_in_count(result, event_name, content_type)
-
-
-def test_content_view_load():
-    event_name = "content_view_load"
     content_type = "community"
 
     go_to_community_page().screen_swipeupanddown()
@@ -187,30 +194,32 @@ def test_text_username_click():
     Validators().validate_change_page(result, event_name, content_type)
 
 
-def test_text_location_show():
+def test_text_location_show_text_location_click():
     event_name = "text_location_show"
+    event_name1 = "text_location_click"
     content_type = "community_comment"
 
-    go_to_community_page()
-    create_a_location_comment()
+    go_to_community_page().text_location_click()
+
+    result = BigQueryFunction().fetch_user_operation_tracker()
+    BigQueryFunction().display_query_result(result, 10)
+
+    Validators().validate_event_name_content_type_in_count(result, event_name, content_type)
+    Validators().validate_change_page(result, event_name1, content_type)
+
+
+def test_comment_appear_comment_disappear():
+    event_name = "comment_appear"
+    event_name1 = "comment_disappear"
+    content_type = "community_comment"
+
+    go_to_community_page().screen_swipeupanddown()
 
     result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_event_name_content_type_in_count(result, event_name, content_type)
-
-
-def test_text_location_click():
-    event_name = "text_location_click"
-    content_type = "community_comment"
-
-    go_to_community_page()
-    create_a_location_comment().text_location_click()
-
-    result = BigQueryFunction().fetch_user_operation_tracker()
-    BigQueryFunction().display_query_result(result, 5)
-
-    Validators().validate_change_page(result, event_name, content_type)
+    Validators().validate_event_name_content_type_in_count(result, event_name1, content_type)
 
 
 def test_comment_text_click():
@@ -223,6 +232,20 @@ def test_comment_text_click():
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_change_page(result, event_name, content_type)
+
+
+def test_comment_media_show_comment_media_click():
+    event_name = "comment_media_show"
+    event_name1 = "comment_media_click"
+    content_type = "community_comment"
+
+    go_to_community_page().comment_media_click()
+
+    result = BigQueryFunction().fetch_user_operation_tracker()
+    BigQueryFunction().display_query_result(result, 10)
+
+    Validators().validate_event_name_content_type_in_count(result, event_name, content_type)
+    Validators().validate_change_page(result, event_name1, content_type)
 
 
 def test_icon_comment_click():
@@ -249,25 +272,42 @@ def test_icon_share_click():
     Validators().validate_change_page(result, event_name, content_type)
 
 
+def test_icon_save_click_icon_unsave_click():
+    event_name = "icon_save_click"
+    event_name1 = "icon_unsave_click"
+    content_type = "community_comment"
+
+    go_to_community_page().icon_save_click()
+    CommunityPage().icon_unsave_click()
+
+    result = BigQueryFunction().fetch_user_operation_tracker()
+    BigQueryFunction().display_query_result(result, 10)
+
+    Validators().validate_event_name_content_type_in_count(result, event_name, content_type)
+    Validators().validate_event_name_content_type_in_count(result, event_name1, content_type)
+
+
 def test_icon_like_click():
     event_name = "icon_like_click"
+    event_name1 = "icon_unlike_click"
     content_type = "community_comment"
 
     go_to_community_page().icon_like_click()
+    CommunityPage().icon_unlike_click()
 
     result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 
-    CommunityPage().icon_like_click()
-
-    Validators().validate_first_event_name(result, event_name, content_type)
+    Validators().validate_event_name_content_type_in_count(result, event_name, content_type)
+    Validators().validate_event_name_content_type_in_count(result, event_name1, content_type)
 
 
 def test_comment_icon_more_click():
     event_name = "icon_more_click"
     content_type = "community_comment"
 
-    go_to_community_page().comment_icon_more_click()
+    go_to_community_page().screen_swipeupanddown()
+    CommunityPage().icon_more_click()
 
     result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
@@ -275,21 +315,13 @@ def test_comment_icon_more_click():
     Validators().validate_change_page(result, event_name, content_type)
 
 
-def test_comment_shared_show_and_comment_shared_click():
-    event_name = "comment_shared_show"
-    content_type = "community_comment"
-    go_to_community_page().icon_share_click().list_community_click()
-    ShareToPopup().btn_share_click()
-    BottomTab().bottomtab_myprofile_click().tab_activities_click()
-    ProfilePageActivities().community_click().title_communityname_click()
+def test_pic_spot_click():
+    event_name = "pic_spot_click"
+    content_type = "spot"
 
-    result = BigQueryFunction().fetch_user_operation_tracker()
-    BigQueryFunction().display_query_result(result, 5)
+    go_to_community_page().tab_spots_click()
+    CommunityPage().pic_spot_click()
 
-    Validators().validate_event_name_content_type_in_count(result, event_name, content_type)
-
-    event_name = "comment_shared_click"
-    CommunityPage().comment_click()
     result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
 

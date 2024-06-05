@@ -480,3 +480,34 @@ def test_text_no_spot_show():
     BigQueryFunction().display_query_result(result, 5)
 
     Validators().validate_event_name_content_type_in_count(result, event_name, content_type)
+
+
+def test_text_no_comment_show():
+    event_name = "text_no_comment_show"
+    content_type = "user"
+    ADBClient.start_playsee_app().explore_click().type_tracker_test()
+    ProfilePage().tab_activities_click()
+
+    result = BigQueryFunction().fetch_user_operation_tracker()
+    BigQueryFunction().display_query_result(result, 5)
+
+    Validators().validate_event_name_content_type_in_count(result, event_name, content_type)
+
+
+def test_text_followed_by_show_text_followed_by_click():
+    event_name = "text_followed_by_show"
+    event_name1 = "text_followed_by_click"
+    content_type = "user"
+    ADBClient.start_playsee_app().explore_click().type_arkibarn()
+
+    result = BigQueryFunction().fetch_user_operation_tracker()
+    BigQueryFunction().display_query_result(result, 5)
+
+    Validators().validate_event_name_content_type_in_count(result, event_name, content_type)
+
+    ProfilePage().text_followed_by_click()
+    result = BigQueryFunction().fetch_user_operation_tracker()
+    BigQueryFunction().display_query_result(result, 5)
+
+    Validators().validate_change_page(result, event_name1, content_type)
+

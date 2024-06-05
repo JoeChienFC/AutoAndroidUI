@@ -1,7 +1,7 @@
 import re
 import subprocess
 import time
-import json
+import uiautomator2 as u2
 
 from internal.infra.pages.communityfeed import CommunityFeed
 from internal.infra.pages.spotfeed import SpotFeed
@@ -54,13 +54,39 @@ class ADBClient:
             print(f"Error executing command: {e}")
 
     @staticmethod
+    def grep_logcat_userid():
+        # 組合 adb logcat 指令
+        command = rf'adb logcat -d | grep \"event_name\"'
+        # 使用 subprocess 執行指令
+        try:
+            # 使用 subprocess 執行指令，加上 stdout=subprocess.PIPE
+            result = subprocess.run(command, shell=True, capture_output=True, text=True)
+            user_id_pattern = r'"user_id":"(\d+)"'
+
+            if result.stdout:
+                matches = re.findall(user_id_pattern, result.stdout)
+                if matches:
+                    return matches[-1]
+                else:
+                    return None
+
+            else:
+                print(f"Error in logcat output: {result.stdout}")
+                return None
+
+        except subprocess.CalledProcessError as e:
+            print(f"Error executing command: {e}")
+            return None
+
+    @staticmethod
     def start_playsee_app():
+        d = u2.connect()
         # ADB command to start the app by package name
         cmd = "adb shell am start -n com.framy.placey/.MainActivity"
 
         # Execute the ADB command
         subprocess.run(cmd, shell=True)
-        time.sleep(8)
+        d(description="btn_locationpicker").wait(timeout=10)
         return CommunityFeed()
 
     @staticmethod

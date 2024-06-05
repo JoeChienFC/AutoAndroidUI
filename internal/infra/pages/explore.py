@@ -71,3 +71,14 @@ class Explore:
 
         except Exception as e:
             pytest.xfail(f"點擊 type_tracker_test 失败 : {e}")
+
+    def type_arkibarn(self):
+        try:
+            time.sleep(1)
+            self.bar_search_click()
+            self.d.shell('input text "arkibarn"')
+            self.list_user_click()
+            time.sleep(2)
+
+        except Exception as e:
+            pytest.xfail(f"點擊 type_arkibarn 失败 : {e}")

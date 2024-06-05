@@ -78,7 +78,7 @@ class CreateCommunity:
     def textfields_description_typing(self):
         try:
             time.sleep(1)
-            os.system('adb shell input text {}'.format("你好"))
+            os.system('adb shell input text {}'.format("11111"))
             time.sleep(1)
 
         except Exception as e:

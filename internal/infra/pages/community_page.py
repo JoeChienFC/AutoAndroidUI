@@ -5,53 +5,52 @@ import time,pytest
 class CommunityPage:
 
     def __init__(self):
+        self.icon_create = "icon_create"
+        self.pic_spot = "pic_spot"
+        self.comment_media = "comment_media"
+        self.text_username = "text_username"
+        self.btn_leave_community_popup_cancel = "btn_leave_community_popup_cancel"
+        self.btn_leave_community_popup_leave_this_community = "btn_leave_community_popup_leave_this_community"
+        self.icon_back = "icon_back"
+        self.title_communityname = "title_communityname"
+        self.text_communitylocation = "text_communitylocation"
+        self.text_members = "text_members"
+        self.btn_join = "btn_join"
+        self.btn_unjoin = "btn_unjoin"
+        self.btn_share = "btn_share"
+        self.pic_headshot = "pic_headshot"
+        self.text_location = "text_location"
+        self.comment_text = "comment_text"
+        self.icon_unlike = "icon_unlike"
+        self.icon_like = "icon_like"
+        self.icon_unsave = "icon_unsave"
+        self.icon_save = "icon_save"
+        self.icon_more = "icon_more"
+        self.icon_share = "icon_share"
+        self.icon_comment = "icon_comment"
         self.d = u2.connect()
-
-        self.like_icon_xpath = '//android.widget.ScrollView/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.widget.ImageView[4]'
-        self.comment_more_icon_xpath = '//android.widget.ScrollView/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.widget.ImageView[1]'
-        self.share_icon_xpath = '//android.widget.ScrollView/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.widget.ImageView[3]'
-        self.comment_icon_xpath = '//android.widget.ScrollView/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.widget.ImageView[2]'
-
-        self.back_icon_x_y = (0.067, 0.06)
-        self.more_icon_x_y = (0.932, 0.062)
-        self.community_name = (0.489, 0.061)
-        self.create_icon_x_y = (0.885, 0.833)
-        self.text_communitylocation_x_y = (0.058, 0.252)
-        self.text_members_x_y = (0.62, 0.254)
-        self.share_btn_x_y = (0.914, 0.319)
-        self.tab_activities_x_y = (0.235, 0.36)
-        self.tab_spots_x_y = (0.75, 0.363)
-        self.headshot_pic_x_y = (0.091, 0.43)
-        self.username_text_x_y = (0.202, 0.43)
-        self.location_icon_x_y = (0.252, 0.483)
-        self.comment_text_x_y = (0.982, 0.43)
-        self.comment_xpath = '//android.widget.ScrollView/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[2]'
-        self.screen_mute_x_y = (0.503, 0.425)
-        self.text_sharecommunity_x_y = (0.113, 0.823)
-        self.text_caption_x_y = (0.061, 0.788)
 
     def icon_back_click(self):
         try:
+            self.d(description=self.icon_back).click(timeout=2)
             time.sleep(1)
-            self.d.click(*self.back_icon_x_y)
 
         except Exception as e:
-            print(f"點擊 back_icon 失败: {e}")
-            pytest.xfail("點擊 back_icon 失败")
+            print(f"點擊 icon_back 失败: {e}")
+            pytest.xfail("點擊 icon_back 失败")
 
     def title_communityname_click(self):
         try:
-            time.sleep(1)
-            self.d.click(*self.community_name)
+            self.d(description=self.title_communityname).click(timeout=2)
 
         except Exception as e:
-            print(f"點擊 icon_create 失败: {e}")
-            pytest.xfail("點擊 icon_create 失败")
+            print(f"點擊 title_communityname 失败: {e}")
+            pytest.xfail("點擊 title_communityname 失败")
 
     def text_communitylocation_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.text_communitylocation_x_y)
+            self.d(description=self.text_communitylocation).click(timeout=2)
 
         except Exception as e:
             print(f"點擊 text_communitylocation 失败: {e}")
@@ -59,8 +58,7 @@ class CommunityPage:
 
     def text_members_click(self):
         try:
-            time.sleep(1)
-            self.d.click(*self.text_members_x_y)
+            self.d(description=self.text_members).click(timeout=2)
 
         except Exception as e:
             print(f"點擊 text_members 失败: {e}")
@@ -68,9 +66,10 @@ class CommunityPage:
 
     def btn_join_click(self):
         try:
-            time.sleep(1)
-            if self.d(description="Join").exists:
-                self.d(description="Join").click()
+            if not self.d(description=self.icon_create).exists():
+                self.d(description=self.btn_join).click(timeout=2)
+            else:
+                pass
 
         except Exception as e:
             print(f"點擊 btn_join 失败: {e}")
@@ -78,9 +77,8 @@ class CommunityPage:
 
     def btn_unjoin_click(self):
         try:
-            time.sleep(2)
-            if self.d(description="Joined").exists:
-                self.d(description="Joined").click()
+            if self.d(description=self.icon_create).exists():
+                self.d(description=self.btn_join).click(timeout=2)
 
         except Exception as e:
             print(f"點擊 btn_unjoin 失败: {e}")
@@ -88,8 +86,7 @@ class CommunityPage:
 
     def btn_share_click(self):
         try:
-            time.sleep(1)
-            self.d.click(*self.share_btn_x_y)
+            self.d(description=self.btn_share).click(timeout=2)
 
         except Exception as e:
             print(f"點擊 share_btn 失败: {e}")
@@ -97,8 +94,8 @@ class CommunityPage:
 
     def tab_activities_click(self):
         try:
-            time.sleep(1)
-            self.d.click(*self.tab_activities_x_y)
+            self.d(description="""tab_activities
+Tab 1 of 2""").click(timeout=1)
 
         except Exception as e:
             print(f"點擊 tab_activities 失败: {e}")
@@ -106,8 +103,8 @@ class CommunityPage:
 
     def tab_spots_click(self):
         try:
-            time.sleep(1)
-            self.d.click(*self.tab_spots_x_y)
+            self.d(description="""tab_spots
+Tab 2 of 2""").click(timeout=1)
 
         except Exception as e:
             print(f"點擊 tab_spots 失败: {e}")
@@ -115,12 +112,7 @@ class CommunityPage:
 
     def icon_create_click(self):
         try:
-            time.sleep(1)
-            self.d.click(*self.create_icon_x_y)
-            time.sleep(1)
-
-            from internal.infra.pages.create_comment import CreateComment
-            return CreateComment()
+            self.d(description=self.icon_create).click(timeout=2)
 
         except Exception as e:
             print(f"點擊 icon_create 失败: {e}")
@@ -137,143 +129,75 @@ class CommunityPage:
 
     def pic_headshot_click(self):
         try:
-            time.sleep(1)
-            self.d.click(*self.headshot_pic_x_y)
+            self.d(description=self.pic_headshot).click(timeout=2)
 
         except Exception as e:
-            print(f"點擊 headshot_pic 失败: {e}")
-            pytest.xfail("點擊 headshot_pic 失败")
+            print(f"點擊 pic_headshot 失败: {e}")
+            pytest.xfail("點擊 pic_headshot 失败")
 
     def text_location_click(self):
         try:
-            time.sleep(1.5)
-            self.d.click(*self.location_icon_x_y)
+            time.sleep(1)
+            i = 20
+            while i > 0:
+                time.sleep(1)
+                if self.d(description=self.text_location).exists():
+                    self.d(description=self.text_location).click()
+                    break
+                else:
+                    self.screen_swipeupanddown()
+                    i -= 1
 
         except Exception as e:
-            print(f"點擊 location_icon 失败: {e}")
-            pytest.xfail("點擊 location_icon 失败")
+            print(f"點擊 text_location 失败: {e}")
+            pytest.xfail("點擊 text_location 失败")
 
     def comment_text_click(self):
         try:
-            time.sleep(1.5)
-            self.d.click(*self.comment_text_x_y)
+            self.d(description=self.comment_text).click(timeout=2)
 
         except Exception as e:
             print(f"點擊 comment_text 失败: {e}")
             pytest.xfail("點擊 comment_text 失败")
 
-    def comment_click(self):
-        try:
-            time.sleep(1.5)
-            self.d.xpath(self.comment_xpath).click()
-
-        except Exception as e:
-            print(f"點擊 comment 失败: {e}")
-            pytest.xfail("點擊 comment 失败")
-
-    #-------------------
-
-    def btn_follow_click(self):
-        try:
-            if self.d(description="F​o​l​l​o​w").exists(2):
-                self.d(description="F​o​l​l​o​w").click()
-            else:
-                pytest.xfail("沒有找到 follow 按鈕")
-
-        except Exception as e:
-            print(f"點擊 follow 失败: {e}")
-            pytest.xfail("點擊 follow 失败")
-
-    def btn_unfollow_click(self):
-        try:
-            if self.d(description="F​o​l​l​o​w​i​n​g").exists(2):
-                self.d(description="F​o​l​l​o​w​i​n​g").click()
-                time.sleep(1)
-            else:
-                pytest.xfail("沒有找到 following 按鈕")
-
-        except Exception as e:
-            print(f"點擊 following 失败: {e}")
-            pytest.xfail("點擊 following 失败")
-
     def icon_like_click(self):
         try:
-            time.sleep(1)
-            self.d.xpath(self.like_icon_xpath).click()
+            self.d(description=self.icon_unlike).click(timeout=3)
 
         except Exception as e:
-            print(f"點擊 like 失败: {e}")
-            pytest.xfail("點擊 like 失败")
+            print(f"點 icon_like 失败: {e}")
+            pytest.xfail("點 icon_like 失败")
 
-    def text_caption_click(self):
+    def icon_unlike_click(self):
         try:
+            self.d(description=self.icon_like).click(timeout=3)
             time.sleep(1)
-            self.d.click(*self.text_caption_x_y)
 
         except Exception as e:
-            print(f"點擊 text_caption 失败: {e}")
-            pytest.xfail("點擊 text_caption 失败")
+            print(f"點 icon_unlike 失败: {e}")
+            pytest.xfail("點 icon_unlike 失败")
 
-    def text_sharecommunity_click(self):
+    def icon_save_click(self):
         try:
+            self.d(description=self.icon_unsave).click(timeout=1)
             time.sleep(1)
-            self.d.click(*self.text_sharecommunity_x_y)
 
         except Exception as e:
-            print(f"點擊 text_sharecommunity 失败: {e}")
-            pytest.xfail("點擊 text_sharecommunity 失败")
+            print(f"點 icon_save 失败: {e}")
+            pytest.xfail("點 icon_save 失败")
 
-
-    def screen_swipeleft(self):
+    def icon_unsave_click(self):
         try:
-            time.sleep(1)
-            self.d.swipe_ext("left")
-            print("成功左滑！")
+            self.d(description=self.icon_save).click(timeout=1)
+            time.sleep(2)
 
         except Exception as e:
-            print(f"左滑 screen 失败: {e}")
-            pytest.xfail("左滑 screen 失败")
-
-    def screen_longclick(self):
-        try:
-            time.sleep(1)
-            self.d.long_click(*self.screen_mute_x_y)
-
-        except Exception as e:
-            print(f"長按 screen 失败: {e}")
-            pytest.xfail("長按 screen 失败")
-
-    def screen_doubleclick(self):
-        try:
-            time.sleep(1)
-            self.d.double_click(*self.screen_mute_x_y)
-
-        except Exception as e:
-            print(f"雙擊 screen 失败: {e}")
-            pytest.xfail("雙擊 screen 失败")
-
-    def screen_click(self):
-        try:
-            time.sleep(1)
-            self.d.click(*self.screen_mute_x_y)
-
-        except Exception as e:
-            print(f"點擊 screen 失败: {e}")
-            pytest.xfail("點擊 screen 失败")
-
-    def text_username_click(self):
-        try:
-            time.sleep(1)
-            self.d.click(*self.username_text_x_y)
-
-        except Exception as e:
-            print(f"點擊 username_text 失败: {e}")
-            pytest.xfail("點擊 username_text 失败")
+            print(f"點 icon_unsave 失败: {e}")
+            pytest.xfail("點 icon_unsave 失败")
 
     def icon_more_click(self):
         try:
-            time.sleep(1)
-            self.d.click(*self.more_icon_x_y)
+            self.d(description=self.icon_more).click(timeout=2)
 
         except Exception as e:
             print(f"點擊 右上角more 失败: {e}")
@@ -281,8 +205,7 @@ class CommunityPage:
 
     def comment_icon_more_click(self):
         try:
-            time.sleep(7)
-            self.d.xpath(self.comment_more_icon_xpath).click()
+            self.d(description=self.icon_more).click(timeout=2)
 
             from internal.infra.pages.comment_more_popup import CommentMorePopup
             return CommentMorePopup()
@@ -293,9 +216,8 @@ class CommunityPage:
 
     def icon_share_click(self):
         try:
-            time.sleep(1)
-            self.d.xpath(self.share_icon_xpath).click()
-            time.sleep(1)
+            self.d(description=self.icon_share).click(timeout=2)
+
             from internal.infra.pages.shareto_popup import ShareToPopup
             return ShareToPopup()
 
@@ -305,10 +227,71 @@ class CommunityPage:
 
     def icon_comment_click(self):
         try:
-            time.sleep(1)
-            self.d.xpath(self.comment_icon_xpath).click()
+            self.d(description=self.icon_comment).click(timeout=2)
 
         except Exception as e:
             print(f"點擊 comment 失败: {e}")
             pytest.xfail("點擊 comment 失败")
 
+    def btn_leave_community_popup_leave_this_community_click(self):
+        try:
+            self.d(description=self.btn_leave_community_popup_leave_this_community).click(timeout=2)
+            time.sleep(1)
+
+        except Exception as e:
+            print(f"點擊 btn_leave_community_popup_leave_this_community 失败: {e}")
+            pytest.xfail("點擊 btn_leave_community_popup_leave_this_community 失败")
+
+    def btn_leave_community_popup_cancel_click(self):
+        try:
+            self.d(description=self.btn_leave_community_popup_cancel).click(timeout=2)
+
+        except Exception as e:
+            print(f"點擊 btn_leave_community_popup_cancel 失败: {e}")
+            pytest.xfail("點擊 btn_leave_community_popup_cancel 失败")
+
+    def text_username_click(self):
+        try:
+            self.d(description=self.text_username).click(timeout=2)
+
+        except Exception as e:
+            print(f"點擊 text_username 失败: {e}")
+            pytest.xfail("點擊 text_username 失败")
+
+    def comment_media_click(self):
+        try:
+            time.sleep(1)
+            i = 10
+            while i > 0:
+                time.sleep(1)
+                if self.d(description=self.comment_media).exists():
+                    self.d(description=self.comment_media).click()
+                    break
+                else:
+                    self.screen_swipeupanddown()
+                    i -= 1
+
+        except Exception as e:
+            print(f"點擊 comment_media 失败: {e}")
+            pytest.xfail("點擊 comment_media 失败")
+
+    def pic_spot_click(self):
+        try:
+            from internal.infra.pages.communityfeed import CommunityFeed
+            time.sleep(1)
+            i = 10
+            while i > 0:
+                time.sleep(1)
+                if self.d(description=self.pic_spot).exists():
+                    time.sleep(1)
+                    self.d(description=self.pic_spot).click(timeout=1, offset=(0.3, 0.3))
+                    break
+                else:
+                    self.icon_back_click()
+                    self.screen_swipeupanddown()
+                    CommunityFeed().text_communityname_click().tab_spots_click()
+                    i -= 1
+
+        except Exception as e:
+            print(f"點擊 pic_spot 失败: {e}")
+            pytest.xfail("點擊 pic_spot 失败")

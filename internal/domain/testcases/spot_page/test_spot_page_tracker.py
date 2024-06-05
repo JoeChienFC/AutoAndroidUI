@@ -10,14 +10,14 @@ from internal.infra.validators.validators import Validators
 
 
 def go_to_spot_page():
-    ADBClient.start_playsee_app().myprofile_click().tab_activities_click()
-    ProfilePage().comment_click().comment_video_click()
+    ADBClient.start_playsee_app().explore_click().pic_spot_click()
     return SpotPage()
 
 
 def go_to_explore_spot_page():
     ADBClient.start_playsee_app().explore_click().pic_spot_s_click()
     return SpotPage()
+
 
 def test_icon_create_click():
     event_name = "icon_create_click"
@@ -41,25 +41,15 @@ def test_icon_back_click():
     Validators().validate_change_page(result, event_name, content_type)
 
 
-def test_title_communityname_show():
-    event_name = "title_communityname_show"
-    content_type = "spot"
-    go_to_spot_page()
-
-    result = BigQueryFunction().fetch_user_operation_tracker()
-    BigQueryFunction().display_query_result(result, 5)
-
-    Validators().validate_event_name_content_type_in_count(result, event_name, content_type)
-
-
-def test_title_communityname_click():
+def test_title_communityname_show_title_communityname_click():
+    event_name1 = "title_communityname_show"
     event_name = "title_communityname_click"
     content_type = "spot"
     go_to_spot_page().title_communityname_click()
 
     result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
-
+    Validators().validate_event_name_content_type_in_count(result, event_name1, content_type)
     Validators().validate_change_page(result, event_name, content_type)
 
 
@@ -80,6 +70,7 @@ def test_btn_follow_click_and_btn_unfollow_click():
     BigQueryFunction().display_query_result(result, 5)
     Validators().validate_first_event_name(result, event_name, content_type)
 
+
 def test_icon_like_click_and_icon_unlike_click():
     event_name = "icon_like_click"
     content_type = "spot"
@@ -96,6 +87,7 @@ def test_icon_like_click_and_icon_unlike_click():
     result = BigQueryFunction().fetch_user_operation_tracker()
     BigQueryFunction().display_query_result(result, 5)
     Validators().validate_first_event_name(result, event_name, content_type)
+
 
 def test_icon_comment_click():
     event_name = "icon_comment_click"
@@ -275,7 +267,7 @@ def test_screen_swipeupanddown():
     Validators().validate_event_name_content_type_in_count(result, event_name, content_type)
 
 
-def btn_collect_click_and_btn_uncollect_click():
+def test_btn_collect_click_and_btn_uncollect_click():
     event_name = "btn_collect_click"
     content_type = "spot"
     go_to_spot_page().icon_more_click().btn_collect_click()
@@ -293,7 +285,7 @@ def btn_collect_click_and_btn_uncollect_click():
     Validators().validate_change_page(result, event_name, content_type)
 
 
-def btn_download_click():
+def test_btn_download_click():
     event_name = "btn_download_click"
     content_type = "spot"
     go_to_spot_page().icon_more_click().btn_download_click()
@@ -304,7 +296,7 @@ def btn_download_click():
     Validators().validate_change_page(result, event_name, content_type)
 
 
-def btn_not_interested_click():
+def test_btn_not_interested_click():
     event_name = "btn_not_interested_click"
     content_type = "spot"
     go_to_spot_page().icon_more_click().btn_notinterested_click()
@@ -315,7 +307,7 @@ def btn_not_interested_click():
     Validators().validate_change_page(result, event_name, content_type)
 
 
-def btn_report_click():
+def test_btn_report_click():
     event_name = "btn_report_click"
     content_type = "spot"
     go_to_spot_page().icon_more_click().btn_report_click()

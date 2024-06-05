@@ -5,6 +5,7 @@ import time,pytest
 class ProfilePage:
 
     def __init__(self):
+        self.text_followed_by = "text_followed_by"
         self.comment_media = "comment_media"
         self.text_location = "text_location"
         self.d = u2.connect()
@@ -47,11 +48,9 @@ class ProfilePage:
         self.pic_headshot = "pic_headshot"
         self.text_communityname = "text_communityname"
 
-
     def title_username_click(self):
         try:
-            time.sleep(1)
-            self.d(description=self.title_username).click()
+            self.d(description=self.title_username).click(timeout=2)
 
         except Exception as e:
             print(f"點擊 title_username_click 失败: {e}")
@@ -59,8 +58,7 @@ class ProfilePage:
 
     def icon_dm_click(self):
         try:
-            time.sleep(1)
-            self.d(description=self.icon_dm).click()
+            self.d(description=self.icon_dm).click(timeout=2)
 
             from internal.infra.pages.dm_list import DmList
             return DmList()
@@ -71,8 +69,10 @@ class ProfilePage:
 
     def icon_menu_click(self):
         try:
-            time.sleep(1)
-            self.d(description=self.icon_menu).click()
+            self.d(description=self.icon_menu).click(timeout=2)
+
+            from internal.infra.pages.menu import Menu
+            return Menu()
 
         except Exception as e:
             print(f"點擊 icon_menu_click 失败: {e}")
@@ -80,8 +80,7 @@ class ProfilePage:
 
     def icon_create_click(self):
         try:
-            time.sleep(1)
-            self.d(description=self.icon_create).click()
+            self.d(description=self.icon_create).click(timeout=1)
 
         except Exception as e:
             print(f"點擊 icon_create_click 失败: {e}")
@@ -89,8 +88,7 @@ class ProfilePage:
 
     def pic_l_headshot_click(self):
         try:
-            time.sleep(1)
-            self.d(description=self.pic_l_headshot).click()
+            self.d(description=self.pic_l_headshot).click(timeout=1)
 
         except Exception as e:
             print(f"點擊 pic_l_headshot_click 失败: {e}")
@@ -98,8 +96,7 @@ class ProfilePage:
 
     def text_followers_click(self):
         try:
-            time.sleep(1)
-            self.d(description=self.text_followers).click()
+            self.d(description=self.text_followers).click(timeout=1)
 
         except Exception as e:
             print(f"點擊 text_followers_click 失败: {e}")
@@ -107,8 +104,7 @@ class ProfilePage:
 
     def text_following_click(self):
         try:
-            time.sleep(1)
-            self.d(description=self.text_following).click()
+            self.d(description=self.text_following).click(timeout=1)
 
         except Exception as e:
             print(f"點擊 text_following_click 失败: {e}")
@@ -116,8 +112,7 @@ class ProfilePage:
 
     def text_joined_click(self):
         try:
-            time.sleep(1)
-            self.d(description=self.text_joined).click()
+            self.d(description=self.text_joined).click(timeout=1)
 
         except Exception as e:
             print(f"點擊 text_joined_click 失败: {e}")
@@ -125,8 +120,7 @@ class ProfilePage:
 
     def text_profile_name_click(self):
         try:
-            time.sleep(1)
-            self.d(description=self.text_profile_name).click()
+            self.d(description=self.text_profile_name).click(timeout=1)
 
         except Exception as e:
             print(f"點擊 text_profile_name_click 失败: {e}")
@@ -134,8 +128,7 @@ class ProfilePage:
 
     def text_bio_click(self):
         try:
-            time.sleep(1)
-            self.d(description=self.text_bio).click()
+            self.d(description=self.text_bio).click(timeout=1)
 
         except Exception as e:
             print(f"點擊 text_bio_click 失败: {e}")
@@ -143,8 +136,7 @@ class ProfilePage:
 
     def btn_editprofile_click(self):
         try:
-            time.sleep(1)
-            self.d(description=self.btn_editprofile).click()
+            self.d(description=self.btn_editprofile).click(timeout=1)
 
         except Exception as e:
             print(f"點擊 btn_editprofile_click 失败: {e}")
@@ -152,8 +144,7 @@ class ProfilePage:
 
     def btn_share_click(self):
         try:
-            time.sleep(1)
-            self.d(description=self.btn_share).click()
+            self.d(description=self.btn_share).click(timeout=1)
 
         except Exception as e:
             print(f"點擊 btn_share_click 失败: {e}")
@@ -161,8 +152,7 @@ class ProfilePage:
 
     def btn_contact_click(self):
         try:
-            time.sleep(1)
-            self.d(description=self.btn_contact).click()
+            self.d(description=self.btn_contact).click(timeout=1)
 
         except Exception as e:
             print(f"點擊 btn_contact_click 失败: {e}")
@@ -170,9 +160,8 @@ class ProfilePage:
             
     def tab_activities_click(self):
         try:
-            time.sleep(1)
             self.d(description="""tab_activities
-Tab 2 of 2""").click()
+Tab 2 of 2""").click(timeout=1)
             time.sleep(1)
 
         except Exception as e:
@@ -182,7 +171,7 @@ Tab 2 of 2""").click()
     def tab_spots_click(self):
         try:
             self.d(description="""tab_spots
-Tab 1 of 2""").click()
+Tab 1 of 2""").click(timeout=1)
             time.sleep(1)
 
         except Exception as e:
@@ -191,8 +180,7 @@ Tab 1 of 2""").click()
 
     def text_sharespot_click(self):
         try:
-            time.sleep(1)
-            self.d(description=self.text_sharespot).click()
+            self.d(description=self.text_sharespot).click(timeout=1)
 
         except Exception as e:
             print(f"點擊 text_sharespot_click 失败: {e}")
@@ -200,8 +188,7 @@ Tab 1 of 2""").click()
 
     def text_url_click(self):
         try:
-            time.sleep(1)
-            self.d(description=self.text_url).click()
+            self.d(description=self.text_url).click(timeout=1)
 
         except Exception as e:
             print(f"點擊 text_url_click 失败: {e}")
@@ -210,8 +197,15 @@ Tab 1 of 2""").click()
     def comment_text_click(self):
         try:
             time.sleep(1)
-            self.d(description=self.comment_text).click()
-
+            i = 10
+            while i > 0:
+                time.sleep(1)
+                if self.d(description=self.comment_text).exists():
+                    self.d(description=self.comment_text).click()
+                    break
+                else:
+                    self.screen_swipeupanddown()
+                    i -= 1
             from internal.infra.pages.comment import Comment
             return Comment()
 
@@ -222,16 +216,22 @@ Tab 1 of 2""").click()
     def text_communityname_click(self):
         try:
             time.sleep(1)
-            self.d(description=self.text_communityname).click()
-
+            i = 10
+            while i > 0:
+                time.sleep(1)
+                if self.d(description=self.text_communityname).exists():
+                    self.d(description=self.text_communityname).click()
+                    break
+                else:
+                    self.screen_swipeupanddown()
+                    i -= 1
         except Exception as e:
             print(f"點擊 text_communityname 失败: {e}")
             pytest.xfail("點擊 text_communityname 失败")
 
     def pic_headshot_click(self):
         try:
-            time.sleep(1)
-            self.d(description=self.pic_headshot).click()
+            self.d(description=self.pic_headshot).click(timeout=1)
 
         except Exception as e:
             print(f"點擊 pic_headshot 失败: {e}")
@@ -239,8 +239,7 @@ Tab 1 of 2""").click()
 
     def text_username_click(self):
         try:
-            time.sleep(1)
-            self.d(description=self.text_username).click()
+            self.d(description=self.text_username).click(timeout=1)
 
         except Exception as e:
             print(f"點擊 text_username 失败: {e}")
@@ -249,8 +248,15 @@ Tab 1 of 2""").click()
     def icon_comment_click(self):
         try:
             time.sleep(1)
-            self.d(description=self.icon_comment).click()
-
+            i = 10
+            while i > 0:
+                time.sleep(1)
+                if self.d(description=self.icon_comment).exists():
+                    self.d(description=self.icon_comment).click()
+                    break
+                else:
+                    self.screen_swipeupanddown()
+                    i -= 1
         except Exception as e:
             print(f"點擊 icon_comment 失败: {e}")
             pytest.xfail("點擊 icon_comment 失败")
@@ -258,7 +264,15 @@ Tab 1 of 2""").click()
     def icon_share_click(self):
         try:
             time.sleep(1)
-            self.d(description=self.icon_share).click()
+            i = 10
+            while i > 0:
+                time.sleep(1)
+                if self.d(description=self.icon_share).exists():
+                    self.d(description=self.icon_share).click()
+                    break
+                else:
+                    self.screen_swipeupanddown()
+                    i -= 1
 
         except Exception as e:
             print(f"點擊 icon_share 失败: {e}")
@@ -267,7 +281,15 @@ Tab 1 of 2""").click()
     def icon_save_click(self):
         try:
             time.sleep(1)
-            self.d(description=self.icon_unsave).click()
+            i = 10
+            while i > 0:
+                time.sleep(1)
+                if self.d(description=self.icon_unsave).exists():
+                    self.d(description=self.icon_unsave).click()
+                    break
+                else:
+                    self.screen_swipeupanddown()
+                    i -= 1
 
         except Exception as e:
             print(f"點擊 icon_save 失败: {e}")
@@ -276,8 +298,15 @@ Tab 1 of 2""").click()
     def icon_unsave_click(self):
         try:
             time.sleep(1)
-            self.d(description=self.icon_save).click()
-
+            i = 10
+            while i > 0:
+                time.sleep(1)
+                if self.d(description=self.icon_save).exists():
+                    self.d(description=self.icon_save).click()
+                    break
+                else:
+                    self.screen_swipeupanddown()
+                    i -= 1
         except Exception as e:
             print(f"點擊 icon_unsave 失败: {e}")
             pytest.xfail("點擊 icon_unsave 失败")
@@ -285,7 +314,15 @@ Tab 1 of 2""").click()
     def icon_like_click(self):
         try:
             time.sleep(1)
-            self.d(description=self.icon_unlike).click()
+            i = 10
+            while i > 0:
+                time.sleep(1)
+                if self.d(description=self.icon_unlike).exists():
+                    self.d(description=self.icon_unlike).click()
+                    break
+                else:
+                    self.screen_swipeupanddown()
+                    i -= 1
 
         except Exception as e:
             print(f"點擊 icon_like 失败: {e}")
@@ -294,8 +331,15 @@ Tab 1 of 2""").click()
     def icon_unlike_click(self):
         try:
             time.sleep(1)
-            self.d(description=self.icon_like).click()
-
+            i = 10
+            while i > 0:
+                time.sleep(1)
+                if self.d(description=self.icon_like).exists():
+                    self.d(description=self.icon_like).click()
+                    break
+                else:
+                    self.screen_swipeupanddown()
+                    i -= 1
         except Exception as e:
             print(f"點擊 icon_unlike 失败: {e}")
             pytest.xfail("點擊 icon_unlike 失败")
@@ -303,7 +347,15 @@ Tab 1 of 2""").click()
     def icon_more_click(self):
         try:
             time.sleep(1)
-            self.d(description=self.icon_more).click()
+            i = 10
+            while i > 0:
+                time.sleep(1)
+                if self.d(description=self.icon_more).exists():
+                    self.d(description=self.icon_more).click()
+                    break
+                else:
+                    self.screen_swipeupanddown()
+                    i -= 1
 
         except Exception as e:
             print(f"點擊 icon_more 失败: {e}")
@@ -320,8 +372,7 @@ Tab 1 of 2""").click()
 
     def card_verifyyouremail_click(self):
         try:
-            time.sleep(1)
-            self.d(description=self.card_verifyyouremail).click()
+            self.d(description=self.card_verifyyouremail).click(timeout=1)
 
         except Exception as e:
             print(f"點擊 card_verifyyouremail 失败: {e}")
@@ -329,8 +380,7 @@ Tab 1 of 2""").click()
 
     def card_addprofilepicture_click(self):
         try:
-            time.sleep(1)
-            self.d(description=self.card_addprofilepicture).click()
+            self.d(description=self.card_addprofilepicture).click(timeout=1)
 
         except Exception as e:
             print(f"點擊 card_addprofilepicture 失败: {e}")
@@ -338,8 +388,7 @@ Tab 1 of 2""").click()
 
     def icon_back_click(self):
         try:
-            time.sleep(1)
-            self.d(description=self.icon_back).click()
+            self.d(description=self.icon_back).click(timeout=1)
 
         except Exception as e:
             print(f"點擊 icon_back 失败: {e}")
@@ -347,8 +396,7 @@ Tab 1 of 2""").click()
 
     def btn_follow_click(self):
         try:
-            time.sleep(1)
-            self.d(description=self.btn_follow).click()
+            self.d(description=self.btn_follow).click(timeout=1)
 
         except Exception as e:
             print(f"點擊 btn_follow 失败: {e}")
@@ -356,8 +404,7 @@ Tab 1 of 2""").click()
 
     def btn_message_click(self):
         try:
-            time.sleep(1)
-            self.d(description=self.btn_message).click()
+            self.d(description=self.btn_message).click(timeout=1)
 
         except Exception as e:
             print(f"點擊 btn_message 失败: {e}")
@@ -368,7 +415,7 @@ Tab 1 of 2""").click()
             time.sleep(1)
             i = 10
             while i > 0:
-                time.sleep(1)
+                time.sleep(2)
                 if self.d(description=self.text_translation).exists():
                     self.d(description=self.text_translation).click()
                     break
@@ -436,3 +483,12 @@ Tab 1 of 2""").click()
         except Exception as e:
             print(f"點擊 comment_media 失败: {e}")
             pytest.xfail("點擊 comment_media 失败或找不到 comment_media")
+
+    def text_followed_by_click(self):
+        try:
+            self.d(description=self.text_followed_by).click(timeout=4)
+            time.sleep(1)
+
+        except Exception as e:
+            print(f"點擊 text_followed_by 失败: {e}")
+            pytest.xfail("點擊 text_followed_by 失败")

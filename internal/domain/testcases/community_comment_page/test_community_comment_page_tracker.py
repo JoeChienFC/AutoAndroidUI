@@ -10,7 +10,8 @@ from internal.infra.validators.validators import Validators
 
 
 def go_to_community_comment_page_by_self():
-    ADBClient.start_playsee_app().text_communityname_click().icon_create_click().textfields_comment_typing_chinese()
+    ADBClient.start_playsee_app().text_communityname_click().btn_join_click()
+    CommunityPage().icon_create_click().textfields_comment_typing_chinese()
     CreateComment().btn_comment_click()
     CommunityPage().icon_back_click()
     CommunityFeed().text_communityname_click()

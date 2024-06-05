@@ -3,8 +3,6 @@ import time
 from internal.infra.adb.adb_function import ADBClient
 from internal.infra.bigquery.get_bigquery_db import BigQueryFunction
 from internal.infra.pages.communityfeed import CommunityFeed
-from internal.infra.pages.spotfeed import SpotFeed
-from internal.infra.pages.shareto_popup import ShareToPopup
 from internal.infra.validators.validators import Validators
 
 

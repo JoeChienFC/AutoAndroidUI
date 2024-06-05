@@ -5,22 +5,28 @@ import time, pytest
 class SpotPage:
 
     def __init__(self):
+        self.icon_back = "icon_back"
+        self.icon_create = "icon_create"
+        self.title_communityname = "title_communityname"
+        self.btn_follow = "btn_follow"
+        self.btn_unfollow = "btn_unfollow"
+        self.icon_unlike = "icon_unlike"
+        self.icon_like = "icon_like"
+        self.text_caption = "text_caption"
+        self.text_sharecommunity = "text_sharecommunity"
+        self.screen_mute_x_y = "screen_mute_x_y"
+        self.text_location = "text_location"
+        self.text_username = "text_username"
+        self.pic_headshot = "pic_headshot"
+        self.icon_more = "icon_more"
+        self.icon_share = "icon_share"
+        self.icon_comment = "icon_comment"
+        self.btn_collect = "btn_collect"
+        self.btn_uncollect = "btn_uncollect"
+        self.btn_download = "btn_download"
+        self.btn_not_interested = "btn_not_interested"
+        self.btn_report = "btn_report"
         self.d = u2.connect()
-
-        self.like_icon_xpath = '//android.widget.Button'
-
-        self.community_name = (0.489, 0.061)
-        self.create_icon_x_y = (0.91, 0.059)
-        self.back_icon_x_y = (0.058, 0.061)
-        self.comment_icon_x_y = (0.928, 0.725)
-        self.share_icon_x_y = (0.934, 0.792)
-        self.more_icon_x_y = (0.924, 0.855)
-        self.headshot_pic_x_y = (0.089, 0.74)
-        self.username_text_x_y = (0.174, 0.743)
-        self.location_icon_x_y = (0.061, 0.857)
-        self.screen_mute_x_y = (0.503, 0.425)
-        self.text_sharecommunity_x_y = (0.113, 0.823)
-        self.text_caption_x_y = (0.061, 0.788)
 
         self.spot_page_setup()
 
@@ -34,16 +40,16 @@ class SpotPage:
     def icon_back_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.back_icon_x_y)
+            self.d(description=self.icon_back).click(timeout=1)
 
         except Exception as e:
-            print(f"點擊 back_icon 失败: {e}")
-            pytest.xfail("點擊 back_icon 失败")
+            print(f"點擊 icon_back 失败: {e}")
+            pytest.xfail("點擊 icon_back 失败")
 
     def icon_create_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.create_icon_x_y)
+            self.d(description=self.icon_create).click(timeout=1)
 
         except Exception as e:
             print(f"點擊 icon_create 失败: {e}")
@@ -52,16 +58,25 @@ class SpotPage:
     def title_communityname_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.community_name)
+            i = 10
+            while i > 0:
+                time.sleep(1)
+                if self.d(description=self.title_communityname).exists():
+                    self.d(description=self.title_communityname).click()
+                    break
+                else:
+                    self.screen_swipeupanddown()
+                    i -= 1
 
         except Exception as e:
-            print(f"點擊 icon_create 失败: {e}")
-            pytest.xfail("點擊 icon_create 失败")
+            print(f"點擊 title_communityname 失败: {e}")
+            pytest.xfail("點擊 title_communityname 失败")
 
     def btn_follow_click(self):
         try:
-            if self.d(description="F​o​l​l​o​w").exists(2):
-                self.d(description="F​o​l​l​o​w").click()
+            time.sleep(1)
+            if self.d(description=self.btn_follow).exists():
+                self.d(description=self.btn_follow).click(timeout=1)
             else:
                 pytest.xfail("沒有找到 follow 按鈕")
 
@@ -71,8 +86,8 @@ class SpotPage:
 
     def btn_unfollow_click(self):
         try:
-            if self.d(description="F​o​l​l​o​w​i​n​g").exists(2):
-                self.d(description="F​o​l​l​o​w​i​n​g").click()
+            if self.d(description=self.btn_unfollow).exists():
+                self.d(description=self.btn_unfollow).click(timeout=1)
                 time.sleep(1)
             else:
                 pytest.xfail("沒有找到 following 按鈕")
@@ -84,16 +99,25 @@ class SpotPage:
     def icon_like_click(self):
         try:
             time.sleep(1)
-            self.d.xpath(self.like_icon_xpath).click()
+            self.d(description=self.icon_unlike).click(timeout=1)
 
         except Exception as e:
             print(f"點擊 like 失败: {e}")
             pytest.xfail("點擊 like 失败")
 
+    def icon_unlike_click(self):
+        try:
+            time.sleep(1)
+            self.d(description=self.icon_like).click(timeout=1)
+
+        except Exception as e:
+            print(f"點擊 icon_unlike 失败: {e}")
+            pytest.xfail("點擊 icon_unlike 失败")
+
     def text_caption_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.text_caption_x_y)
+            self.d(description=self.text_caption).click(timeout=1)
 
         except Exception as e:
             print(f"點擊 text_caption 失败: {e}")
@@ -102,7 +126,15 @@ class SpotPage:
     def text_sharecommunity_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.text_sharecommunity_x_y)
+            i = 10
+            while i > 0:
+                time.sleep(1)
+                if self.d(description=self.text_sharecommunity).exists():
+                    self.d(description=self.text_sharecommunity).click()
+                    break
+                else:
+                    self.screen_swipeupanddown()
+                    i -= 1
 
         except Exception as e:
             print(f"點擊 text_sharecommunity 失败: {e}")
@@ -157,7 +189,7 @@ class SpotPage:
     def text_location_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.location_icon_x_y)
+            self.d(description=self.text_location).click(timeout=1)
 
         except Exception as e:
             print(f"點擊 location_icon 失败: {e}")
@@ -166,7 +198,7 @@ class SpotPage:
     def text_username_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.username_text_x_y)
+            self.d(description=self.text_username).click(timeout=1)
 
         except Exception as e:
             print(f"點擊 username_text 失败: {e}")
@@ -175,7 +207,7 @@ class SpotPage:
     def pic_headshot_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.headshot_pic_x_y)
+            self.d(description=self.pic_headshot).click(timeout=1)
 
         except Exception as e:
             print(f"點擊 headshot_pic 失败: {e}")
@@ -184,7 +216,7 @@ class SpotPage:
     def icon_more_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.more_icon_x_y)
+            self.d(description=self.icon_more).click(timeout=1)
 
             from internal.infra.pages.spot_more_popup import SpotMorePopup
             return SpotMorePopup()
@@ -195,7 +227,7 @@ class SpotPage:
     def icon_share_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.share_icon_x_y)
+            self.d(description=self.icon_share).click(timeout=1)
             time.sleep(1)
             from internal.infra.pages.shareto_popup import ShareToPopup
             return ShareToPopup()
@@ -207,9 +239,54 @@ class SpotPage:
     def icon_comment_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.comment_icon_x_y)
+            self.d(description=self.icon_comment).click(timeout=1)
 
         except Exception as e:
             print(f"點擊 comment 失败: {e}")
             pytest.xfail("點擊 comment 失败")
+
+    def btn_collect_click(self):
+        try:
+            time.sleep(1)
+            self.d(description=self.btn_collect).click(timeout=1)
+
+        except Exception as e:
+            print(f"點擊 btn_collect 失败: {e}")
+            pytest.xfail("點擊 btn_collect 失败")
+
+    def btn_uncollect_click(self):
+        try:
+            time.sleep(1)
+            self.d(description=self.btn_uncollect).click(timeout=1)
+
+        except Exception as e:
+            print(f"點擊 btn_uncollect 失败: {e}")
+            pytest.xfail("點擊 btn_uncollect 失败")
+
+    def btn_download_click(self):
+        try:
+            time.sleep(1)
+            self.d(description=self.btn_download).click(timeout=1)
+
+        except Exception as e:
+            print(f"點擊 btn_download 失败: {e}")
+            pytest.xfail("點擊 btn_download 失败")
+
+    def btn_not_interested_click(self):
+        try:
+            time.sleep(1)
+            self.d(description=self.btn_not_interested).click(timeout=1)
+
+        except Exception as e:
+            print(f"點擊 btn_not_interested 失败: {e}")
+            pytest.xfail("點擊 btn_not_interested 失败")
+
+    def btn_report_click(self):
+        try:
+            time.sleep(1)
+            self.d(description=self.btn_report).click(timeout=1)
+
+        except Exception as e:
+            print(f"點擊 btn_report 失败: {e}")
+            pytest.xfail("點擊 btn_report 失败")
 
