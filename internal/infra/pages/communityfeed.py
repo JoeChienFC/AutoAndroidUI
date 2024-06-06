@@ -199,7 +199,7 @@ class CommunityFeed:
     def explore_click(self):
         try:
             time.sleep(1)
-            if self.d(description="Tab 3 of 5").exists():
+            if self.d(description="Tab 3 of 5").exists(timeout=3):
                 self.d(description="Tab 3 of 5").click()
                 print("成功進入 explore！")
                 from internal.infra.pages.explore import Explore
@@ -225,7 +225,7 @@ class CommunityFeed:
     def spot_click(self):
         try:
             time.sleep(1)
-            if self.d(description="Tab 2 of 5").exists():
+            if self.d(description="Tab 2 of 5").exists(timeout=3):
                 self.d(description="Tab 2 of 5").click()
                 print("成功進入spot！")
                 self.d(description="icon_create").wait(timeout=10)
@@ -238,7 +238,7 @@ class CommunityFeed:
     def community_click(self):
         try:
             time.sleep(1)
-            if self.d(description="Tab 1 of 5").exists():
+            if self.d(description="Tab 1 of 5").exists(timeout=3):
                 self.d(description="Tab 1 of 5").click()
                 print("成功進入community！")
                 self.d(description="text_communityname").wait(timeout=10)
@@ -250,7 +250,7 @@ class CommunityFeed:
 
     def tab_notifications_click(self):
         try:
-            if self.d(description="Tab 4 of 5").exists(5):
+            if self.d(description="Tab 4 of 5").exists(timeout=3):
                 self.d(description="Tab 4 of 5").click()
                 print("成功進入 tab_notifications！")
                 from internal.infra.pages.notifications import Notifications

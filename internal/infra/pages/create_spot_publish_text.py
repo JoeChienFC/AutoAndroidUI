@@ -6,25 +6,17 @@ import os
 class CreateSpotPublishText:
 
     def __init__(self):
-        self.btn_hashtag_drag_xy1_xy2 = ()
+        self.icon_back = "icon_back"
+        self.text_done = "text_done"
+        self.btn_hashtag = "btn_hashtag"
+        self.btn_at_user = "btn_at_user"
+
         self.d = u2.connect()
-        self.icon_close_xpath = '//android.widget.FrameLayout[3]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.widget.ImageView[2]'
-        self.icon_preview_close_xpath = '//android.widget.FrameLayout[4]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[3]/android.view.View[1]/android.view.View[1]/android.widget.ImageView[1]'
-        self.pic_preview_xpath = '//android.widget.FrameLayout[4]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[3]'
-        self.icon_video_preview_close_xpath = '//android.widget.FrameLayout[4]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.widget.ImageView[4]'
-        self.icon_url_preview_close_xpath = '//android.widget.FrameLayout[3]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.widget.ImageView[3]'
-        self.icon_back_x_y = (0.062, 0.061)
-        self.btn_community_x_y = (0.086, 0.743)
-        self.textfields_comment_xpath = '//android.widget.EditText'
-        self.location_pin_x_y = (0.182, 0.867)
-        self.icon_album_x_y = (0.061, 0.867)
-        self.btn_at_user_x_y = (0.232, 0.729)
-        self.btn_hashtag_x_y = (0.11, 0.851)
-        self.btn_add_x_y = (0.13, 0.737)
+
 
     def icon_back_click(self):
         try:
-            self.d.click(*self.icon_back_x_y)
+            self.d(description=self.icon_back).click()
             time.sleep(1)
 
         except Exception as e:
@@ -32,7 +24,7 @@ class CreateSpotPublishText:
 
     def text_done_click(self):
         try:
-            self.d.xpath('//android.widget.Button').click()
+            self.d(description=self.text_done).click()
             time.sleep(1)
 
         except Exception as e:
@@ -58,7 +50,7 @@ class CreateSpotPublishText:
 
     def btn_hashtag_click(self):
         try:
-            self.d.click(*self.btn_hashtag_x_y)
+            self.d(description=self.btn_hashtag).click()
             time.sleep(1)
 
         except Exception as e:
@@ -68,7 +60,7 @@ class CreateSpotPublishText:
     def btn_hashtag_drag(self):
         try:
             time.sleep(1)
-            self.d.xpath('//android.widget.HorizontalScrollView').swipe("left")
+            self.d(description=self.btn_hashtag).swipe("left")
             time.sleep(1)
 
         except Exception as e:
@@ -88,7 +80,7 @@ class CreateSpotPublishText:
     def btn_at_user_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.btn_hashtag_x_y)
+            self.d(description=self.btn_at_user).click()
             time.sleep(1)
 
         except Exception as e:
@@ -98,7 +90,7 @@ class CreateSpotPublishText:
     def btn_at_user_drag(self):
         try:
             time.sleep(1)
-            self.d.xpath('//android.widget.HorizontalScrollView').swipe("left")
+            self.d(description=self.btn_at_user).swipe("left")
             time.sleep(1)
 
         except Exception as e:

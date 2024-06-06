@@ -1,0 +1,39 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    text-align: center;
+    color: #2084D9;
+    font-size: 30px;
+}
+h2 {
+    color: #2084D9;
+    font-size: 24px;
+}
+a {
+    color: #466AFF;
+}
+span {
+    font-size: 20px;
+}
+#environment td {
+    padding: 10px;
+}
+#result-table {
+    font-size: 16px;
+}
+#result-table-head th{
+    font-size: 20px;
+    background-color: #2084D9;
+    color: #FFFFFF;
+}
+td {
+    color:#000000;
+}
+#environment tbody tr td:ntd-child(1){
+    background-color: #2084D9;
+    color: #FFFFFF;
+    font-weight:bold;
+    font-size: 20px
+}
