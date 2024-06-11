@@ -57,9 +57,17 @@ def pytest_runtest_makereport(item, call):
                 # 将截图添加到报告中
                 with open(local_path, "rb") as image_file:
                     image_base64 = base64.b64encode(image_file.read()).decode('utf-8')
-                extra.append(
-                    pytest_html.extras.image(image_base64, mime_type='image/png', extension='png', name='screenshot'))
-                # extra.append(pytest_html.extras.image(local_path))
+                # 将 base64 编码的图片添加到报告中，并包含点击展开功能
+                img_html = f"""
+                                    <div style="float: right; margin-left: 20px;">
+                                        <a href="data:image/png;base64,{image_base64}" target="_blank">
+                                            <img src="data:image/png;base64,{image_base64}" style="max-width:300px; max-height:300px;" />
+                                        </a>
+                                    </div>
+                                """
+                extra.append(pytest_html.extras.html(img_html))
+                # extra.append(
+                #     pytest_html.extras.image(image_base64, mime_type='image/png', extension='png', name='screenshot'))
                 os.remove(local_path)
             except Exception as e:
                 print(f"Failed to capture screenshot: {e}")
