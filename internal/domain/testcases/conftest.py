@@ -3,6 +3,7 @@ import datetime
 import os
 import subprocess
 import time
+from PIL import Image
 
 import pytest
 import uiautomator2 as u2
@@ -39,36 +40,46 @@ def pytest_runtest_makereport(item, call):
     outcome = yield
     report = outcome.get_result()
     extra = getattr(report, "extra", [])
+    resize_factor = 0.25
 
     if report.when == "call":
         xfail = hasattr(report, "wasxfail")
         if (report.skipped and xfail) or (report.failed and not xfail):
             # 如果测试失败，执行 adb 命令截取屏幕
             timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-            screenshot_name = f"screenshot_{timestamp}.png"
-            local_path = os.path.join(os.getcwd(), screenshot_name)
+            screenshot_png_name = f"screenshot_{timestamp}.png"
+            screenshot_jpg_name = f"screenshot_{timestamp}.jpg"
+            local_png_path = os.path.join(os.getcwd(), screenshot_png_name)
+            local_jpg_path = os.path.join(os.getcwd(), screenshot_jpg_name)
             try:
                 # pytest.set_trace()
                 # 使用 adb 截取屏幕并将其保存到本地文件
-                subprocess.run(["adb", "shell", "screencap", "-p", f"/sdcard/{screenshot_name}"])
-                print(f"Local screenshot path: {local_path}")
-                subprocess.run(["adb", "pull", f"/sdcard/{screenshot_name}", local_path], check=True)
-                print(f"Screenshot pulled to: {local_path}")
+                subprocess.run(["adb", "shell", "screencap", "-p", f"/sdcard/{screenshot_png_name}"])
+                print(f"Local screenshot path: {local_png_path}")
+                subprocess.run(["adb", "pull", f"/sdcard/{screenshot_png_name}", local_png_path], check=True)
+                print(f"Screenshot pulled to: {local_png_path}")
+
+                with Image.open(local_png_path) as img:
+                    new_size = (int(img.width * resize_factor), int(img.height * resize_factor))
+                    img = img.resize(new_size, Image.ANTIALIAS)
+                    rgb_im = img.convert('RGB')
+                    rgb_im.save(local_jpg_path, "JPEG")
+
                 # 将截图添加到报告中
-                with open(local_path, "rb") as image_file:
+                with open(local_jpg_path, "rb") as image_file:
                     image_base64 = base64.b64encode(image_file.read()).decode('utf-8')
                 # 将 base64 编码的图片添加到报告中，并包含点击展开功能
                 img_html = f"""
                                     <div style="float: right; margin-left: 20px;">
-                                        <a href="data:image/png;base64,{image_base64}" target="_blank">
-                                            <img src="data:image/png;base64,{image_base64}" style="max-width:300px; max-height:300px;" />
+                                        <a> 
+                                            <img src="data:image/jpeg;base64,{image_base64}" style="max-width:300px; max-height:300px;" />
                                         </a>
                                     </div>
                                 """
                 extra.append(pytest_html.extras.html(img_html))
-                # extra.append(
-                #     pytest_html.extras.image(image_base64, mime_type='image/png', extension='png', name='screenshot'))
-                os.remove(local_path)
+
+                os.remove(local_png_path)
+                os.remove(local_jpg_path)
             except Exception as e:
                 print(f"Failed to capture screenshot: {e}")
 
