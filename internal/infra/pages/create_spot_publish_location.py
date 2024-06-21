@@ -8,14 +8,16 @@ import pytest
 class CreateSpotPublishLocation:
 
     def __init__(self):
-        self.list_my_location_x_y = (0.404, 0.455)
-        self.icon_clear_x_y = (0.901, 0.14)
+        self.icon_my_location = "icon_my_location"
+        self.list_location = "list_location"
+        self.list_my_location = "list_my_location"
+        self.icon_clear = "list_my_location"
         self.d = u2.connect()
-        self.text_done_x_y = (0.908, 0.077)
+        self.text_done = "text_done"
 
     def text_done_click(self):
         try:
-            self.d.click(*self.text_done_x_y)
+            self.d(description=self.text_done).click(timeout=2)
             time.sleep(1)
 
         except Exception as e:
@@ -45,7 +47,7 @@ class CreateSpotPublishLocation:
     def icon_clear_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.icon_clear_x_y)
+            self.d(description=self.icon_clear).click(timeout=2)
 
         except Exception as e:
             print(f"點擊 icon_clear 失败: {e}")
@@ -54,7 +56,7 @@ class CreateSpotPublishLocation:
     def icon_my_location_click(self):
         try:
             time.sleep(1)
-            self.d(className="android.widget.ImageView", index=3).click()
+            self.d(description=self.icon_my_location).click(timeout=2)
 
         except Exception as e:
             print(f"點擊 icon_my_location_click 失败: {e}")
@@ -63,7 +65,7 @@ class CreateSpotPublishLocation:
     def list_location_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.list_my_location_x_y)
+            self.d(description=self.list_location).click(timeout=2)
 
         except Exception as e:
             print(f"點擊 list_location_click 失败: {e}")
@@ -72,7 +74,7 @@ class CreateSpotPublishLocation:
     def list_result_location_click(self):
         try:
             time.sleep(1)
-            self.d.click(*self.list_my_location_x_y)
+            self.d(description=self.list_location).click(timeout=2)
             time.sleep(0.5)
 
         except Exception as e:
