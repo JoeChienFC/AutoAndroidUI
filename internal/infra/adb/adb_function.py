@@ -3,9 +3,6 @@ import subprocess
 import time
 import uiautomator2 as u2
 
-from internal.infra.pages.communityfeed import CommunityFeed
-from internal.infra.pages.spotfeed import SpotFeed
-
 
 class ADBClient:
     def __init__(self):
@@ -87,7 +84,6 @@ class ADBClient:
         # Execute the ADB command
         subprocess.run(cmd, shell=True)
         d(description="btn_locationpicker").wait(timeout=10)
-        return CommunityFeed()
 
     @staticmethod
     def stop_playsee_app():
