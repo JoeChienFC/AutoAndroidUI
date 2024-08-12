@@ -1,9 +1,9 @@
 import uiautomator2 as u2
-import time,pytest
+import time, pytest
 import os
 
 
-class AiFeed:
+class SettingsPopover:
 
     def __init__(self):
         self.big_icon_send_x_y = (0.94, 0.546)
