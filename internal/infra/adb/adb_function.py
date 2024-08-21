@@ -1,3 +1,4 @@
+import os
 import re
 import subprocess
 import time
@@ -9,127 +10,97 @@ class ADBClient:
         pass
 
     @staticmethod
-    def grep_logcat_event_name(event_name):
-        # 組合 adb logcat 指令
-        command = rf'adb logcat -d | grep "\"event_name\":\"{event_name}\""'
+    def push_data_to_camera():
+        # 使用相对路径构建 adb push 命令
+        current_working_directory = os.getcwd()
+        print(f"Current working directory: {current_working_directory}")
+        relative_path = r'data\data_camera'
+        destination_path = '/sdcard/DCIM/Camera'
+
+        command = rf'adb push {relative_path} {destination_path}'
+
+        try:
+            print(command)
+            time.sleep(1)
+            # 使用 subprocess 執行指令，加上 stdout=subprocess.PIPE
+            subprocess.run(command, shell=True)
+        except subprocess.CalledProcessError as e:
+            print(f"Error executing command: {e}")
+
+    @staticmethod
+    def push_data_to_albums():
+        # 使用相对路径构建 adb push 命令
+        relative_path = r'data\data_albums'
+        destination_path = '/sdcard/Pictures/'
+
+        command = rf'adb push {relative_path} {destination_path}'
 
         # 使用 subprocess 執行指令
         try:
             print(command)
-            # time.sleep(1)
             # 使用 subprocess 執行指令，加上 stdout=subprocess.PIPE
-            result = subprocess.run(command, shell=True, capture_output=True, text=True)
-            print(f"logcat : {result.stdout}")
-
-            if result.stdout:
-                return True
-            else:
-                print(f"Error in logcat output: {result.stdout}")
-                return False
+            subprocess.run(command, shell=True)
 
         except subprocess.CalledProcessError as e:
             print(f"Error executing command: {e}")
 
     @staticmethod
-    def grep_logcat_event_name_content_type(event_name, content_type):
-        # 組合 adb logcat 指令
-        command = rf'adb logcat -d | grep "\"event_name\":\"{event_name}\".*"content_type\":\"{content_type}\"'
+    def delete_albums_camera_data():
+        delete_albums_command = rf'adb shell rm -rf /sdcard/DCIM/Camera/*'
+        delete_camera_command = rf'adb shell rm -rf /sdcard/Pictures/*'
         # 使用 subprocess 執行指令
         try:
-            print(f"adb command : {command}")
-            # 使用 subprocess 執行指令，加上 stdout=subprocess.PIPE
-            result = subprocess.run(command, shell=True, capture_output=True, text=True)
-            print(f"logcat : {result.stdout}")
-
-            if result.stdout:
-                return True
-            else:
-                print(f"Error in logcat output: {result.stdout}")
-                return False
-
+            subprocess.run(delete_albums_command, shell=True)
+            subprocess.run(delete_camera_command, shell=True)
         except subprocess.CalledProcessError as e:
             print(f"Error executing command: {e}")
 
     @staticmethod
-    def grep_logcat_userid():
-        # 組合 adb logcat 指令
-        command = rf'adb logcat -d | grep \"event_name\"'
+    def refresh_gallery_data():
+        refresh_gallery_command = ('adb shell am broadcast -a android.intent.action.MEDIA_SCANNER_SCAN_FILE -d file:///sdcard/Pictures')
         # 使用 subprocess 執行指令
         try:
-            # 使用 subprocess 執行指令，加上 stdout=subprocess.PIPE
-            result = subprocess.run(command, shell=True, capture_output=True, text=True)
-            user_id_pattern = r'"user_id":"(\d+)"'
-
-            if result.stdout:
-                matches = re.findall(user_id_pattern, result.stdout)
-                if matches:
-                    return matches[-1]
-                else:
-                    return None
-
-            else:
-                print(f"Error in logcat output: {result.stdout}")
-                return None
-
+            subprocess.run(refresh_gallery_command, shell=True)
+            time.sleep(1)
         except subprocess.CalledProcessError as e:
             print(f"Error executing command: {e}")
-            return None
 
     @staticmethod
-    def start_playsee_app():
+    def clear_gallery_cache():
+        clear_gallery_cache_command = 'adb shell pm clear com.nothing.gallery'
+        # 使用 subprocess 執行指令
+        try:
+            subprocess.run(clear_gallery_cache_command, shell=True)
+        except subprocess.CalledProcessError as e:
+            print(f"Error executing command: {e}")
+
+    @staticmethod
+    def start_gallery_app():
         d = u2.connect()
         # ADB command to start the app by package name
-        cmd = "adb shell am start -n com.framy.placey/.MainActivity"
+        cmd = "adb shell am start -a android.intent.action.MAIN -n com.nothing.gallery/.activity.EntryActivity"
 
         # Execute the ADB command
         subprocess.run(cmd, shell=True)
-        d(description="btn_locationpicker").wait(timeout=10)
 
     @staticmethod
-    def stop_playsee_app():
-        cmd = "adb shell am force-stop com.framy.placey"
+    def start_settings():
+        d = u2.connect()
+        # ADB command to start the app by package name
+        cmd = "adb shell am start -n com.android.settings/.Settings"
+
+        # Execute the ADB command
         subprocess.run(cmd, shell=True)
 
     @staticmethod
-    def logcat_action_type_1408_community_id():
-        cmd = "adb logcat -d | grep '\"action_type\":\"1408\"' | grep -o '\"community_id\":\"[^\"]*\"'"
-        # 执行 adb 命令并获取输出
-        result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
-        # 检查命令的返回码以及输出
-        if result.returncode == 0:
-            adb_communityid = result.stdout
-            communityid = extract_community_ids(adb_communityid)[0]
-            return communityid
+    def stop_settings():
+        d = u2.connect()
+        # ADB command to start the app by package name
+        cmd = "adb shell am force-stop com.android.settings"
+        # Execute the ADB command
+        subprocess.run(cmd, shell=True)
 
     @staticmethod
-    def check_action_type_1408_is_none():
-        cmd = "adb logcat -d | grep '\"action_type\":\"1408\"' | grep -o '\"community_id\":\"[^\"]*\"'"
-        try:
-            # 执行 adb 命令并获取输出
-            result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
-            if result.stdout == "":
-                return True
-            else:
-                return False
-        except subprocess.CalledProcessError as e:
-            print(f"Command execution failed with error: {e}")
-            return None
-
-    @staticmethod
-    def clean_action_type_1408():
-        for iteration in range(10):
-            time.sleep(60)
-            if ADBClient.check_action_type_1408_is_none():
-                print("清空了1408")
-                return None
-        print("清空1408失敗")
-
-
-def extract_community_ids(data):
-    pattern = r'"community_id":"([^"]+)"'
-    community_ids = []
-    matches = re.finditer(pattern, data)
-    for match in matches:
-        community_id = match.group(1)
-        community_ids.append(community_id)
-    return community_ids
+    def stop_gallery_app():
+        cmd = "adb shell am force-stop com.nothing.gallery"
+        subprocess.run(cmd, shell=True)
