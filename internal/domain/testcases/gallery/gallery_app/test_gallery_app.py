@@ -30,6 +30,7 @@ def test_gallery_app_004():
     """
     ADBClient.clear_gallery_cache()
     ADBClient.start_gallery_app()
+    time.sleep(2)
     PhotosPage().close_gallery_with_swipe_up()
     GeneralPage().is_launcher_page()
 
@@ -64,3 +65,4 @@ def test_gallery_app_006():
     ADBClient.start_gallery_app()
     PhotosPage().go_to_last_app_with_swipe_left()
     GeneralPage().is_settings_page()
+    ADBClient.stop_settings()

@@ -8,67 +8,33 @@ class ShowInPhotosViewPage:
     def __init__(self):
         self.d = u2.connect()
 
-    def bar_message_click(self):
-        try:
-            time.sleep(1)
-            self.d.xpath('//android.widget.EditText').click()
+    def is_screenshots_select(self):
+        select = self.d(resourceId="com.nothing.gallery:id/display_name", text="Screenshots").right(
+            resourceId='com.nothing.gallery:id/switch_widget', selected='true')
 
-        except Exception as e:
-            print(f"點擊 bar_message_click 失败: {e}")
-            pytest.xfail("點擊 bar_message_click 失败")
+        if not select:
+            pytest.fail("screenshots 選項没有被選中")
 
-    def bar_message_typing(self):
-        try:
-            time.sleep(1)
-            # os.system('adb shell input text {}'.format('test'))
-            self.d.shell('input text "test"')
+    def is_not_favorite_select(self):
+        if not self.d(text="Favorite").exists(timeout=3):
+            pytest.fail("沒有 Favorite 選項")
+        select = self.d(resourceId="com.nothing.gallery:id/display_name", text="Favorite").right(
+            resourceId='com.nothing.gallery:id/switch_widget', selected='false')
 
-        except Exception as e:
-            print(f"點擊 bar_message_typing 失败: {e}")
-            pytest.xfail("點擊 bar_message_typing 失败")
+        if not select:
+            pytest.fail("Favorite 選項有被選中")
 
-    def icon_send_click(self):
-        try:
-            if self.d(text="1").exists():
-                self.d.click(*self.big_icon_send_x_y)
-                time.sleep(1)
-            else:
-                self.d.click(*self.icon_send_x_y)
+    def is_not_video_select(self):
+        if not self.d(text="Video").exists(timeout=3):
+            pytest.fail("沒有 Video 選項")
+        select = self.d(resourceId="com.nothing.gallery:id/display_name", text="Video").right(
+            resourceId='com.nothing.gallery:id/switch_widget', selected='false')
 
-        except Exception as e:
-            print(f"點擊 icon_send_click 失败: {e}")
-            pytest.xfail("點擊 icon_send_click 失败")
+        if not select:
+            pytest.fail("Video 選項有被選中")
 
-    def pic_spot_click(self):
-        try:
-            self.bar_message_click()
-            time.sleep(1)
-            os.system('adb shell input text \\"{}\\"'.format('I like Dog'))
-            time.sleep(1)
-            if self.d(text="1").exists():
-                self.d.click(*self.big_icon_send_x_y)
-                time.sleep(1)
-            else:
-                self.d.click(*self.icon_send_x_y)
-            time.sleep(15)
-        except Exception as e:
-            print(f"點擊 pic_spot_click 失败: {e}")
-            pytest.xfail("點擊 pic_spot_click 失败")
-
-    def btn_like_click(self):
-        try:
-            time.sleep(1)
-            self.d(description="Like").click()
-
-        except Exception as e:
-            print(f"點擊 btn_like_click 失败: {e}")
-            pytest.xfail("點擊 btn_like_click 失败")
-
-    def btn_dislike_click(self):
-        try:
-            time.sleep(1)
-            self.d(description="Dislike").click()
-
-        except Exception as e:
-            print(f"點擊 btn_dislike_click 失败: {e}")
-            pytest.xfail("點擊 btn_dislike_click 失败")
+    def video_select(self):
+        no_select = self.d(resourceId="com.nothing.gallery:id/display_name", text="Video").right(
+            resourceId='com.nothing.gallery:id/switch_widget', selected='false')
+        if no_select:
+            self.d(resourceId="com.nothing.gallery:id/display_name", text="Video").click()

@@ -1,7 +1,7 @@
 import os
-import re
 import subprocess
 import time
+
 import uiautomator2 as u2
 
 
@@ -56,8 +56,20 @@ class ADBClient:
             print(f"Error executing command: {e}")
 
     @staticmethod
-    def refresh_gallery_data():
-        refresh_gallery_command = ('adb shell am broadcast -a android.intent.action.MEDIA_SCANNER_SCAN_FILE -d file:///sdcard/Pictures')
+    def refresh_gallery_albums():
+        refresh_gallery_command = (
+            'adb shell am broadcast -a android.intent.action.MEDIA_SCANNER_SCAN_FILE -d file:///sdcard/Pictures')
+        # 使用 subprocess 執行指令
+        try:
+            subprocess.run(refresh_gallery_command, shell=True)
+            time.sleep(1)
+        except subprocess.CalledProcessError as e:
+            print(f"Error executing command: {e}")
+
+    @staticmethod
+    def refresh_gallery_camera():
+        refresh_gallery_command = (
+            'adb shell am broadcast -a android.intent.action.MEDIA_SCANNER_SCAN_FILE -d file:///sdcard/DCIM/Camera')
         # 使用 subprocess 執行指令
         try:
             subprocess.run(refresh_gallery_command, shell=True)
