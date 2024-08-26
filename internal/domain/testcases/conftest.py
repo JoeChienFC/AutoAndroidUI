@@ -36,7 +36,9 @@ def restore_environment():
 
     yield
     ADBClient.stop_gallery_app()
-    # ADBClient.delete_albums_camera_data()
+    ADBClient.delete_albums_camera_data()
+    ADBClient.refresh_gallery_camera()
+    ADBClient.refresh_gallery_albums()
     time.sleep(1)
     # 測試後執行
 

@@ -28,6 +28,42 @@ class ADBClient:
             print(f"Error executing command: {e}")
 
     @staticmethod
+    def push_1_pic_to_camera():
+        # 使用相对路径构建 adb push 命令
+        current_working_directory = os.getcwd()
+        print(f"Current working directory: {current_working_directory}")
+        relative_path = r'data\data_1_pic'
+        destination_path = '/sdcard/DCIM/Camera'
+
+        command = rf'adb push {relative_path} {destination_path}'
+
+        try:
+            print(command)
+            time.sleep(1)
+            # 使用 subprocess 執行指令，加上 stdout=subprocess.PIPE
+            subprocess.run(command, shell=True)
+        except subprocess.CalledProcessError as e:
+            print(f"Error executing command: {e}")
+
+    @staticmethod
+    def push_location_pic_to_camera():
+        # 使用相对路径构建 adb push 命令
+        current_working_directory = os.getcwd()
+        print(f"Current working directory: {current_working_directory}")
+        relative_path = r'data\data_location'
+        destination_path = '/sdcard/DCIM/Camera'
+
+        command = rf'adb push {relative_path} {destination_path}'
+
+        try:
+            print(command)
+            time.sleep(1)
+            # 使用 subprocess 執行指令，加上 stdout=subprocess.PIPE
+            subprocess.run(command, shell=True)
+        except subprocess.CalledProcessError as e:
+            print(f"Error executing command: {e}")
+
+    @staticmethod
     def push_data_to_albums():
         # 使用相对路径构建 adb push 命令
         relative_path = r'data\data_albums'
@@ -106,7 +142,6 @@ class ADBClient:
 
     @staticmethod
     def stop_settings():
-        d = u2.connect()
         # ADB command to start the app by package name
         cmd = "adb shell am force-stop com.android.settings"
         # Execute the ADB command
@@ -115,4 +150,23 @@ class ADBClient:
     @staticmethod
     def stop_gallery_app():
         cmd = "adb shell am force-stop com.nothing.gallery"
+        subprocess.run(cmd, shell=True)
+
+    @staticmethod
+    def disable_auto_rotate():
+        cmd = ("adb shell content insert --uri content://settings/system --bind "
+               "name:s:accelerometer_rotation --bind value:i:0")
+        subprocess.run(cmd, shell=True)
+
+    @staticmethod
+    def enable_auto_rotate():
+        cmd = ("adb shell content insert --uri content://settings/system --bind "
+               "name:s:accelerometer_rotation --bind value:i:1")
+        subprocess.run(cmd, shell=True)
+
+    @staticmethod
+    def set_rotate():
+        cmd = ("adb shell content insert --uri content://settings/system "
+               "--bind name:s:user_rotation --bind value:i:1")
+
         subprocess.run(cmd, shell=True)

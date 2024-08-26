@@ -26,9 +26,21 @@ class PhotosPage:
         if not self.d(text="No photo here, go take some photos!").exists(timeout=2):
             pytest.fail("照片頁沒有顯示_沒有照片_的文案")
 
+    def no_display_no_photos_text(self):
+        if self.d(text="No photo here, go take some photos!").exists(timeout=2):
+            pytest.fail("照片頁顯示_沒有照片_的文案")
+
     def is_video_exists(self):
         if not self.d(text="00:10", resourceId="com.nothing.gallery:id/video_duration").exists(timeout=2):
             pytest.fail("照片頁沒有 test case 的影片")
+
+    def is_two_photos_exists(self):
+        if self.d(text="Today").exists:
+            two_img = self.d(text="Today").down(description="Thumbnail")
+            if not two_img:
+                pytest.fail("照片頁沒有 2 張照片")
+        else:
+            pytest.fail("照片頁沒有 2 張照片")
 
     def no_photos_exists(self):
         if self.d(resourceId="com.nothing.gallery:id/title", text="2 August").exists(timeout=1):

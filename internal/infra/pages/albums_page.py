@@ -18,3 +18,15 @@ class AlbumsPage:
             resourceId="com.nothing.gallery:id/photo_media_count", text="1 IMG")
         if not img:
             pytest.fail("Favorite 相簿沒有相片或不符合TEST CASE 張數")
+
+    def is_recently_deleted_album_has_1_img(self):
+        img = self.d(resourceId="com.nothing.gallery:id/display_name", text="Recently deleted").down(
+            resourceId="com.nothing.gallery:id/photo_media_count", text="1 IMG")
+        if not img:
+            pytest.fail("Recently 相簿沒有相片或不符合TEST CASE 張數")
+
+    def is_data_album_has_6_img(self):
+        img = self.d(resourceId="com.nothing.gallery:id/display_name", text="data_albums").down(
+            resourceId="com.nothing.gallery:id/photo_media_count", text="6 IMG")
+        if not img:
+            pytest.fail("Recently 相簿沒有相片或不符合TEST CASE 張數")
