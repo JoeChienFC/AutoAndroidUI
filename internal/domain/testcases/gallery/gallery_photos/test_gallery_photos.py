@@ -319,3 +319,26 @@ def test_gallery_photos_029():
 
     PhotosPage().photo_click().swipe_up_to_details()
     PhotoAllViewPage().is_no_location_details_correct()
+
+
+@pytest.mark.P1
+def test_gallery_photos_038():
+    """
+    至少有多张照片。
+    步骤：
+    "1.打开Gallery应用，进入照片页面。
+    2.點開照片，上滑检查照片是否按照时间顺序排列。"
+    期望结果：
+    2.照片应按时间顺序正确排列。
+    """
+    ADBClient.clear_gallery_cache()
+    ADBClient.start_gallery_app()
+    ADBClient.push_data_to_camera()
+    ADBClient.refresh_gallery_camera()
+
+    PhotosPage().photo_click().swipe_up_to_details()
+    PhotoAllViewPage().is_24_july_pic()
+    GeneralPage().back()
+    GeneralPage().back()
+    PhotosPage().is_date_order_correct()
+

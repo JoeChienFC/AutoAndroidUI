@@ -83,7 +83,6 @@ class PhotosPage:
 
     def btn_photos_click(self):
         try:
-            time.sleep(1)
             self.d(description=self.btn_photos).click()
             time.sleep(1)
 
@@ -93,7 +92,6 @@ class PhotosPage:
 
     def btn_albums_click(self):
         try:
-            time.sleep(1)
             self.d(description=self.btn_albums).click()
             time.sleep(1)
 
@@ -101,3 +99,18 @@ class PhotosPage:
             print(f"點擊 btn_albums 失败: {e}")
             pytest.xfail("點擊 btn_albums 失败")
 
+    def is_date_order_correct(self):
+        try:
+            correct0 = self.d(resourceId="com.nothing.gallery:id/title", text="24 July").down(
+                resourceId="com.nothing.gallery:id/title", text="23 July")
+            correct1 = self.d(resourceId="com.nothing.gallery:id/title", text="23 July").down(
+                resourceId="com.nothing.gallery:id/title", text="22 July")
+            correct2 = self.d(resourceId="com.nothing.gallery:id/title", text="22 July").down(
+                resourceId="com.nothing.gallery:id/title", text="21 July")
+
+            if not (correct0 and correct1 and correct2):
+                pytest.fail("有照片日期排序錯誤")
+
+        except Exception as e:
+            print(f"有照片日期的元件沒出現: {e}")
+            pytest.xfail("有照片日期的元件沒出現")

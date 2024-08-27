@@ -109,3 +109,6 @@ class PhotoAllViewPage:
             print(f"點擊 swipe_up_to_details 失败: {e}")
             pytest.xfail("點擊 swipe_up_to_details 失败")
 
+    def is_24_july_pic(self):
+        if not self.d(resourceId="com.nothing.gallery:id/taken_time_date", text="24 July").exists:
+            pytest.fail("不是測試用例設定的照片")
