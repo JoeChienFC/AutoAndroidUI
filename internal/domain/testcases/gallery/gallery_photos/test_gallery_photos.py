@@ -3,6 +3,7 @@ import time
 import pytest
 
 from internal.infra.adb.adb_function import ADBClient
+from internal.infra.pages.albums_page import AlbumsPage
 from internal.infra.pages.general_page import GeneralPage
 from internal.infra.pages.photo_all_view_page import PhotoAllViewPage
 from internal.infra.pages.photos_page import PhotosPage
@@ -342,3 +343,177 @@ def test_gallery_photos_038():
     GeneralPage().back()
     PhotosPage().is_date_order_correct()
 
+
+@pytest.mark.P0
+def test_gallery_photos_042():
+    """
+    至少有多张照片。
+    步骤：
+    "1.在Gallery应用中长按选中的照片后，選中一張照片。
+    2.点击下方第一个icon（+），选择要加入的相簿。"
+    期望结果：
+    2.照片不會消失且可以正常添加到指定的相簿。
+    """
+    ADBClient.clear_gallery_cache()
+    ADBClient.start_gallery_app()
+    ADBClient.push_1_pic_to_camera()
+    ADBClient.push_data_to_albums()
+    ADBClient.refresh_gallery_camera()
+    ADBClient.refresh_gallery_albums()
+
+    PhotosPage().photo_long_click()
+    PhotosPage().icon_copy_to_album_click().data_albums_click()
+    PhotosPage().no_display_no_photos_text()
+
+    GeneralPage().btn_albums_click()
+    AlbumsPage().is_data_album_has_6_img()
+
+
+@pytest.mark.P0
+def test_gallery_photos_043():
+    """
+    至少有多张照片。
+    步骤：
+    "1.在Gallery应用中长按选中的照片后，選中多張照片。
+    2.点击下方第一个icon（+），选择要加入的相簿。"
+    期望结果：
+    2.照片不會消失且可以正常添加到指定的相簿。
+    """
+    ADBClient.clear_gallery_cache()
+    ADBClient.start_gallery_app()
+    ADBClient.push_2_pic_to_camera()
+    ADBClient.push_data_to_albums()
+    ADBClient.refresh_gallery_camera()
+    ADBClient.refresh_gallery_albums()
+
+    PhotosPage().photo_long_click()
+    PhotosPage().no_select_click()
+    PhotosPage().icon_copy_to_album_click().data_albums_click()
+    PhotosPage().is_july_24_pic_exit()
+
+    GeneralPage().btn_albums_click()
+    AlbumsPage().is_data_album_has_7_img()
+
+
+@pytest.mark.P0
+def test_gallery_photos_046():
+    """
+    至少有多张照片。
+    步骤：
+    "1.在Gallery应用中长按选中的照片后，選中一張照片。
+    2.点击第三个icon（删除），确认删除选定的照片。
+    3.检查照片是否成功移动到“最近删除”相簿。"
+    期望结果：
+    3.照片成功删除并移动到“最近删除”相簿。
+    """
+    ADBClient.clear_gallery_cache()
+    ADBClient.start_gallery_app()
+    ADBClient.push_1_pic_to_camera()
+    ADBClient.refresh_gallery_camera()
+
+    PhotosPage().photo_long_click()
+    PhotosPage().icon_delete_click().btn_delete_click()
+    PhotosPage().is_display_no_photos_text()
+
+    GeneralPage().btn_albums_click()
+    AlbumsPage().is_recently_deleted_album_has_1_img()
+
+
+@pytest.mark.P0
+def test_gallery_photos_047():
+    """
+    至少有多张照片。
+    步骤：
+    "1.在Gallery应用中长按选中的照片后，選中多張照片。
+    2.点击第三个icon（删除），确认删除选定的照片。
+    3.检查照片是否成功移动到“最近删除”相簿。"
+    期望结果：
+    3.照片成功删除并移动到“最近删除”相簿。
+    """
+    ADBClient.clear_gallery_cache()
+    ADBClient.start_gallery_app()
+    ADBClient.push_2_pic_to_camera()
+    ADBClient.refresh_gallery_camera()
+
+    PhotosPage().photo_long_click()
+    PhotosPage().no_select_click()
+    PhotosPage().icon_delete_click().btn_delete_click()
+    PhotosPage().is_display_no_photos_text()
+
+    GeneralPage().btn_albums_click()
+    AlbumsPage().is_recently_deleted_album_has_2_img()
+
+
+@pytest.mark.P0
+def test_gallery_photos_048():
+    """
+    至少有多张照片。
+    步骤：
+    "1.在Gallery应用中长按选中的照片后，選中一張照片。
+    2.点击第四个icon（更多选项）點擊 move to album選項。
+    3.將照片移動到指定的相簿。"
+    期望结果：
+    3.照片會消失且照片可以正常移動到指定的相簿。
+    """
+    ADBClient.clear_gallery_cache()
+    ADBClient.start_gallery_app()
+    ADBClient.push_1_pic_to_camera()
+    ADBClient.push_data_to_albums()
+    ADBClient.refresh_gallery_camera()
+    ADBClient.refresh_gallery_albums()
+
+    PhotosPage().photo_long_click()
+    PhotosPage().icon_more_click().btn_move_to_album_click().data_albums_click()
+    PhotosPage().is_display_no_photos_text()
+
+    GeneralPage().btn_albums_click()
+    AlbumsPage().is_data_album_has_6_img()
+
+
+@pytest.mark.P0
+def test_gallery_photos_049():
+    """
+    至少有多张照片。
+    步骤：
+   "1.在Gallery应用中长按选中的照片后，選中多張照片。
+    2.点击第四个icon（更多选项）點擊 move to album選項。
+    3.將照片移動到指定的相簿。"
+    期望结果：
+    3.照片會消失且照片可以正常移動到指定的相簿。
+    """
+    ADBClient.clear_gallery_cache()
+    ADBClient.start_gallery_app()
+    ADBClient.push_2_pic_to_camera()
+    ADBClient.push_data_to_albums()
+    ADBClient.refresh_gallery_camera()
+    ADBClient.refresh_gallery_albums()
+
+    PhotosPage().photo_long_click()
+    PhotosPage().no_select_click()
+    PhotosPage().icon_more_click().btn_move_to_album_click().data_albums_click()
+    PhotosPage().is_display_no_photos_text()
+
+    GeneralPage().btn_albums_click()
+    AlbumsPage().is_data_album_has_7_img()
+
+
+@pytest.mark.P0
+def test_gallery_photos_050():
+    """
+    至少有多张照片。
+    步骤：
+    "1.在Gallery应用中长按选中的照片后，選中一張照片。
+    2.点击第四个icon（更多选项）點擊clone選項。
+    3.檢查複製出的照片跟照片位置。"
+    期望结果：
+    3.照片可以正常複製
+    """
+    ADBClient.clear_gallery_cache()
+    ADBClient.start_gallery_app()
+    ADBClient.push_1_pic_to_camera()
+    ADBClient.refresh_gallery_camera()
+
+    PhotosPage().photo_long_click()
+    PhotosPage().icon_more_click().btn_clone_click()
+    PhotosPage().is_july_24_pic_exit()
+    PhotosPage().is_today_pic_exit()

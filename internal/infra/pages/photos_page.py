@@ -6,15 +6,12 @@ import os
 class PhotosPage:
 
     def __init__(self):
+        self.btn_more = "More"
+        self.btn_delete = "Delete"
+        self.btn_share = "Share"
+        self.btn_copy_to_album = "Copy to album"
         self.photo = "Thumbnail"
         self.btn_more_options = "More options"
-        self.btn_photos = ""
-        self.btn_albums = ""
-        self.btn_search = ""
-
-        self.item_pic = ""
-        self.item_video = ""
-        self.btn_menu = ""
 
         self.d = u2.connect()
 
@@ -81,23 +78,14 @@ class PhotosPage:
             print(f"點擊 photo_click 失败: {e}")
             pytest.xfail("點擊 photo_click 失败")
 
-    def btn_photos_click(self):
+    def photo_long_click(self):
         try:
-            self.d(description=self.btn_photos).click()
+            self.d(description=self.photo).long_click()
             time.sleep(1)
 
         except Exception as e:
-            print(f"點擊 btn_photos 失败: {e}")
-            pytest.xfail("點擊 btn_photos 失败")
-
-    def btn_albums_click(self):
-        try:
-            self.d(description=self.btn_albums).click()
-            time.sleep(1)
-
-        except Exception as e:
-            print(f"點擊 btn_albums 失败: {e}")
-            pytest.xfail("點擊 btn_albums 失败")
+            print(f"點擊 photo_click 失败: {e}")
+            pytest.xfail("點擊 photo_click 失败")
 
     def is_date_order_correct(self):
         try:
@@ -114,3 +102,63 @@ class PhotosPage:
         except Exception as e:
             print(f"有照片日期的元件沒出現: {e}")
             pytest.xfail("有照片日期的元件沒出現")
+
+    def icon_copy_to_album_click(self):
+        try:
+            self.d(description=self.btn_copy_to_album).click()
+            time.sleep(1)
+
+            from internal.infra.pages.copy_to_album_page import CopyToAlbumPage
+            return CopyToAlbumPage()
+        except Exception as e:
+            print(f"點擊 btn_copy_to_album_click 失败: {e}")
+            pytest.xfail("點擊 btn_copy_to_album_click 失败")
+
+    def icon_share_click(self):
+        try:
+            self.d(description=self.btn_share).click()
+            time.sleep(1)
+
+        except Exception as e:
+            print(f"點擊 btn_share_click 失败: {e}")
+            pytest.xfail("點擊 btn_share_click 失败")
+
+    def icon_delete_click(self):
+        try:
+            self.d(description=self.btn_delete).click()
+            time.sleep(1)
+
+            from internal.infra.pages.delete_mediaa_popup import DeleteMediaPopup
+            return DeleteMediaPopup()
+        except Exception as e:
+            print(f"點擊 btn_delete_click 失败: {e}")
+            pytest.xfail("點擊 btn_delete_click 失败")
+
+    def icon_more_click(self):
+        try:
+            self.d(description=self.btn_more).click()
+            time.sleep(1)
+
+            from internal.infra.pages.photo_more_popover import PhotoMorePopover
+            return PhotoMorePopover()
+        except Exception as e:
+            print(f"點擊 btn_more_click 失败: {e}")
+            pytest.xfail("點擊 btn_more_click 失败")
+
+    def no_select_click(self):
+        try:
+            self.d(resourceId="com.nothing.gallery:id/selection", selected="false").click()
+            time.sleep(1)
+
+        except Exception as e:
+            print(f"點擊 no_select_click 失败: {e}")
+            pytest.xfail("點擊 no_select_click 失败")
+
+    def is_july_24_pic_exit(self):
+        if not self.d(resourceId="com.nothing.gallery:id/title", text="July 24").exists(timeout=3):
+            pytest.fail("加入到相簿的相片消失了")
+
+    def is_today_pic_exit(self):
+        if not self.d(resourceId="com.nothing.gallery:id/title", text="Today").exists(timeout=3):
+            pytest.fail("没有今天的相片")
+

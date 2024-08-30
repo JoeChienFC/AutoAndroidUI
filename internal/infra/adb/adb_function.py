@@ -46,6 +46,24 @@ class ADBClient:
             print(f"Error executing command: {e}")
 
     @staticmethod
+    def push_2_pic_to_camera():
+        # 使用相对路径构建 adb push 命令
+        current_working_directory = os.getcwd()
+        print(f"Current working directory: {current_working_directory}")
+        relative_path = r'data\data_2_pic'
+        destination_path = '/sdcard/DCIM/Camera'
+
+        command = rf'adb push {relative_path} {destination_path}'
+
+        try:
+            print(command)
+            time.sleep(1)
+            # 使用 subprocess 執行指令，加上 stdout=subprocess.PIPE
+            subprocess.run(command, shell=True)
+        except subprocess.CalledProcessError as e:
+            print(f"Error executing command: {e}")
+
+    @staticmethod
     def push_location_pic_to_camera():
         # 使用相对路径构建 adb push 命令
         current_working_directory = os.getcwd()

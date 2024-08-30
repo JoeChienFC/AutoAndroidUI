@@ -3,7 +3,7 @@ import time, pytest
 import os
 
 
-class PhotoNorePopover:
+class PhotoMorePopover:
 
     def __init__(self):
         self.btn_edit = "Edit"

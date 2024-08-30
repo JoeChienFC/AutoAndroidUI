@@ -56,8 +56,8 @@ class PhotoAllViewPage:
             self.d(description=self.more_icon).click()
             time.sleep(1)
 
-            from internal.infra.pages.photo_more_popover import PhotoNorePopover
-            return PhotoNorePopover()
+            from internal.infra.pages.photo_more_popover import PhotoMorePopover
+            return PhotoMorePopover()
 
         except Exception as e:
             print(f"點擊 more_click 失败: {e}")
@@ -111,4 +111,4 @@ class PhotoAllViewPage:
 
     def is_24_july_pic(self):
         if not self.d(resourceId="com.nothing.gallery:id/taken_time_date", text="24 July").exists:
-            pytest.fail("不是測試用例設定的照片")
+            pytest.fail("不是測試用例設定的照片 或是 日期错误")
