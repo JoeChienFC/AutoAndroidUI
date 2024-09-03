@@ -56,7 +56,7 @@ class PhotosPage:
 
     def btn_more_options_click(self):
         try:
-            self.d(description=self.btn_more_options).click()
+            self.d(description=self.btn_more_options).click(timeout=2)
             time.sleep(1)
 
             from internal.infra.pages.settings_popover import SettingsPopover
@@ -155,8 +155,8 @@ class PhotosPage:
             pytest.xfail("點擊 no_select_click 失败")
 
     def is_july_24_pic_exit(self):
-        if not self.d(resourceId="com.nothing.gallery:id/title", text="July 24").exists(timeout=3):
-            pytest.fail("加入到相簿的相片消失了")
+        if not self.d(resourceId="com.nothing.gallery:id/title", text="24 July").exists(timeout=3):
+            pytest.fail("icon（+）功能 加入到相簿的相片消失了")
 
     def is_today_pic_exit(self):
         if not self.d(resourceId="com.nothing.gallery:id/title", text="Today").exists(timeout=3):

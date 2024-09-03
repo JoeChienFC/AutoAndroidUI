@@ -497,7 +497,7 @@ def test_gallery_photos_049():
     AlbumsPage().is_data_album_has_7_img()
 
 
-@pytest.mark.P0
+@pytest.mark.P5
 def test_gallery_photos_050():
     """
     至少有多张照片。

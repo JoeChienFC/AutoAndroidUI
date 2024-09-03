@@ -16,6 +16,8 @@ def pytest_html_report_title(report):
     import sys
     if "-m" in sys.argv and "P0" in sys.argv:
         report.title = "NGallery P0 自动化测试报告"
+    elif "S" in sys.argv:
+        report.title = "NGallery UI Layout 自动化测试报告"
     else:
         report.title = "NGallery All 自動化測試報告"
 
@@ -111,9 +113,11 @@ def rename_report_file(file_path):
     os.rename(file_path, new_file_path)
     return new_file_path
 
+
 def upload_file_to_network(file_path, network_path):
     # 复制文件到网络路径
     shutil.copy(file_path, network_path)
+
 
 @pytest.hookimpl(tryfirst=True)
 def pytest_terminal_summary(terminalreporter, exitstatus, config):
