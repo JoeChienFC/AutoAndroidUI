@@ -66,13 +66,13 @@ class PhotosPage:
             print(f"點擊 btn_more_options_click 失败: {e}")
             pytest.xfail("點擊 btn_more_options_click 失败")
 
-    def photo_click(self):
+    def photo_video_click(self):
         try:
             self.d(description=self.photo).click()
             time.sleep(1)
 
-            from internal.infra.pages.photo_all_view_page import PhotoAllViewPage
-            return PhotoAllViewPage()
+            from internal.infra.pages.photo_video_all_view_page import PhotoVideoAllViewPage
+            return PhotoVideoAllViewPage()
 
         except Exception as e:
             print(f"點擊 photo_click 失败: {e}")
@@ -154,11 +154,35 @@ class PhotosPage:
             print(f"點擊 no_select_click 失败: {e}")
             pytest.xfail("點擊 no_select_click 失败")
 
-    def is_july_24_pic_exit(self):
-        if not self.d(resourceId="com.nothing.gallery:id/title", text="24 July").exists(timeout=3):
-            pytest.fail("icon（+）功能 加入到相簿的相片消失了")
+    def is_august_9_pic_exit(self):
+        if not self.d(resourceId="com.nothing.gallery:id/title", text="9 August").exists(timeout=3):
+            pytest.fail("加入到相簿的相片消失了")
 
     def is_today_pic_exit(self):
         if not self.d(resourceId="com.nothing.gallery:id/title", text="Today").exists(timeout=3):
             pytest.fail("没有今天的相片")
+
+    def pinch_in(self):
+        try:
+            self.d(resourceId="com.nothing.gallery:id/entry_fragments").gesture((135, 622), (882, 1540), (525, 960),
+                                                                                (613, 1121), 10)
+            time.sleep(1)
+
+        except Exception as e:
+            print(f"雙指縮小 失败: {e}")
+            pytest.xfail("雙指縮小 失败")
+
+    def pinch_out(self):
+        try:
+            self.d(resourceId="com.nothing.gallery:id/entry_fragments").gesture((525, 960), (613, 1121), (135, 622),
+                                                                                (882, 1540), 10)
+            time.sleep(1)
+
+        except Exception as e:
+            print(f"雙指放大 失败: {e}")
+            pytest.xfail("雙指放大 失败")
+
+    def check_title(self, title=str):
+        if not self.d(resourceId="com.nothing.gallery:id/title", text=title).exists(timeout=3):
+            pytest.fail(f"没有符合測項的title {title}")
 

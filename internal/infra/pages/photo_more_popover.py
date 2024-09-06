@@ -72,3 +72,7 @@ class PhotoMorePopover:
         except Exception as e:
             print(f"點擊 btn_clone 失败: {e}")
             pytest.xfail("點擊 btn_clone 失败")
+
+    def check_set_as_button_disabled(self):
+        if not self.d(description="Set as", enabled="false").exists:
+            pytest.fail("Set as 按鈕沒有至灰被禁用")

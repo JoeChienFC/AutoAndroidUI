@@ -22,6 +22,13 @@ def pytest_html_report_title(report):
         report.title = "NGallery All 自動化測試報告"
 
 
+def pytest_itemcollected(item):
+    # 获取测试函数名
+    test_name = item.name
+    # 设置报告中的名称，仅显示函数名
+    item._nodeid = test_name
+
+
 def pytest_configure(config):
 
     config.stash[metadata_key]["開始時間"] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")

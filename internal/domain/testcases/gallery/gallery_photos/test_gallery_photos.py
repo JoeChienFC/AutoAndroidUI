@@ -5,7 +5,8 @@ import pytest
 from internal.infra.adb.adb_function import ADBClient
 from internal.infra.pages.albums_page import AlbumsPage
 from internal.infra.pages.general_page import GeneralPage
-from internal.infra.pages.photo_all_view_page import PhotoAllViewPage
+from internal.infra.pages.photo_video_all_view_page import PhotoVideoAllViewPage
+from internal.infra.pages.photo_more_popover import PhotoMorePopover
 from internal.infra.pages.photos_page import PhotosPage
 from internal.infra.pages.settings_page import SettingsPage
 from internal.infra.pages.show_in_photos_view_page import ShowInPhotosViewPage
@@ -88,11 +89,11 @@ def test_gallery_photos_008():
     ADBClient.push_data_to_camera()
     ADBClient.refresh_gallery_camera()
 
-    PhotosPage().photo_click().set_as_favorite_click()
-    PhotoAllViewPage().is_un_favorite_exists()
+    PhotosPage().photo_video_click().set_as_favorite_click()
+    PhotoVideoAllViewPage().is_un_favorite_exists()
 
     GeneralPage().back()
-    GeneralPage().btn_albums_click().is_favorite_album_has_1_img()
+    GeneralPage().btn_albums_click().check_favorite_album_count("1")
 
 
 @pytest.mark.P0
@@ -111,10 +112,10 @@ def test_gallery_photos_012():
     ADBClient.push_1_pic_to_camera()
     ADBClient.refresh_gallery_camera()
 
-    PhotosPage().photo_click().delete_click().btn_delete_click()
+    PhotosPage().photo_video_click().delete_click().btn_delete_click()
     PhotosPage().is_display_no_photos_text()
 
-    GeneralPage().btn_albums_click().is_recently_deleted_album_has_1_img()
+    GeneralPage().btn_albums_click().check_recently_deleted_album_count("1")
 
 
 @pytest.mark.P0
@@ -135,11 +136,11 @@ def test_gallery_photos_015():
     ADBClient.refresh_gallery_camera()
     ADBClient.refresh_gallery_albums()
 
-    PhotosPage().photo_click().more_click().btn_copy_to_album_click().data_albums_click()
+    PhotosPage().photo_video_click().more_click().btn_copy_to_album_click().data_albums_click()
     GeneralPage().back()
     PhotosPage().no_display_no_photos_text()
 
-    GeneralPage().btn_albums_click().is_data_album_has_6_img()
+    GeneralPage().btn_albums_click().check_data_album_count("6")
 
 
 @pytest.mark.P0
@@ -160,10 +161,10 @@ def test_gallery_photos_016():
     ADBClient.refresh_gallery_camera()
     ADBClient.refresh_gallery_albums()
 
-    PhotosPage().photo_click().more_click().btn_move_to_album_click().data_albums_click()
+    PhotosPage().photo_video_click().more_click().btn_move_to_album_click().data_albums_click()
     PhotosPage().is_display_no_photos_text()
 
-    GeneralPage().btn_albums_click().is_data_album_has_6_img()
+    GeneralPage().btn_albums_click().check_data_album_count("6")
 
 
 @pytest.mark.P0
@@ -182,9 +183,10 @@ def test_gallery_photos_017():
     ADBClient.push_1_pic_to_camera()
     ADBClient.refresh_gallery_camera()
 
-    PhotosPage().photo_click().more_click().btn_clone_click()
+    PhotosPage().photo_video_click().more_click().btn_clone_click()
     GeneralPage().back()
-    PhotosPage().is_two_photos_exists()
+    GeneralPage().btn_albums_click()
+    AlbumsPage().check_camera_photo_count("2")
 
 
 @pytest.mark.P0
@@ -210,8 +212,8 @@ def test_gallery_photos_024_025():
     ADBClient.push_location_pic_to_camera()
     ADBClient.refresh_gallery_camera()
 
-    PhotosPage().photo_click().more_click().btn_details_click()
-    PhotoAllViewPage().is_location_details_correct()
+    PhotosPage().photo_video_click().more_click().btn_details_click()
+    PhotoVideoAllViewPage().is_location_details_correct()
 
 
 @pytest.mark.P2
@@ -231,10 +233,10 @@ def test_gallery_photos_026():
     ADBClient.push_location_pic_to_camera()
     ADBClient.refresh_gallery_camera()
 
-    PhotosPage().photo_click().more_click().btn_details_click()
+    PhotosPage().photo_video_click().more_click().btn_details_click()
     ADBClient.disable_auto_rotate()
     ADBClient.set_rotate()
-    PhotoAllViewPage().is_location_details_correct()
+    PhotoVideoAllViewPage().is_location_details_correct()
     ADBClient.enable_auto_rotate()
 
 
@@ -263,8 +265,8 @@ def test_gallery_photos_027():
     ADBClient.disable_auto_rotate()
     ADBClient.set_rotate()
 
-    PhotosPage().photo_click().swipe_up_to_details()
-    PhotoAllViewPage().is_location_details_correct()
+    PhotosPage().photo_video_click().swipe_up_to_details()
+    PhotoVideoAllViewPage().is_location_details_correct()
     ADBClient.enable_auto_rotate()
 
 
@@ -290,8 +292,8 @@ def test_gallery_photos_028():
     ADBClient.push_1_pic_to_camera()
     ADBClient.refresh_gallery_camera()
 
-    PhotosPage().photo_click().swipe_up_to_details()
-    PhotoAllViewPage().is_no_location_details_correct()
+    PhotosPage().photo_video_click().swipe_up_to_details()
+    PhotoVideoAllViewPage().is_no_location_details_correct()
 
 
 @pytest.mark.P1
@@ -318,8 +320,8 @@ def test_gallery_photos_029():
     ADBClient.disable_auto_rotate()
     ADBClient.set_rotate()
 
-    PhotosPage().photo_click().swipe_up_to_details()
-    PhotoAllViewPage().is_no_location_details_correct()
+    PhotosPage().photo_video_click().swipe_up_to_details()
+    PhotoVideoAllViewPage().is_no_location_details_correct()
 
 
 @pytest.mark.P1
@@ -337,8 +339,8 @@ def test_gallery_photos_038():
     ADBClient.push_data_to_camera()
     ADBClient.refresh_gallery_camera()
 
-    PhotosPage().photo_click().swipe_up_to_details()
-    PhotoAllViewPage().is_24_july_pic()
+    PhotosPage().photo_video_click().swipe_up_to_details()
+    PhotoVideoAllViewPage().is_24_july_pic()
     GeneralPage().back()
     GeneralPage().back()
     PhotosPage().is_date_order_correct()
@@ -366,7 +368,7 @@ def test_gallery_photos_042():
     PhotosPage().no_display_no_photos_text()
 
     GeneralPage().btn_albums_click()
-    AlbumsPage().is_data_album_has_6_img()
+    AlbumsPage().check_data_album_count("6")
 
 
 @pytest.mark.P0
@@ -389,10 +391,10 @@ def test_gallery_photos_043():
     PhotosPage().photo_long_click()
     PhotosPage().no_select_click()
     PhotosPage().icon_copy_to_album_click().data_albums_click()
-    PhotosPage().is_july_24_pic_exit()
+    PhotosPage().is_august_9_pic_exit()
 
     GeneralPage().btn_albums_click()
-    AlbumsPage().is_data_album_has_7_img()
+    AlbumsPage().check_data_album_count("7")
 
 
 @pytest.mark.P0
@@ -416,7 +418,7 @@ def test_gallery_photos_046():
     PhotosPage().is_display_no_photos_text()
 
     GeneralPage().btn_albums_click()
-    AlbumsPage().is_recently_deleted_album_has_1_img()
+    AlbumsPage().check_recently_deleted_album_count("1")
 
 
 @pytest.mark.P0
@@ -441,7 +443,7 @@ def test_gallery_photos_047():
     PhotosPage().is_display_no_photos_text()
 
     GeneralPage().btn_albums_click()
-    AlbumsPage().is_recently_deleted_album_has_2_img()
+    AlbumsPage().check_recently_deleted_album_count("2")
 
 
 @pytest.mark.P0
@@ -467,7 +469,7 @@ def test_gallery_photos_048():
     PhotosPage().is_display_no_photos_text()
 
     GeneralPage().btn_albums_click()
-    AlbumsPage().is_data_album_has_6_img()
+    AlbumsPage().check_data_album_count("6")
 
 
 @pytest.mark.P0
@@ -494,10 +496,10 @@ def test_gallery_photos_049():
     PhotosPage().is_display_no_photos_text()
 
     GeneralPage().btn_albums_click()
-    AlbumsPage().is_data_album_has_7_img()
+    AlbumsPage().check_data_album_count("7")
 
 
-@pytest.mark.P5
+@pytest.mark.P0
 def test_gallery_photos_050():
     """
     至少有多张照片。
@@ -515,5 +517,134 @@ def test_gallery_photos_050():
 
     PhotosPage().photo_long_click()
     PhotosPage().icon_more_click().btn_clone_click()
-    PhotosPage().is_july_24_pic_exit()
-    PhotosPage().is_today_pic_exit()
+    GeneralPage().btn_albums_click()
+    AlbumsPage().check_camera_photo_count("2")
+
+
+@pytest.mark.P0
+def test_gallery_photos_051():
+    """
+    至少有多张照片。
+    步骤：
+    "1.在Gallery应用中长按选中的照片后，選中多張照片。
+    2.点击第四个icon（更多选项）點擊clone選項。
+    3.檢查複製出的照片跟照片位置。"
+    期望结果：
+    3.照片可以正常複製
+    """
+    ADBClient.clear_gallery_cache()
+    ADBClient.start_gallery_app()
+    ADBClient.push_2_pic_to_camera()
+    ADBClient.refresh_gallery_camera()
+
+    PhotosPage().photo_long_click()
+    PhotosPage().no_select_click()
+    PhotosPage().icon_more_click().btn_clone_click()
+
+    GeneralPage().btn_albums_click()
+    AlbumsPage().check_camera_photo_count("4")
+
+
+@pytest.mark.P1
+def test_gallery_photos_054():
+    """
+    至少有多张照片。
+    步骤：
+    "1.在Gallery应用中长按选中的照片后，選中多張照片。
+    2.点击第四个icon（更多选项）點擊set as選項。"
+    期望结果：
+    2.選項反灰，點擊無反應。
+    """
+    ADBClient.clear_gallery_cache()
+    ADBClient.start_gallery_app()
+    ADBClient.push_2_pic_to_camera()
+    ADBClient.refresh_gallery_camera()
+
+    PhotosPage().photo_long_click()
+    PhotosPage().no_select_click()
+    PhotosPage().icon_more_click().btn_set_as_click()
+    PhotoMorePopover().check_set_as_button_disabled()
+
+
+@pytest.mark.P1
+def test_gallery_photos_058():
+    """
+    至少有多张照片。
+    步骤：
+    "1.打开Gallery应用并进入Photos页面。
+    2.使用双指缩放手势切换到月跟年缩图显示模式。
+    3.关闭Gallery应用。
+    4.重新打开Gallery应用，检查Photos页面的缩图显示模式。"
+    期望结果：
+    4.Gallery应用重新打开后，Photos页面的缩图显示模式与关闭前的状态一致。
+    """
+    ADBClient.clear_gallery_cache()
+    ADBClient.start_gallery_app()
+    ADBClient.push_2_pic_to_camera()
+    ADBClient.refresh_gallery_camera()
+
+    PhotosPage().pinch_in()
+    ADBClient.stop_gallery_app()
+    ADBClient.start_gallery_app()
+    PhotosPage().check_title("August")
+
+
+@pytest.mark.P0
+def test_gallery_photos_059():
+    """
+    至少有多张照片。
+    步骤：
+    "1.打开Gallery应用并进入Photos页面。
+    2.使用双指缩放手势切换到日显示模式。
+    3.检查每日照片的缩图显示效果。"
+    期望结果：
+    3.每日照片的缩图显示正常，能够准确显示每一天的照片。
+    """
+    ADBClient.clear_gallery_cache()
+    ADBClient.start_gallery_app()
+    ADBClient.push_2_pic_to_camera()
+    ADBClient.refresh_gallery_camera()
+
+    PhotosPage().check_title("9 August")
+    PhotosPage().check_title("23 July")
+
+
+@pytest.mark.P0
+def test_gallery_photos_060():
+    """
+    至少有多张照片。
+    步骤：
+    "1.打开Gallery应用并进入Photos页面。
+    2.使用双指缩放手势切换到月显示模式。
+    3.检查每月照片的缩图显示效果。"
+    期望结果：
+    3.每月照片的缩图显示正常，能够准确显示每个月的照片。
+    """
+    ADBClient.clear_gallery_cache()
+    ADBClient.start_gallery_app()
+    ADBClient.push_2_pic_to_camera()
+    ADBClient.refresh_gallery_camera()
+
+    PhotosPage().pinch_in()
+    PhotosPage().check_title("August")
+    PhotosPage().check_title("July")
+
+
+@pytest.mark.P0
+def test_gallery_photos_070():
+    """
+    Photos页面有可播放的视频文件。
+    步骤：
+    "1.打开Gallery应用并进入Photos页面。
+    2.选择一个视频文件并打开。
+    3.点击更多选项按钮，选择添加到favorites相簿"
+    期望结果：
+    3.檢查favorites相簿有此视频文件
+    """
+    ADBClient.clear_gallery_cache()
+    ADBClient.start_gallery_app()
+    ADBClient.push_data_to_device("data_1_video", "Camera")
+    ADBClient.refresh_gallery_camera()
+
+    PhotosPage().photo_video_click().set_as_favorite_click()
+    PhotoVideoAllViewPage().is_un_favorite_exists()

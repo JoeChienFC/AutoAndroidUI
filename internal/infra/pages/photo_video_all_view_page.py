@@ -3,7 +3,7 @@ import time, pytest
 import os
 
 
-class PhotoAllViewPage:
+class PhotoVideoAllViewPage:
 
     def __init__(self):
         self.thumbnail = "Thumbnail"
@@ -87,9 +87,9 @@ class PhotoAllViewPage:
             pytest.fail("沒有 geo_location 資訊存在或資訊錯誤")
 
     def is_no_location_details_correct(self):
-        if not self.d(resourceId="com.nothing.gallery:id/taken_time_date", text="24 July").exists:
+        if not self.d(resourceId="com.nothing.gallery:id/taken_time_date", text="9 August").exists:
             pytest.fail("沒有日期時間存在或資訊錯誤")
-        if not self.d(resourceId="com.nothing.gallery:id/display_name", text="image_1.png").exists:
+        if not self.d(resourceId="com.nothing.gallery:id/display_name", text="image_3.png").exists:
             pytest.fail("沒有檔名資訊存在或資訊錯誤")
         if not self.d(resourceId="com.nothing.gallery:id/device_name", text="—").exists:
             pytest.fail("沒有 device_name 資訊存在或資訊錯誤")
