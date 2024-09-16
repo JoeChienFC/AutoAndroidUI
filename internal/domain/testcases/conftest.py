@@ -78,9 +78,7 @@ def pytest_runtest_makereport(item, call):
 
                 subprocess.run(["adb", "shell", "rm", f"/sdcard/{screenshot_png_name}"])
                 print(f"Delete fail screenshot: {screenshot_png_name}")
-                refresh_gallery_command = (
-                    'adb shell am broadcast -a android.intent.action.MEDIA_SCANNER_SCAN_FILE -d file:///sdcard/Pictures')
-                subprocess.run(refresh_gallery_command, shell=True)
+                ADBClient.refresh_gallery_albums()
 
                 with Image.open(local_png_path) as img:
                     new_size = (int(img.width * resize_factor), int(img.height * resize_factor))

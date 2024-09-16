@@ -15,14 +15,14 @@ class ShowInPhotosViewPage:
         if not select:
             pytest.fail("screenshots 選項没有被選中")
 
-    def is_not_favorite_select(self):
-        if not self.d(text="Favorite").exists(timeout=3):
-            pytest.fail("沒有 Favorite 選項")
-        select = self.d(resourceId="com.nothing.gallery:id/display_name", text="Favorite").right(
+    def is_not_favorites_select(self):
+        if not self.d(text="Favourite").exists(timeout=3):
+            pytest.fail("沒有 Favourite 選項")
+        select = self.d(resourceId="com.nothing.gallery:id/display_name", text="Favourite").right(
             resourceId='com.nothing.gallery:id/switch_widget', selected='false')
 
         if not select:
-            pytest.fail("Favorite 選項有被選中")
+            pytest.fail("Favourite 選項有被選中")
 
     def is_not_video_select(self):
         if not self.d(text="Video").exists(timeout=3):

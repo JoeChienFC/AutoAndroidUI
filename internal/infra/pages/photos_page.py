@@ -20,11 +20,11 @@ class PhotosPage:
             pytest.fail("不在 Photos 頁面")
 
     def is_display_no_photos_text(self):
-        if not self.d(text="No photo here, go take some photos!").exists(timeout=2):
+        if not self.d(text="No photos here. Take your first shot.").exists(timeout=2):
             pytest.fail("照片頁沒有顯示_沒有照片_的文案")
 
     def no_display_no_photos_text(self):
-        if self.d(text="No photo here, go take some photos!").exists(timeout=2):
+        if self.d(text="No photos here. Take your first shot.").exists(timeout=2):
             pytest.fail("照片頁顯示_沒有照片_的文案")
 
     def is_video_exists(self):
@@ -77,6 +77,10 @@ class PhotosPage:
         except Exception as e:
             print(f"點擊 photo_click 失败: {e}")
             pytest.xfail("點擊 photo_click 失败")
+
+    def is_not_photo_video_exists(self):
+        if self.d(description=self.photo).exists(timeout=2):
+            pytest.fail("有存在照片或影片")
 
     def photo_long_click(self):
         try:

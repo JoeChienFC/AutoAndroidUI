@@ -11,7 +11,7 @@ class PhotoMorePopover:
         self.btn_copy_to_album = "Copy to album"
         self.btn_move_to_album = "Move to album"
         self.btn_set_as = "Set as"
-        self.btn_clone = "Clone"
+        self.btn_clone = "Duplicate"
         self.d = u2.connect()
 
     def btn_edit_click(self):

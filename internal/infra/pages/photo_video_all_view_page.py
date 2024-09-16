@@ -12,20 +12,20 @@ class PhotoVideoAllViewPage:
         self.delete_icon = "Delete"
         self.photo = "Thumbnail"
         self.btn_more_options = "More options"
-        self.favorite = "Set as favorite"
-        self.un_favorite = "Unfavorite"
+        self.favorite = "Favourite"
+        self.un_favorite = "Unfavourite"
 
         self.d = u2.connect()
 
-    def set_as_favorite_click(self):
+    def icon_favorite_click(self):
         try:
             if self.d(description=self.favorite).exists:
                 self.d(description=self.favorite).click()
                 time.sleep(1)
 
         except Exception as e:
-            print(f"點擊 set_as_favorite_click 失败: {e}")
-            pytest.xfail("點擊 set_as_favorite_click 失败")
+            print(f"點擊 icon_favorite 失败: {e}")
+            pytest.xfail("點擊 icon_favorite 失败")
 
     def is_un_favorite_exists(self):
         if not self.d(description=self.un_favorite).exists:
@@ -109,6 +109,6 @@ class PhotoVideoAllViewPage:
             print(f"點擊 swipe_up_to_details 失败: {e}")
             pytest.xfail("點擊 swipe_up_to_details 失败")
 
-    def is_24_july_pic(self):
+    def is_july_24_pic(self):
         if not self.d(resourceId="com.nothing.gallery:id/taken_time_date", text="24 July").exists:
             pytest.fail("不是測試用例設定的照片 或是 日期错误")

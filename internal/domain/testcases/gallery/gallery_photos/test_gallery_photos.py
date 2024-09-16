@@ -27,7 +27,7 @@ def test_gallery_photos_001():
     ADBClient.start_gallery_app()
     PhotosPage().btn_more_options_click().btn_settings_click()
     SettingsPage().btn_show_in_photos_view_click()
-    ShowInPhotosViewPage().is_not_favorite_select()
+    ShowInPhotosViewPage().is_not_favorites_select()
     ShowInPhotosViewPage().is_screenshots_select()
     ShowInPhotosViewPage().is_not_video_select()
 
@@ -89,11 +89,11 @@ def test_gallery_photos_008():
     ADBClient.push_data_to_camera()
     ADBClient.refresh_gallery_camera()
 
-    PhotosPage().photo_video_click().set_as_favorite_click()
+    PhotosPage().photo_video_click().icon_favorite_click()
     PhotoVideoAllViewPage().is_un_favorite_exists()
 
     GeneralPage().back()
-    GeneralPage().btn_albums_click().check_favorite_album_count("1")
+    GeneralPage().btn_albums_click().check_favorites_album_count("1")
 
 
 @pytest.mark.P0
@@ -113,6 +113,7 @@ def test_gallery_photos_012():
     ADBClient.refresh_gallery_camera()
 
     PhotosPage().photo_video_click().delete_click().btn_delete_click()
+    PhotosPage().is_not_photo_video_exists()
     PhotosPage().is_display_no_photos_text()
 
     GeneralPage().btn_albums_click().check_recently_deleted_album_count("1")
@@ -162,6 +163,7 @@ def test_gallery_photos_016():
     ADBClient.refresh_gallery_albums()
 
     PhotosPage().photo_video_click().more_click().btn_move_to_album_click().data_albums_click()
+    PhotosPage().is_not_photo_video_exists()
     PhotosPage().is_display_no_photos_text()
 
     GeneralPage().btn_albums_click().check_data_album_count("6")
@@ -340,7 +342,7 @@ def test_gallery_photos_038():
     ADBClient.refresh_gallery_camera()
 
     PhotosPage().photo_video_click().swipe_up_to_details()
-    PhotoVideoAllViewPage().is_24_july_pic()
+    PhotoVideoAllViewPage().is_july_24_pic()
     GeneralPage().back()
     GeneralPage().back()
     PhotosPage().is_date_order_correct()
@@ -646,5 +648,8 @@ def test_gallery_photos_070():
     ADBClient.push_data_to_device("data_1_video", "Camera")
     ADBClient.refresh_gallery_camera()
 
-    PhotosPage().photo_video_click().set_as_favorite_click()
+    PhotosPage().photo_video_click().icon_favorite_click()
     PhotoVideoAllViewPage().is_un_favorite_exists()
+    GeneralPage().back()
+    GeneralPage().btn_albums_click()
+    AlbumsPage().check_favorites_album_video_count("1")
