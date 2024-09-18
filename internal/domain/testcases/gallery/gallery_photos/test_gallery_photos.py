@@ -93,7 +93,7 @@ def test_gallery_photos_008():
     PhotoVideoAllViewPage().is_un_favorite_exists()
 
     GeneralPage().back()
-    GeneralPage().btn_albums_click().check_favorites_album_count("1")
+    GeneralPage().btn_albums_click().check_favorites_album_photos_count("1")
 
 
 @pytest.mark.P0
@@ -116,7 +116,7 @@ def test_gallery_photos_012():
     PhotosPage().is_not_photo_video_exists()
     PhotosPage().is_display_no_photos_text()
 
-    GeneralPage().btn_albums_click().check_recently_deleted_album_count("1")
+    GeneralPage().btn_albums_click().check_recently_deleted_album_photos_count("1")
 
 
 @pytest.mark.P0
@@ -298,7 +298,7 @@ def test_gallery_photos_028():
     PhotoVideoAllViewPage().is_no_location_details_correct()
 
 
-@pytest.mark.P1
+@pytest.mark.P5
 def test_gallery_photos_029():
     """
     至少有一张不包含定位信息的照片。
@@ -420,7 +420,7 @@ def test_gallery_photos_046():
     PhotosPage().is_display_no_photos_text()
 
     GeneralPage().btn_albums_click()
-    AlbumsPage().check_recently_deleted_album_count("1")
+    AlbumsPage().check_recently_deleted_album_photos_count("1")
 
 
 @pytest.mark.P0
@@ -445,7 +445,7 @@ def test_gallery_photos_047():
     PhotosPage().is_display_no_photos_text()
 
     GeneralPage().btn_albums_click()
-    AlbumsPage().check_recently_deleted_album_count("2")
+    AlbumsPage().check_recently_deleted_album_photos_count("2")
 
 
 @pytest.mark.P0
@@ -653,3 +653,52 @@ def test_gallery_photos_070():
     GeneralPage().back()
     GeneralPage().btn_albums_click()
     AlbumsPage().check_favorites_album_video_count("1")
+
+
+@pytest.mark.P0
+def test_gallery_photos_072():
+    """
+    Photos页面有可播放的视频文件。
+    步骤：
+    "1.打开Gallery应用并进入Photos页面。
+    2.选择一个视频文件并打开。
+    3.点击更多选项按钮，选择删除"
+    期望结果：
+    3.视频成功删除并移动到“最近删除”相簿。
+    """
+    ADBClient.clear_gallery_cache()
+    ADBClient.start_gallery_app()
+    ADBClient.push_data_to_device("data_1_video", "Camera")
+    ADBClient.refresh_gallery_camera()
+
+    PhotosPage().photo_video_click().delete_click().btn_delete_click()
+    PhotosPage().is_display_no_photos_text()
+    GeneralPage().btn_albums_click()
+    AlbumsPage().check_recently_deleted_album_video_count("1")
+
+
+@pytest.mark.P0
+def test_gallery_photos_073():
+    """
+    Photos页面有可播放的视频文件。
+    步骤：
+    "1.打开Gallery应用并进入Photos页面。
+    2.选择一个视频文件并打开。
+    3.点击更多选项按钮，选择添加到任一相簿"
+    期望结果：
+    3.视频不會消失且可以正常添加到指定的相簿。
+    """
+    ADBClient.clear_gallery_cache()
+    ADBClient.start_gallery_app()
+    ADBClient.push_data_to_device("data_1_video", "Camera")
+    ADBClient.push_data_to_albums()
+    ADBClient.refresh_gallery_camera()
+    ADBClient.refresh_gallery_albums()
+
+    PhotosPage().photo_video_click().more_click().btn_copy_to_album_click().data_albums_click()
+    GeneralPage().back()
+    PhotosPage().no_display_no_photos_text()
+
+    GeneralPage().btn_albums_click()
+    AlbumsPage().check_data_album_video_count("2")
+

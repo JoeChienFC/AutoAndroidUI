@@ -72,12 +72,8 @@ def pytest_runtest_makereport(item, call):
                 # pytest.set_trace()
                 # 使用 adb 截取屏幕并将其保存到本地文件
                 subprocess.run(["adb", "shell", "screencap", "-p", f"/sdcard/{screenshot_png_name}"])
-                print(f"Local screenshot path: {local_png_path}")
                 subprocess.run(["adb", "pull", f"/sdcard/{screenshot_png_name}", local_png_path], check=True)
-                print(f"Screenshot pulled to: {local_png_path}")
-
                 subprocess.run(["adb", "shell", "rm", f"/sdcard/{screenshot_png_name}"])
-                print(f"Delete fail screenshot: {screenshot_png_name}")
                 ADBClient.refresh_gallery_albums()
 
                 with Image.open(local_png_path) as img:
