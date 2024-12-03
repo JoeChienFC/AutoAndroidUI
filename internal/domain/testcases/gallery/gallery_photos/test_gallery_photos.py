@@ -298,7 +298,7 @@ def test_gallery_photos_028():
     PhotoVideoAllViewPage().is_no_location_details_correct()
 
 
-@pytest.mark.P5
+@pytest.mark.P1
 def test_gallery_photos_029():
     """
     至少有一张不包含定位信息的照片。
@@ -588,7 +588,7 @@ def test_gallery_photos_058():
     PhotosPage().pinch_in()
     ADBClient.stop_gallery_app()
     ADBClient.start_gallery_app()
-    PhotosPage().check_title("August")
+    PhotosPage().check_title("AUGUST")
 
 
 @pytest.mark.P0
@@ -607,8 +607,8 @@ def test_gallery_photos_059():
     ADBClient.push_2_pic_to_camera()
     ADBClient.refresh_gallery_camera()
 
-    PhotosPage().check_title("9 August")
-    PhotosPage().check_title("23 July")
+    PhotosPage().check_title("9 AUGUST")
+    PhotosPage().check_title("23 JULY")
 
 
 @pytest.mark.P0
@@ -628,8 +628,8 @@ def test_gallery_photos_060():
     ADBClient.refresh_gallery_camera()
 
     PhotosPage().pinch_in()
-    PhotosPage().check_title("August")
-    PhotosPage().check_title("July")
+    PhotosPage().check_title("AUGUST")
+    PhotosPage().check_title("JULY")
 
 
 @pytest.mark.P0

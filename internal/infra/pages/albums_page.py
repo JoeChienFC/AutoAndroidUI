@@ -8,6 +8,8 @@ class AlbumsPage:
     def __init__(self):
 
         self.d = u2.connect()
+        self.d(resourceId="com.nothing.gallery:id/entry_fragments").gesture((135, 622), (882, 1540), (525, 960),
+                                                                            (613, 1121), 10)
 
     def is_favourite_album(self):
         if not self.d(resourceId="com.nothing.gallery:id/display_name", text="Favourite").exists(timeout=2):

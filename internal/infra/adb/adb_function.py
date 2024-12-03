@@ -162,17 +162,20 @@ class ADBClient:
 
     @staticmethod
     def start_gallery_app():
-        d = u2.connect()
         # ADB command to start the app by package name
         cmd = "adb shell am start -a android.intent.action.MAIN -n com.nothing.gallery/.activity.EntryActivity"
 
         # Execute the ADB command
         subprocess.run(cmd, shell=True)
         time.sleep(2)
+        from internal.infra.pages.welcom_gallery_page import WelcomeGalleryPage
+        from internal.infra.pages.photos_video_access_page import PhotosVideoAccessPage
+        WelcomeGalleryPage().get_started_click().enable_access_click()
+        PhotosVideoAccessPage().allow_all_click()
+        time.sleep(2)
 
     @staticmethod
     def start_settings():
-        d = u2.connect()
         # ADB command to start the app by package name
         cmd = "adb shell am start -n com.android.settings/.Settings"
 

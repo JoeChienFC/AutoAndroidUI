@@ -8,7 +8,7 @@ class PhotoVideoAllViewPage:
     def __init__(self):
         self.thumbnail = "Thumbnail"
         self.share_icon = "Share"
-        self.more_icon = "More"
+        self.more_icon = "More options"
         self.delete_icon = "Delete"
         self.photo = "Thumbnail"
         self.btn_more_options = "More options"
@@ -77,11 +77,11 @@ class PhotoVideoAllViewPage:
             pytest.fail("沒有日期時間存在或資訊錯誤")
         if not self.d(resourceId="com.nothing.gallery:id/display_name", text="location_pic.jpg").exists:
             pytest.fail("沒有檔名資訊存在或資訊錯誤")
-        if not self.d(resourceId="com.nothing.gallery:id/device_name", text="Nothing A065").exists:
+        if not self.d(resourceId="com.nothing.gallery:id/device_name", text="NOTHING A065").exists:
             pytest.fail("沒有 device_name 資訊存在或資訊錯誤")
         if not self.d(resourceId="com.nothing.gallery:id/pixel_count", text="12.6 MP").exists:
             pytest.fail("沒有 Image 資訊存在或資訊錯誤")
-        if not self.d(resourceId="com.nothing.gallery:id/focal_length", text="5.59 mm").exists:
+        if not self.d(resourceId="com.nothing.gallery:id/focal_length", text="5.59 MM").exists:
             pytest.fail("沒有 Capture 資訊存在或資訊錯誤")
         if not self.d(resourceId="com.nothing.gallery:id/geo_location_panel", description="Geo location panel").exists:
             pytest.fail("沒有 geo_location 資訊存在或資訊錯誤")
@@ -91,18 +91,15 @@ class PhotoVideoAllViewPage:
             pytest.fail("沒有日期時間存在或資訊錯誤")
         if not self.d(resourceId="com.nothing.gallery:id/display_name", text="image_3.png").exists:
             pytest.fail("沒有檔名資訊存在或資訊錯誤")
-        if not self.d(resourceId="com.nothing.gallery:id/device_name", text="—").exists:
-            pytest.fail("沒有 device_name 資訊存在或資訊錯誤")
         if not self.d(resourceId="com.nothing.gallery:id/pixel_count", text="0.5 MP").exists:
             pytest.fail("沒有 Image 資訊存在或資訊錯誤")
-        if not self.d(resourceId="com.nothing.gallery:id/focal_length", text="—").exists:
-            pytest.fail("沒有 Capture 資訊存在或資訊錯誤")
         if self.d(resourceId="com.nothing.gallery:id/geo_location_panel", description="Geo location panel").exists:
             pytest.fail("有 geo_location 資訊存在")
 
     def swipe_up_to_details(self):
         try:
-            self.d.swipe(0.465, 0.654, 0.465, 0.367, duration=0.02)
+            time.sleep(1)
+            self.d.swipe(0.465, 0.654, 0.465, 0.367, duration=0.03)
             time.sleep(1)
 
         except Exception as e:

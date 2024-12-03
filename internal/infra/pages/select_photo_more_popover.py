@@ -3,7 +3,7 @@ import time, pytest
 import os
 
 
-class PhotoMorePopover:
+class SelectPhotoMorePopover:
 
     def __init__(self):
         self.btn_edit = "Edit"
@@ -25,7 +25,7 @@ class PhotoMorePopover:
 
     def btn_details_click(self):
         try:
-            self.d(text=self.btn_details).click()
+            self.d(description=self.btn_details).click()
             time.sleep(1)
 
         except Exception as e:
@@ -34,7 +34,7 @@ class PhotoMorePopover:
 
     def btn_copy_to_album_click(self):
         try:
-            self.d(text=self.btn_copy_to_album).click()
+            self.d(description=self.btn_copy_to_album).click()
             time.sleep(1)
 
             from internal.infra.pages.copy_to_album_page import CopyToAlbumPage
@@ -45,7 +45,7 @@ class PhotoMorePopover:
 
     def btn_move_to_album_click(self):
         try:
-            self.d(text=self.btn_move_to_album).click()
+            self.d(description=self.btn_move_to_album).click()
             time.sleep(1)
 
             from internal.infra.pages.move_to_album_page import MoveToAlbumPage
@@ -57,7 +57,7 @@ class PhotoMorePopover:
 
     def btn_set_as_click(self):
         try:
-            self.d(text=self.btn_set_as).click()
+            self.d(description=self.btn_set_as).click()
             time.sleep(1)
 
         except Exception as e:
@@ -66,7 +66,7 @@ class PhotoMorePopover:
 
     def btn_clone_click(self):
         try:
-            self.d(text=self.btn_duplicate).click()
+            self.d(description=self.btn_duplicate).click()
             time.sleep(1)
 
         except Exception as e:

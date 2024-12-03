@@ -40,16 +40,20 @@ class PhotosPage:
             pytest.fail("照片頁沒有 2 張照片")
 
     def no_photos_exists(self):
-        if self.d(resourceId="com.nothing.gallery:id/title", text="2 August").exists(timeout=1):
+        if self.d(resourceId="com.nothing.gallery:id/title", text="2 AUGUST").exists(timeout=1):
             pytest.fail("照片頁有其他照片")
-        if self.d(resourceId="com.nothing.gallery:id/title", text="1 August").exists(timeout=1):
+        if self.d(resourceId="com.nothing.gallery:id/title", text="1 AUGUST").exists(timeout=1):
             pytest.fail("照片頁有其他照片")
 
     def close_gallery_with_swipe_up(self):
         self.d.swipe(0.496, 0.991, 0.496, 0.3, duration=0.1)
 
     def go_to_recent_app_with_swipe_up(self):
-        self.d.swipe(0.496, 0.991, 0.496, 0.9, duration=1.7)
+        # self.d.swipe(0.496, 0.991, 0.496, 0.9, duration=2.0)
+        self.d.touch.down(0.496, 0.995)  # 在屏幕底部按下
+        self.d.touch.move(0.496, 0.92)
+        time.sleep(0.5)  # 停頓 0.5 秒
+        self.d.touch.up(0.496, 0.92)
 
     def go_to_last_app_with_swipe_left(self):
         self.d.swipe(0.304, 0.991, 0.661, 0.991, duration=0.1)
@@ -93,12 +97,12 @@ class PhotosPage:
 
     def is_date_order_correct(self):
         try:
-            correct0 = self.d(resourceId="com.nothing.gallery:id/title", text="24 July").down(
-                resourceId="com.nothing.gallery:id/title", text="23 July")
-            correct1 = self.d(resourceId="com.nothing.gallery:id/title", text="23 July").down(
-                resourceId="com.nothing.gallery:id/title", text="22 July")
-            correct2 = self.d(resourceId="com.nothing.gallery:id/title", text="22 July").down(
-                resourceId="com.nothing.gallery:id/title", text="21 July")
+            correct0 = self.d(resourceId="com.nothing.gallery:id/title", text="24 JULY").down(
+                resourceId="com.nothing.gallery:id/title", text="23 JULY")
+            correct1 = self.d(resourceId="com.nothing.gallery:id/title", text="23 JULY").down(
+                resourceId="com.nothing.gallery:id/title", text="22 JULY")
+            correct2 = self.d(resourceId="com.nothing.gallery:id/title", text="22 JULY").down(
+                resourceId="com.nothing.gallery:id/title", text="21 JULY")
 
             if not (correct0 and correct1 and correct2):
                 pytest.fail("有照片日期排序錯誤")
@@ -143,8 +147,8 @@ class PhotosPage:
             self.d(description=self.btn_more).click()
             time.sleep(1)
 
-            from internal.infra.pages.photo_more_popover import PhotoMorePopover
-            return PhotoMorePopover()
+            from internal.infra.pages.select_photo_more_popover import SelectPhotoMorePopover
+            return SelectPhotoMorePopover()
         except Exception as e:
             print(f"點擊 btn_more_click 失败: {e}")
             pytest.xfail("點擊 btn_more_click 失败")
@@ -159,11 +163,11 @@ class PhotosPage:
             pytest.xfail("點擊 no_select_click 失败")
 
     def is_august_9_pic_exit(self):
-        if not self.d(resourceId="com.nothing.gallery:id/title", text="9 August").exists(timeout=3):
+        if not self.d(resourceId="com.nothing.gallery:id/title", text="9 AUGUST").exists(timeout=3):
             pytest.fail("加入到相簿的相片消失了")
 
     def is_today_pic_exit(self):
-        if not self.d(resourceId="com.nothing.gallery:id/title", text="Today").exists(timeout=3):
+        if not self.d(resourceId="com.nothing.gallery:id/title", text="TODAY").exists(timeout=3):
             pytest.fail("没有今天的相片")
 
     def pinch_in(self):
