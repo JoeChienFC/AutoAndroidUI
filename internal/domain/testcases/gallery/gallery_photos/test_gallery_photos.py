@@ -588,7 +588,7 @@ def test_gallery_photos_058():
     PhotosPage().pinch_in()
     ADBClient.stop_gallery_app()
     ADBClient.start_gallery_app()
-    PhotosPage().check_title("AUGUST")
+    PhotosPage().check_title("AUGUST 2024")
 
 
 @pytest.mark.P0
@@ -607,8 +607,8 @@ def test_gallery_photos_059():
     ADBClient.push_2_pic_to_camera()
     ADBClient.refresh_gallery_camera()
 
-    PhotosPage().check_title("9 AUGUST")
-    PhotosPage().check_title("23 JULY")
+    PhotosPage().check_title("9 AUGUST 2024")
+    PhotosPage().check_title("23 JULY 2024")
 
 
 @pytest.mark.P0
@@ -628,8 +628,8 @@ def test_gallery_photos_060():
     ADBClient.refresh_gallery_camera()
 
     PhotosPage().pinch_in()
-    PhotosPage().check_title("AUGUST")
-    PhotosPage().check_title("JULY")
+    PhotosPage().check_title("AUGUST 2024")
+    PhotosPage().check_title("JULY 2024")
 
 
 @pytest.mark.P0

@@ -97,12 +97,12 @@ class PhotosPage:
 
     def is_date_order_correct(self):
         try:
-            correct0 = self.d(resourceId="com.nothing.gallery:id/title", text="24 JULY").down(
-                resourceId="com.nothing.gallery:id/title", text="23 JULY")
-            correct1 = self.d(resourceId="com.nothing.gallery:id/title", text="23 JULY").down(
-                resourceId="com.nothing.gallery:id/title", text="22 JULY")
-            correct2 = self.d(resourceId="com.nothing.gallery:id/title", text="22 JULY").down(
-                resourceId="com.nothing.gallery:id/title", text="21 JULY")
+            correct0 = self.d(resourceId="com.nothing.gallery:id/title", text="24 JULY 2024").down(
+                resourceId="com.nothing.gallery:id/title", text="23 JULY 2024")
+            correct1 = self.d(resourceId="com.nothing.gallery:id/title", text="23 JULY 2024").down(
+                resourceId="com.nothing.gallery:id/title", text="22 JULY 2024")
+            correct2 = self.d(resourceId="com.nothing.gallery:id/title", text="22 JULY 2024").down(
+                resourceId="com.nothing.gallery:id/title", text="21 JULY 2024")
 
             if not (correct0 and correct1 and correct2):
                 pytest.fail("有照片日期排序錯誤")
@@ -163,7 +163,7 @@ class PhotosPage:
             pytest.xfail("點擊 no_select_click 失败")
 
     def is_august_9_pic_exit(self):
-        if not self.d(resourceId="com.nothing.gallery:id/title", text="9 AUGUST").exists(timeout=3):
+        if not self.d(resourceId="com.nothing.gallery:id/title", text="9 AUGUST 2024").exists(timeout=3):
             pytest.fail("加入到相簿的相片消失了")
 
     def is_today_pic_exit(self):

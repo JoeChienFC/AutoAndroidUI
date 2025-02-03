@@ -73,7 +73,7 @@ class PhotoVideoAllViewPage:
             pytest.xfail("點擊 share_click 失败")
 
     def is_location_details_correct(self):
-        if not self.d(resourceId="com.nothing.gallery:id/taken_time_date", text="9 August").exists:
+        if not self.d(resourceId="com.nothing.gallery:id/taken_time_date", text="9 August 2024").exists:
             pytest.fail("沒有日期時間存在或資訊錯誤")
         if not self.d(resourceId="com.nothing.gallery:id/display_name", text="location_pic.jpg").exists:
             pytest.fail("沒有檔名資訊存在或資訊錯誤")
@@ -87,7 +87,7 @@ class PhotoVideoAllViewPage:
             pytest.fail("沒有 geo_location 資訊存在或資訊錯誤")
 
     def is_no_location_details_correct(self):
-        if not self.d(resourceId="com.nothing.gallery:id/taken_time_date", text="9 August").exists:
+        if not self.d(resourceId="com.nothing.gallery:id/taken_time_date", text="9 August 2024").exists:
             pytest.fail("沒有日期時間存在或資訊錯誤")
         if not self.d(resourceId="com.nothing.gallery:id/display_name", text="image_3.png").exists:
             pytest.fail("沒有檔名資訊存在或資訊錯誤")
@@ -107,5 +107,5 @@ class PhotoVideoAllViewPage:
             pytest.xfail("點擊 swipe_up_to_details 失败")
 
     def is_july_24_pic(self):
-        if not self.d(resourceId="com.nothing.gallery:id/taken_time_date", text="24 July").exists:
+        if not self.d(resourceId="com.nothing.gallery:id/taken_time_date", text="24 July 2024").exists:
             pytest.fail("不是測試用例設定的照片 或是 日期错误")

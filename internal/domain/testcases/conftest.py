@@ -10,6 +10,111 @@ from internal.infra.adb.adb_function import ADBClient
 import pytest_html
 from pytest_metadata.plugin import metadata_key
 import shutil
+import requests
+import json
+
+LARK_WEBHOOK_URL = "https://open.larksuite.com/open-apis/bot/v2/hook/5d17525b-a9c3-4f65-ab66-5233cda0ae00"
+
+
+class LarkReporter:
+    def __init__(self):
+        # 直接使用確認過的 URL，而不是從環境變量獲取
+        self.webhook_url = LARK_WEBHOOK_URL
+        self.test_results = {
+            'passed': 0,
+            'failed': 0,
+            'skipped': 0,
+            'total': 0,
+            'failed_cases': []
+        }
+        # 定義報告上傳路徑
+        self.report_upload_path = r"\\172.30.1.98\public01\Quality Management\Test Engineering\OS测试资源\Nothing_Gallery\auto_test_report"
+
+    def update_stats(self, report):
+        if report.when == "call":
+            self.test_results['total'] += 1
+            if report.passed:
+                self.test_results['passed'] += 1
+            elif report.failed:
+                self.test_results['failed'] += 1
+                self.test_results['failed_cases'].append({
+                    'name': report.nodeid,
+                    'error': str(getattr(report, 'longrepr', ''))
+                })
+            elif report.skipped:
+                self.test_results['skipped'] += 1
+
+    def send_report(self):
+        # 移除不正確的條件檢查
+        print(f"Preparing to send report to Lark...")  # 添加除錯信息
+
+        # 取得測試報告標題
+        import sys
+        if "-m" in sys.argv and "P0" in sys.argv:
+            report_title = "NTGallery P0 自动化测试报告"
+        elif "S" in sys.argv:
+            report_title = "NTGallery UI Layout 自动化测试报告"
+        else:
+            report_title = "NTGallery All 自動化測試報告"
+
+        message = {
+            "msg_type": "interactive",
+            "card": {
+                "config": {
+                    "wide_screen_mode": True
+                },
+                "header": {
+                    "title": {
+                        "tag": "plain_text",
+                        "content": f"🤖 {report_title}"
+                    },
+                    "template": "blue" if self.test_results['failed'] == 0 else "red"
+                },
+                "elements": [
+                    {
+                        "tag": "div",
+                        "text": {
+                            "tag": "lark_md",
+                            "content": f"""
+**測試執行時間：** {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+**測試結果摘要：**
+- 總測試數：{self.test_results['total']}
+- 通過：{self.test_results['passed']}
+- 失敗：{self.test_results['failed']}
+- 跳過：{self.test_results['skipped']}
+
+**報告路徑：**
+📂 [{self.report_upload_path}]({self.report_upload_path})
+"""
+                        }
+                    }
+                ]
+            }
+        }
+
+        # 添加除錯信息
+        print(f"Test results: {self.test_results}")
+
+        try:
+            print(f"Sending request to Lark...")
+            response = requests.post(
+                self.webhook_url,
+                headers={'Content-Type': 'application/json'},
+                data=json.dumps(message),
+                timeout=10  # 設置超時時間為 10 秒
+            )
+            print(f"Response status code: {response.status_code}")
+            print(f"Response content: {response.text}")
+            if response.status_code == 200:
+                print("Successfully sent report to Lark")
+            else:
+                print(f"Failed to send report to Lark. Status code: {response.status_code}")
+        except requests.exceptions.RequestException as e:
+            print(f"Error sending report to Lark: {str(e)}")
+
+
+# 初始化全局的 LarkReporter 實例
+lark_reporter = LarkReporter()
 
 
 def pytest_html_report_title(report):
@@ -23,14 +128,11 @@ def pytest_html_report_title(report):
 
 
 def pytest_itemcollected(item):
-    # 获取测试函数名
     test_name = item.name
-    # 设置报告中的名称，仅显示函数名
     item._nodeid = test_name
 
 
 def pytest_configure(config):
-
     config.stash[metadata_key]["開始時間"] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 
@@ -41,15 +143,14 @@ def restore_environment():
     time.sleep(2)
     d = u2.connect()
     d.set_fastinput_ime(True)
-    # 測試前執行
 
     yield
+
     ADBClient.stop_gallery_app()
     ADBClient.delete_albums_camera_data()
     ADBClient.refresh_gallery_camera()
     ADBClient.refresh_gallery_albums()
     time.sleep(1)
-    # 測試後執行
 
 
 @pytest.hookimpl(hookwrapper=True)
@@ -59,18 +160,18 @@ def pytest_runtest_makereport(item, call):
     extra = getattr(report, "extra", [])
     resize_factor = 0.25
 
+    # 更新 Lark 報告統計
+    lark_reporter.update_stats(report)
+
     if report.when == "call":
         xfail = hasattr(report, "wasxfail")
         if (report.skipped and xfail) or (report.failed and not xfail):
-            # 如果测试失败，执行 adb 命令截取屏幕
             timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
             screenshot_png_name = f"screenshot_{timestamp}.png"
             screenshot_jpg_name = f"screenshot_{timestamp}.jpg"
             local_png_path = os.path.join(os.getcwd(), screenshot_png_name)
             local_jpg_path = os.path.join(os.getcwd(), screenshot_jpg_name)
             try:
-                # pytest.set_trace()
-                # 使用 adb 截取屏幕并将其保存到本地文件
                 subprocess.run(["adb", "shell", "screencap", "-p", f"/sdcard/{screenshot_png_name}"])
                 subprocess.run(["adb", "pull", f"/sdcard/{screenshot_png_name}", local_png_path], check=True)
                 subprocess.run(["adb", "shell", "rm", f"/sdcard/{screenshot_png_name}"])
@@ -82,17 +183,15 @@ def pytest_runtest_makereport(item, call):
                     rgb_im = img.convert('RGB')
                     rgb_im.save(local_jpg_path, "JPEG")
 
-                # 将截图添加到报告中
                 with open(local_jpg_path, "rb") as image_file:
                     image_base64 = base64.b64encode(image_file.read()).decode('utf-8')
-                # 将 base64 编码的图片添加到报告中，并包含点击展开功能
                 img_html = f"""
-                                    <div style="float: right; margin-left: 20px;">
-                                        <a> 
-                                            <img src="data:image/jpeg;base64,{image_base64}" style="max-width:300px; max-height:300px;" />
-                                        </a>
-                                    </div>
-                                """
+                    <div style="float: right; margin-left: 20px;">
+                        <a> 
+                            <img src="data:image/jpeg;base64,{image_base64}" style="max-width:300px; max-height:300px;" />
+                        </a>
+                    </div>
+                """
                 extra.append(pytest_html.extras.html(img_html))
 
                 os.remove(local_png_path)
@@ -104,34 +203,45 @@ def pytest_runtest_makereport(item, call):
 
 
 def rename_report_file(file_path):
-    # 获取当前时间戳
-    timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-    # 分离文件名和扩展名
+    timestamp = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
     base, ext = os.path.splitext(file_path)
-    # 构建新的文件名
     new_file_path = f"{base}_{timestamp}{ext}"
-    # 重命名文件
     os.rename(file_path, new_file_path)
     return new_file_path
 
 
 def upload_file_to_network(file_path, network_path):
-    # 复制文件到网络路径
     shutil.copy(file_path, network_path)
 
 
-@pytest.hookimpl(tryfirst=True)
-def pytest_terminal_summary(terminalreporter, exitstatus, config):
-    # 原始报告文件路径
+def pytest_html_results_summary(prefix, summary, postfix):
+    print("HTML report generation completed. Proceeding with file operations...")
     original_report_file = "../reports/gallery_all_report.html"
-    # 目标网络路径
     network_path = r"\\172.30.1.98\public01\Quality Management\Test Engineering\OS测试资源\Nothing_Gallery\auto_test_report"
 
     try:
-        # 修改报告文件名
         new_report_file = rename_report_file(original_report_file)
-        # 上传文件到网络路径
         upload_file_to_network(new_report_file, network_path)
-        terminalreporter.write(f"Report has been renamed and uploaded to network path: {network_path}\n")
+        print(f"Report has been renamed and uploaded to network path: {network_path}")
     except Exception as e:
-        terminalreporter.write(f"Failed to process and upload report: {e}\n")
+        print(f"Failed to process and upload report: {e}")
+
+
+
+def pytest_sessionfinish(session, exitstatus):
+    print("Waiting for report generation to complete...")
+    time.sleep(10)  # 等待 10 秒以確保報告完成
+
+    print("Sending report to Lark...")
+    lark_reporter.send_report()
+    print("Report sent.")
+    # 原始報告檔案處理
+    original_report_file = "../reports/gallery_all_report.html"
+    network_path = r"\\172.30.1.98\public01\Quality Management\Test Engineering\OS测试资源\Nothing_Gallery\auto_test_report"
+
+    try:
+        new_report_file = rename_report_file(original_report_file)
+        upload_file_to_network(new_report_file, network_path)
+        print(f"Report has been renamed and uploaded to network path: {network_path}\n")
+    except Exception as e:
+        print(f"Failed to process and upload report: {e}\n")
