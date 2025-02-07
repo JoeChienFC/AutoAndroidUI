@@ -2,23 +2,25 @@ import base64
 import datetime
 import os
 import subprocess
+import shutil
 import time
+
+import pytest_html
+import requests
+import json
 from PIL import Image
 import pytest
 import uiautomator2 as u2
 from internal.infra.adb.adb_function import ADBClient
-import pytest_html
 from pytest_metadata.plugin import metadata_key
-import shutil
-import requests
-import json
 
 LARK_WEBHOOK_URL = "https://open.larksuite.com/open-apis/bot/v2/hook/5d17525b-a9c3-4f65-ab66-5233cda0ae00"
+REPORT_UPLOAD_PATH = r"C:\Users\fanchiao.chien\PycharmProjects\UIAutomation4Android\internal\domain\reports\gallery_all_report.html"
+RESIZE_FACTOR = 0.25
 
 
 class LarkReporter:
     def __init__(self):
-        # 直接使用確認過的 URL，而不是從環境變量獲取
         self.webhook_url = LARK_WEBHOOK_URL
         self.test_results = {
             'passed': 0,
@@ -27,8 +29,6 @@ class LarkReporter:
             'total': 0,
             'failed_cases': []
         }
-        # 定義報告上傳路徑
-        self.report_upload_path = r"\\172.30.1.98\public01\Quality Management\Test Engineering\OS测试资源\Nothing_Gallery\auto_test_report"
 
     def update_stats(self, report):
         if report.when == "call":
@@ -45,17 +45,9 @@ class LarkReporter:
                 self.test_results['skipped'] += 1
 
     def send_report(self):
-        # 移除不正確的條件檢查
-        print(f"Preparing to send report to Lark...")  # 添加除錯信息
+        print(f"Preparing to send report to Lark...")
 
-        # 取得測試報告標題
-        import sys
-        if "-m" in sys.argv and "P0" in sys.argv:
-            report_title = "NTGallery P0 自动化测试报告"
-        elif "S" in sys.argv:
-            report_title = "NTGallery UI Layout 自动化测试报告"
-        else:
-            report_title = "NTGallery All 自動化測試報告"
+        report_title = self._get_report_title()
 
         message = {
             "msg_type": "interactive",
@@ -75,7 +67,28 @@ class LarkReporter:
                         "tag": "div",
                         "text": {
                             "tag": "lark_md",
-                            "content": f"""
+                            "content": self._generate_report_summary()
+                        }
+                    }
+                ]
+            }
+        }
+
+        print(f"Test results: {self.test_results}")
+        self._send_lark_message(message)
+
+    def _get_report_title(self):
+        import sys
+        if "-m" in sys.argv and "P0" in sys.argv:
+            return "NTGallery P0 自动化测试报告"
+        elif "S" in sys.argv:
+            return "NTGallery UI Layout 自动化测试报告"
+        else:
+            return "NTGallery All 自動化測試報告"
+
+    def _generate_report_summary(self):
+        if self.test_results['failed'] > 0:
+            return f"""
 **測試執行時間：** {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
 **測試結果摘要：**
 - 總測試數：{self.test_results['total']}
@@ -84,24 +97,34 @@ class LarkReporter:
 - 跳過：{self.test_results['skipped']}
 
 **報告路徑：**
-📂 [{self.report_upload_path}]({self.report_upload_path})
+📂 [{REPORT_UPLOAD_PATH}]({REPORT_UPLOAD_PATH})
+
+😱😱  **請注意：**  😱😱
+有測試用例未通過，請查閱報告以了解詳細信息😵‍💫😵‍💫😵‍💫
 """
-                        }
-                    }
-                ]
-            }
-        }
+        else:
+            return f"""
+**測試執行時間：** {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+**測試結果摘要：**
+- 總測試數：{self.test_results['total']}
+- 通過：{self.test_results['passed']}
+- 失敗：{self.test_results['failed']}
+- 跳過：{self.test_results['skipped']}
 
-        # 添加除錯信息
-        print(f"Test results: {self.test_results}")
+**恭喜！所有測試通過！**
+🎉 **優秀表現！** 🎉
+所有測試用例都成功執行，系統運行穩定。感謝您的辛勤工作與努力！繼續保持這樣的表現，我們將邁向更加完美的成果！👏👏
 
+"""
+
+    def _send_lark_message(self, message):
         try:
             print(f"Sending request to Lark...")
             response = requests.post(
                 self.webhook_url,
                 headers={'Content-Type': 'application/json'},
                 data=json.dumps(message),
-                timeout=10  # 設置超時時間為 10 秒
+                timeout=10  # Set timeout to 10 seconds
             )
             print(f"Response status code: {response.status_code}")
             print(f"Response content: {response.text}")
@@ -113,18 +136,12 @@ class LarkReporter:
             print(f"Error sending report to Lark: {str(e)}")
 
 
-# 初始化全局的 LarkReporter 實例
+# Initialize the global LarkReporter instance
 lark_reporter = LarkReporter()
 
 
 def pytest_html_report_title(report):
-    import sys
-    if "-m" in sys.argv and "P0" in sys.argv:
-        report.title = "NGallery P0 自动化测试报告"
-    elif "S" in sys.argv:
-        report.title = "NGallery UI Layout 自动化测试报告"
-    else:
-        report.title = "NGallery All 自動化測試報告"
+    report.title = lark_reporter._get_report_title()
 
 
 def pytest_itemcollected(item):
@@ -158,48 +175,52 @@ def pytest_runtest_makereport(item, call):
     outcome = yield
     report = outcome.get_result()
     extra = getattr(report, "extra", [])
-    resize_factor = 0.25
 
-    # 更新 Lark 報告統計
+    # Update Lark report stats
     lark_reporter.update_stats(report)
 
     if report.when == "call":
         xfail = hasattr(report, "wasxfail")
         if (report.skipped and xfail) or (report.failed and not xfail):
-            timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-            screenshot_png_name = f"screenshot_{timestamp}.png"
-            screenshot_jpg_name = f"screenshot_{timestamp}.jpg"
-            local_png_path = os.path.join(os.getcwd(), screenshot_png_name)
-            local_jpg_path = os.path.join(os.getcwd(), screenshot_jpg_name)
-            try:
-                subprocess.run(["adb", "shell", "screencap", "-p", f"/sdcard/{screenshot_png_name}"])
-                subprocess.run(["adb", "pull", f"/sdcard/{screenshot_png_name}", local_png_path], check=True)
-                subprocess.run(["adb", "shell", "rm", f"/sdcard/{screenshot_png_name}"])
-                ADBClient.refresh_gallery_albums()
-
-                with Image.open(local_png_path) as img:
-                    new_size = (int(img.width * resize_factor), int(img.height * resize_factor))
-                    img = img.resize(new_size, Image.LANCZOS)
-                    rgb_im = img.convert('RGB')
-                    rgb_im.save(local_jpg_path, "JPEG")
-
-                with open(local_jpg_path, "rb") as image_file:
-                    image_base64 = base64.b64encode(image_file.read()).decode('utf-8')
-                img_html = f"""
-                    <div style="float: right; margin-left: 20px;">
-                        <a> 
-                            <img src="data:image/jpeg;base64,{image_base64}" style="max-width:300px; max-height:300px;" />
-                        </a>
-                    </div>
-                """
-                extra.append(pytest_html.extras.html(img_html))
-
-                os.remove(local_png_path)
-                os.remove(local_jpg_path)
-            except Exception as e:
-                print(f"Failed to capture screenshot: {e}")
+            capture_screenshot(report, extra)
 
         report.extra = extra
+
+
+def capture_screenshot(report, extra):
+    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+    screenshot_png_name = f"screenshot_{timestamp}.png"
+    screenshot_jpg_name = f"screenshot_{timestamp}.jpg"
+    local_png_path = os.path.join(os.getcwd(), screenshot_png_name)
+    local_jpg_path = os.path.join(os.getcwd(), screenshot_jpg_name)
+
+    try:
+        subprocess.run(["adb", "shell", "screencap", "-p", f"/sdcard/{screenshot_png_name}"])
+        subprocess.run(["adb", "pull", f"/sdcard/{screenshot_png_name}", local_png_path], check=True)
+        subprocess.run(["adb", "shell", "rm", f"/sdcard/{screenshot_png_name}"])
+        ADBClient.refresh_gallery_albums()
+
+        with Image.open(local_png_path) as img:
+            new_size = (int(img.width * RESIZE_FACTOR), int(img.height * RESIZE_FACTOR))
+            img = img.resize(new_size, Image.LANCZOS)
+            rgb_im = img.convert('RGB')
+            rgb_im.save(local_jpg_path, "JPEG")
+
+        with open(local_jpg_path, "rb") as image_file:
+            image_base64 = base64.b64encode(image_file.read()).decode('utf-8')
+        img_html = f"""
+            <div style="float: right; margin-left: 20px;">
+                <a> 
+                    <img src="data:image/jpeg;base64,{image_base64}" style="max-width:300px; max-height:300px;" />
+                </a>
+            </div>
+        """
+        extra.append(pytest_html.extras.html(img_html))
+
+        os.remove(local_png_path)
+        os.remove(local_jpg_path)
+    except Exception as e:
+        print(f"Failed to capture screenshot: {e}")
 
 
 def rename_report_file(file_path):
@@ -216,32 +237,12 @@ def upload_file_to_network(file_path, network_path):
 
 def pytest_html_results_summary(prefix, summary, postfix):
     print("HTML report generation completed. Proceeding with file operations...")
-    original_report_file = "../reports/gallery_all_report.html"
-    network_path = r"\\172.30.1.98\public01\Quality Management\Test Engineering\OS测试资源\Nothing_Gallery\auto_test_report"
+    # original_report_file = "../reports/gallery_all_report.html"
 
     try:
-        new_report_file = rename_report_file(original_report_file)
-        upload_file_to_network(new_report_file, network_path)
-        print(f"Report has been renamed and uploaded to network path: {network_path}")
+        # rename_report_file(original_report_file)
+        print("Sending report to Lark...")
+        lark_reporter.send_report()
+        print("Report sent.")
     except Exception as e:
         print(f"Failed to process and upload report: {e}")
-
-
-
-def pytest_sessionfinish(session, exitstatus):
-    print("Waiting for report generation to complete...")
-    time.sleep(10)  # 等待 10 秒以確保報告完成
-
-    print("Sending report to Lark...")
-    lark_reporter.send_report()
-    print("Report sent.")
-    # 原始報告檔案處理
-    original_report_file = "../reports/gallery_all_report.html"
-    network_path = r"\\172.30.1.98\public01\Quality Management\Test Engineering\OS测试资源\Nothing_Gallery\auto_test_report"
-
-    try:
-        new_report_file = rename_report_file(original_report_file)
-        upload_file_to_network(new_report_file, network_path)
-        print(f"Report has been renamed and uploaded to network path: {network_path}\n")
-    except Exception as e:
-        print(f"Failed to process and upload report: {e}\n")
