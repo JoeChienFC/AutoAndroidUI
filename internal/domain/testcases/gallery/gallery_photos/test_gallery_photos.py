@@ -702,3 +702,198 @@ def test_gallery_photos_073():
     GeneralPage().btn_albums_click()
     AlbumsPage().check_data_album_video_count("2")
 
+
+@pytest.mark.P0
+def test_gallery_photos_074():
+    """
+    Photos页面有可播放的视频文件。
+    步骤：
+    "1.打开Gallery应用并进入Photos页面。
+    2.选择一个视频文件并打开。
+    3.点击更多选项按钮，选择移動到新建的相簿"
+    期望结果：
+    3.视频會消失且可以正常添加到指定的相簿。
+    """
+    ADBClient.clear_gallery_cache()
+    ADBClient.start_gallery_app()
+    ADBClient.push_data_to_device("data_1_video", "Camera")
+    ADBClient.push_data_to_albums()
+    ADBClient.refresh_gallery_camera()
+    ADBClient.refresh_gallery_albums()
+
+    PhotosPage().photo_video_click().more_click().btn_move_to_album_click().data_albums_click()
+    PhotosPage().is_display_no_photos_text()
+
+    GeneralPage().btn_albums_click()
+    AlbumsPage().check_data_album_video_count("2")
+
+
+@pytest.mark.P0
+def test_gallery_photos_075():
+    """
+    Photos页面有可播放的视频文件。
+    步骤：
+    "1.打开Gallery应用并进入Photos页面。
+    2.选择一个视频文件并打开。
+    3.点击更多选项按钮，选择建立副本"
+    期望结果：
+    3.视频可以正常複製。
+    """
+    ADBClient.clear_gallery_cache()
+    ADBClient.start_gallery_app()
+    ADBClient.push_data_to_device("data_1_video", "Camera")
+    ADBClient.refresh_gallery_camera()
+
+    PhotosPage().photo_video_click().more_click().btn_clone_click()
+    GeneralPage().back()
+
+    GeneralPage().btn_albums_click()
+    AlbumsPage().check_camera_video_count("2")
+
+
+@pytest.mark.P0
+def test_gallery_photos_082():
+    """
+    已存在連拍组照片
+    步骤：
+    "1.打开Gallery App并进入Photos页面。
+    2.点击任意照片进入大图视图。
+    3.在大图视图下方转盘中找到連拍照片堆叠。
+    4.点击照片堆叠。"
+    期望结果：
+    "2.应用成功进入大图视图
+    3.進入堆疊的照片大圖時下方转盘显示照片堆叠。
+    4.点击照片堆叠后，堆叠展开，显示组内所有照片。"
+    """
+    ADBClient.clear_gallery_cache()
+    ADBClient.start_gallery_app()
+    ADBClient.push_data_to_device("data_burst", "Camera")
+    ADBClient.refresh_gallery_camera()
+
+    PhotosPage().photo_video_click()
+    PhotoVideoAllViewPage().photo_click()
+    PhotoVideoAllViewPage().check_filmstrip_items(5)
+
+
+@pytest.mark.P1
+def test_gallery_photos_083():
+    """
+    已存在連拍组照片
+    步骤：
+    "1.打开Gallery App并进入Photos页面，橫放手機進入橫屏模式。
+    2.点击任意照片进入大图视图。
+    3.在大图视图下方转盘中找到連拍照片堆叠。
+    4.点击照片堆叠。"
+    期望结果：
+    "2.3.应用成功进入大图视图，并在下方转盘显示照片堆叠。
+    4.点击照片堆叠后，堆叠展开，显示组内所有照片。"
+    """
+    ADBClient.clear_gallery_cache()
+    ADBClient.start_gallery_app()
+    ADBClient.push_data_to_device("data_burst", "Camera")
+    ADBClient.refresh_gallery_camera()
+
+    ADBClient.disable_auto_rotate()
+    ADBClient.set_rotate()
+    PhotosPage().photo_video_click()
+    PhotoVideoAllViewPage().photo_click()
+    PhotoVideoAllViewPage().check_filmstrip_items(5)
+
+
+@pytest.mark.P0
+def test_gallery_photos_086():
+    """
+    已存在連拍组照片
+    步骤：
+    "1.打开Gallery App并进入Photos页面。
+    2.点击任意照片进入大图视图。
+    3.查看大图视图下方转盘中照片堆叠的數量显示。
+    4.点击堆叠组照片进行展开。"
+    期望结果：
+    "3.照片堆叠应显示堆叠数量（数字叠加在堆叠缩略图上）。
+    4.照片數量與顯示的數字相同(例:10張的話是顯示+9)"
+    """
+    ADBClient.clear_gallery_cache()
+    ADBClient.start_gallery_app()
+    ADBClient.push_data_to_device("data_burst", "Camera")
+    ADBClient.refresh_gallery_camera()
+
+    PhotosPage().photo_video_click().is_burst_amount("+4")
+    PhotoVideoAllViewPage().photo_click()
+    PhotoVideoAllViewPage().check_filmstrip_items(5)
+
+
+@pytest.mark.P1
+def test_gallery_photos_087():
+    """
+    已存在連拍组照片
+    步骤：
+    "1.打开Gallery App并进入Photos页面，橫放手機進入橫屏模式。
+    2.点击任意照片进入大图视图。
+    3.查看大图视图下方转盘中照片堆叠的數量显示。
+    4.点击堆叠组照片进行展开。"
+    期望结果：
+    "3.照片堆叠应显示堆叠数量（数字叠加在堆叠缩略图上）。
+    4.照片數量與顯示的數字相同(例:10張的話是顯示+9)"
+    """
+    ADBClient.clear_gallery_cache()
+    ADBClient.start_gallery_app()
+    ADBClient.push_data_to_device("data_burst", "Camera")
+    ADBClient.refresh_gallery_camera()
+
+    ADBClient.disable_auto_rotate()
+    ADBClient.set_rotate()
+    PhotosPage().photo_video_click().is_burst_amount("+4")
+    PhotoVideoAllViewPage().photo_click()
+    PhotoVideoAllViewPage().check_filmstrip_items(5)
+
+
+@pytest.mark.P1
+def test_gallery_photos_088():
+    """
+    已存在連拍组照片
+    步骤：
+    "1.打开Gallery App并进入Photos页面。
+    2.点击任意照片进入大图视图。
+    3.查看大图视图下方转盘中照片堆叠的數量显示。
+    4.点击堆叠组照片进行展开。
+    5.刪除任一照片返回堆叠组照片"
+    期望结果：
+    "3.照片堆叠应显示堆叠数量（数字叠加在堆叠缩略图上）。
+    4.照片數量與顯示的數字相同
+    5.數量會及時顯示少1"
+    """
+    ADBClient.clear_gallery_cache()
+    ADBClient.start_gallery_app()
+    ADBClient.push_data_to_device("data_burst", "Camera")
+    ADBClient.refresh_gallery_camera()
+
+    PhotosPage().photo_video_click().is_burst_amount("+4")
+    PhotoVideoAllViewPage().photo_click()
+    PhotoVideoAllViewPage().delete_click().btn_delete_click()
+    PhotoVideoAllViewPage().check_filmstrip_items(4)
+    GeneralPage().back()
+    PhotoVideoAllViewPage().is_burst_amount("+3")
+
+
+@pytest.mark.P2
+def test_gallery_photos_089():
+    """
+    已存在連拍组照片
+    步骤：
+    "1.打开Gallery App并进入Photos页面。
+    2.点击任意照片进入大图视图。
+    3.查看大图视图下方转盘中照片堆叠的數量显示。
+    4.点击堆叠组照片进行展开。
+    5.刪除有皇冠的封面照片"
+    期望结果：
+    5.會自動設定一張細節最多的照片為封面
+    """
+    ADBClient.clear_gallery_cache()
+    ADBClient.start_gallery_app()
+    ADBClient.push_data_to_device("data_burst", "Camera")
+    ADBClient.refresh_gallery_camera()
+
+    PhotosPage().photo_video_click().photo_click()
+    PhotoVideoAllViewPage().delete_click().btn_delete_click()
+    PhotoVideoAllViewPage().check_crown_icon()

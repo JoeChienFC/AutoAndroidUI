@@ -7,8 +7,8 @@ from internal.infra.pages.general_page import GeneralPage
 from internal.infra.pages.photos_page import PhotosPage
 
 
-@pytest.mark.P0
-def test_gallery_app_002():
+@pytest.mark.P6
+def test_gallery_test():
     """
     步骤：
     1. 打开 Gallery 应用。
@@ -21,7 +21,7 @@ def test_gallery_app_002():
 
 
 @pytest.mark.P0
-def test_gallery_app_004():
+def test_gallery_app_013():
     """
     步骤：
     1.打开 Gallery 应用。
@@ -36,7 +36,7 @@ def test_gallery_app_004():
 
 
 @pytest.mark.P0
-def test_gallery_app_005():
+def test_gallery_app_014():
     """
     步骤：
     1.打开 Gallery 应用。
@@ -50,7 +50,7 @@ def test_gallery_app_005():
 
 
 @pytest.mark.P0
-def test_gallery_app_006():
+def test_gallery_app_015():
     """
     已經打開過其他應用
     步骤：

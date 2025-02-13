@@ -56,3 +56,10 @@ class AlbumsPage:
             resourceId="com.nothing.gallery:id/photo_media_count", text=f"{count} IMG")
         if not img:
             pytest.fail(f"Camera 相簿沒有不符合 TEST CASE 要求 {count} 張數")
+
+    def check_camera_video_count(self, count=str):
+        img = self.d(resourceId="com.nothing.gallery:id/display_name", text="Camera").down(
+            resourceId="com.nothing.gallery:id/video_media_count", text=f"{count} VID")
+        if not img:
+            pytest.fail(f"Camera 相簿沒有 video 或不符合 TEST CASE 要求 {count} 張數")
+

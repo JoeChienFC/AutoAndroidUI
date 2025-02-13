@@ -16,6 +16,7 @@ from pytest_metadata.plugin import metadata_key
 
 LARK_WEBHOOK_URL = "https://open.larksuite.com/open-apis/bot/v2/hook/5d17525b-a9c3-4f65-ab66-5233cda0ae00"
 REPORT_UPLOAD_PATH = r"C:\Users\fanchiao.chien\PycharmProjects\UIAutomation4Android\internal\domain\reports\gallery_all_report.html"
+# fail screenshot size
 RESIZE_FACTOR = 0.25
 
 
@@ -60,7 +61,8 @@ class LarkReporter:
                         "tag": "plain_text",
                         "content": f"🤖 {report_title}"
                     },
-                    "template": "blue" if self.test_results['failed'] == 0 else "red"
+                    "template": "blue" if (
+                            self.test_results['failed'] == 0 and self.test_results['skipped'] == 0) else "red"
                 },
                 "elements": [
                     {
@@ -87,14 +89,14 @@ class LarkReporter:
             return "NTGallery All 自動化測試報告"
 
     def _generate_report_summary(self):
-        if self.test_results['failed'] > 0:
+        if self.test_results['failed'] or self.test_results['skipped'] > 0:
             return f"""
 **測試執行時間：** {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
 **測試結果摘要：**
 - 總測試數：{self.test_results['total']}
 - 通過：{self.test_results['passed']}
 - 失敗：{self.test_results['failed']}
-- 跳過：{self.test_results['skipped']}
+- 非預期失敗：{self.test_results['skipped']}
 
 **報告路徑：**
 📂 [{REPORT_UPLOAD_PATH}]({REPORT_UPLOAD_PATH})
@@ -109,7 +111,7 @@ class LarkReporter:
 - 總測試數：{self.test_results['total']}
 - 通過：{self.test_results['passed']}
 - 失敗：{self.test_results['failed']}
-- 跳過：{self.test_results['skipped']}
+- 非預期失敗：{self.test_results['skipped']}
 
 **恭喜！所有測試通過！**
 🎉 **優秀表現！** 🎉
@@ -199,6 +201,7 @@ def capture_screenshot(report, extra):
         subprocess.run(["adb", "pull", f"/sdcard/{screenshot_png_name}", local_png_path], check=True)
         subprocess.run(["adb", "shell", "rm", f"/sdcard/{screenshot_png_name}"])
         ADBClient.refresh_gallery_albums()
+        ADBClient.refresh_gallery_camera()
 
         with Image.open(local_png_path) as img:
             new_size = (int(img.width * RESIZE_FACTOR), int(img.height * RESIZE_FACTOR))

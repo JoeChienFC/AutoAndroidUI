@@ -109,3 +109,17 @@ class PhotoVideoAllViewPage:
     def is_july_24_pic(self):
         if not self.d(resourceId="com.nothing.gallery:id/taken_time_date", text="24 July 2024").exists:
             pytest.fail("不是測試用例設定的照片 或是 日期错误")
+
+    def is_burst_amount(self, photos=str):
+        if not self.d(resourceId="com.nothing.gallery:id/count", text=photos).exists:
+            pytest.fail(f"堆疊的照片數量錯誤{photos} 或是 沒有堆疊顯示")
+
+    def check_filmstrip_items(self, photos=int):
+        elements = self.d(resourceId="com.nothing.gallery:id/filmstrip_thumb_bar_item")
+        if elements.count != photos:
+            pytest.fail(f"堆疊照片展開後的照片數量錯誤{photos}")
+
+    def check_crown_icon(self):
+        if not self.d(resourceId="com.nothing.gallery:id/icon").exists:
+            pytest.fail("堆疊照片展開後顯示堆疊照片封面的皇冠圖標沒有出現")
+
