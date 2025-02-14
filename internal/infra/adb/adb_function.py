@@ -132,7 +132,7 @@ class ADBClient:
     @staticmethod
     def refresh_gallery_albums():
         refresh_gallery_command = (
-            'adb shell am broadcast -a android.intent.action.MEDIA_SCANNER_SCAN_FILE -d file:///sdcard/Pictures')
+            'adb shell am broadcast -a android.intent.action.MEDIA_SCANNER_SCAN_FILE -d file:///sdcard')
         # 使用 subprocess 執行指令
         try:
             subprocess.run(refresh_gallery_command, shell=True)
@@ -141,9 +141,9 @@ class ADBClient:
             print(f"Error executing command: {e}")
 
     @staticmethod
-    def refresh_gallery_camera():
+    def refresh_gallery_media():
         refresh_gallery_command = (
-            'adb shell am broadcast -a android.intent.action.MEDIA_SCANNER_SCAN_FILE -d file:///sdcard/DCIM/Camera')
+            'adb shell am broadcast -a android.intent.action.MEDIA_SCANNER_SCAN_FILE -d file:///sdcard')
         # 使用 subprocess 執行指令
         try:
             subprocess.run(refresh_gallery_command, shell=True)
@@ -281,3 +281,9 @@ class ADBClient:
             return local_png_path
         except Exception as e:
             print(f"Failed to capture screenshot: {e}")
+
+    @staticmethod
+    def stop_chrome_app():
+        cmd = "adb shell am force-stop com.android.chrome"
+        subprocess.run(cmd, shell=True)
+

@@ -13,7 +13,7 @@ class SettingsPopover:
             self.d(text="Settings").click()
             time.sleep(1)
             from internal.infra.pages.settings_page import SettingsPage
-            return SettingsPage
+            return SettingsPage()
 
         except Exception as e:
             print(f"點擊 btn_settings_click 失败: {e}")

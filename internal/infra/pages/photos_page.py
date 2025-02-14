@@ -194,3 +194,10 @@ class PhotosPage:
         if not self.d(resourceId="com.nothing.gallery:id/title", text=title).exists(timeout=3):
             pytest.fail(f"没有符合測項的title {title}")
 
+    def check_summary(self, summary=str):
+        if not self.d(resourceId="com.nothing.gallery:id/summary", text=summary).exists(timeout=3):
+            pytest.fail(f"没有符合測項的 summary (位置){summary}")
+
+    def change_to_month_display(self):
+        self.d(resourceId="com.nothing.gallery:id/entry_fragments").gesture((135, 622), (882, 1540), (525, 960),
+                                                                            (613, 1121), 10)

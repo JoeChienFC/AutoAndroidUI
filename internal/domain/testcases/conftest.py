@@ -157,6 +157,7 @@ def pytest_configure(config):
 
 @pytest.fixture(autouse=True)
 def restore_environment():
+    ADBClient.stop_chrome_app()
     ADBClient.stop_gallery_app()
     ADBClient.clear_gallery_cache()
     time.sleep(2)
@@ -165,9 +166,10 @@ def restore_environment():
 
     yield
 
+    ADBClient.stop_chrome_app()
     ADBClient.stop_gallery_app()
     ADBClient.delete_albums_camera_data()
-    ADBClient.refresh_gallery_camera()
+    ADBClient.refresh_gallery_media()
     ADBClient.refresh_gallery_albums()
     time.sleep(1)
 
@@ -200,8 +202,7 @@ def capture_screenshot(report, extra):
         subprocess.run(["adb", "shell", "screencap", "-p", f"/sdcard/{screenshot_png_name}"])
         subprocess.run(["adb", "pull", f"/sdcard/{screenshot_png_name}", local_png_path], check=True)
         subprocess.run(["adb", "shell", "rm", f"/sdcard/{screenshot_png_name}"])
-        ADBClient.refresh_gallery_albums()
-        ADBClient.refresh_gallery_camera()
+        ADBClient.refresh_gallery_media()
 
         with Image.open(local_png_path) as img:
             new_size = (int(img.width * RESIZE_FACTOR), int(img.height * RESIZE_FACTOR))

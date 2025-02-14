@@ -87,7 +87,7 @@ def test_gallery_photos_008():
     ADBClient.clear_gallery_cache()
     ADBClient.start_gallery_app()
     ADBClient.push_data_to_camera()
-    ADBClient.refresh_gallery_camera()
+    ADBClient.refresh_gallery_media()
 
     PhotosPage().photo_video_click().icon_favorite_click()
     PhotoVideoAllViewPage().is_un_favorite_exists()
@@ -110,7 +110,7 @@ def test_gallery_photos_012():
     ADBClient.clear_gallery_cache()
     ADBClient.start_gallery_app()
     ADBClient.push_1_pic_to_camera()
-    ADBClient.refresh_gallery_camera()
+    ADBClient.refresh_gallery_media()
 
     PhotosPage().photo_video_click().delete_click().btn_delete_click()
     PhotosPage().is_not_photo_video_exists()
@@ -134,7 +134,7 @@ def test_gallery_photos_015():
     ADBClient.start_gallery_app()
     ADBClient.push_1_pic_to_camera()
     ADBClient.push_data_to_albums()
-    ADBClient.refresh_gallery_camera()
+    ADBClient.refresh_gallery_media()
     ADBClient.refresh_gallery_albums()
 
     PhotosPage().photo_video_click().more_click().btn_copy_to_album_click().data_albums_click()
@@ -159,7 +159,7 @@ def test_gallery_photos_016():
     ADBClient.start_gallery_app()
     ADBClient.push_1_pic_to_camera()
     ADBClient.push_data_to_albums()
-    ADBClient.refresh_gallery_camera()
+    ADBClient.refresh_gallery_media()
     ADBClient.refresh_gallery_albums()
 
     PhotosPage().photo_video_click().more_click().btn_move_to_album_click().data_albums_click()
@@ -183,7 +183,7 @@ def test_gallery_photos_017():
     ADBClient.clear_gallery_cache()
     ADBClient.start_gallery_app()
     ADBClient.push_1_pic_to_camera()
-    ADBClient.refresh_gallery_camera()
+    ADBClient.refresh_gallery_media()
 
     PhotosPage().photo_video_click().more_click().btn_clone_click()
     GeneralPage().back()
@@ -212,7 +212,7 @@ def test_gallery_photos_024_025():
     ADBClient.clear_gallery_cache()
     ADBClient.start_gallery_app()
     ADBClient.push_location_pic_to_camera()
-    ADBClient.refresh_gallery_camera()
+    ADBClient.refresh_gallery_media()
 
     PhotosPage().photo_video_click().more_click().btn_details_click()
     PhotoVideoAllViewPage().is_location_details_correct()
@@ -233,7 +233,7 @@ def test_gallery_photos_026():
     ADBClient.clear_gallery_cache()
     ADBClient.start_gallery_app()
     ADBClient.push_location_pic_to_camera()
-    ADBClient.refresh_gallery_camera()
+    ADBClient.refresh_gallery_media()
 
     PhotosPage().photo_video_click().more_click().btn_details_click()
     ADBClient.disable_auto_rotate()
@@ -263,7 +263,7 @@ def test_gallery_photos_027():
     ADBClient.clear_gallery_cache()
     ADBClient.start_gallery_app()
     ADBClient.push_location_pic_to_camera()
-    ADBClient.refresh_gallery_camera()
+    ADBClient.refresh_gallery_media()
     ADBClient.disable_auto_rotate()
     ADBClient.set_rotate()
 
@@ -292,7 +292,7 @@ def test_gallery_photos_028():
     ADBClient.clear_gallery_cache()
     ADBClient.start_gallery_app()
     ADBClient.push_1_pic_to_camera()
-    ADBClient.refresh_gallery_camera()
+    ADBClient.refresh_gallery_media()
 
     PhotosPage().photo_video_click().swipe_up_to_details()
     PhotoVideoAllViewPage().is_no_location_details_correct()
@@ -318,7 +318,7 @@ def test_gallery_photos_029():
     ADBClient.clear_gallery_cache()
     ADBClient.start_gallery_app()
     ADBClient.push_1_pic_to_camera()
-    ADBClient.refresh_gallery_camera()
+    ADBClient.refresh_gallery_media()
     ADBClient.disable_auto_rotate()
     ADBClient.set_rotate()
 
@@ -339,7 +339,7 @@ def test_gallery_photos_038():
     ADBClient.clear_gallery_cache()
     ADBClient.start_gallery_app()
     ADBClient.push_data_to_camera()
-    ADBClient.refresh_gallery_camera()
+    ADBClient.refresh_gallery_media()
 
     PhotosPage().photo_video_click().swipe_up_to_details()
     PhotoVideoAllViewPage().is_july_24_pic()
@@ -362,7 +362,7 @@ def test_gallery_photos_042():
     ADBClient.start_gallery_app()
     ADBClient.push_1_pic_to_camera()
     ADBClient.push_data_to_albums()
-    ADBClient.refresh_gallery_camera()
+    ADBClient.refresh_gallery_media()
     ADBClient.refresh_gallery_albums()
 
     PhotosPage().photo_long_click()
@@ -387,7 +387,7 @@ def test_gallery_photos_043():
     ADBClient.start_gallery_app()
     ADBClient.push_2_pic_to_camera()
     ADBClient.push_data_to_albums()
-    ADBClient.refresh_gallery_camera()
+    ADBClient.refresh_gallery_media()
     ADBClient.refresh_gallery_albums()
 
     PhotosPage().photo_long_click()
@@ -413,7 +413,7 @@ def test_gallery_photos_046():
     ADBClient.clear_gallery_cache()
     ADBClient.start_gallery_app()
     ADBClient.push_1_pic_to_camera()
-    ADBClient.refresh_gallery_camera()
+    ADBClient.refresh_gallery_media()
 
     PhotosPage().photo_long_click()
     PhotosPage().icon_delete_click().btn_delete_click()
@@ -437,7 +437,7 @@ def test_gallery_photos_047():
     ADBClient.clear_gallery_cache()
     ADBClient.start_gallery_app()
     ADBClient.push_2_pic_to_camera()
-    ADBClient.refresh_gallery_camera()
+    ADBClient.refresh_gallery_media()
 
     PhotosPage().photo_long_click()
     PhotosPage().no_select_click()
@@ -463,7 +463,7 @@ def test_gallery_photos_048():
     ADBClient.start_gallery_app()
     ADBClient.push_1_pic_to_camera()
     ADBClient.push_data_to_albums()
-    ADBClient.refresh_gallery_camera()
+    ADBClient.refresh_gallery_media()
     ADBClient.refresh_gallery_albums()
 
     PhotosPage().photo_long_click()
@@ -489,7 +489,7 @@ def test_gallery_photos_049():
     ADBClient.start_gallery_app()
     ADBClient.push_2_pic_to_camera()
     ADBClient.push_data_to_albums()
-    ADBClient.refresh_gallery_camera()
+    ADBClient.refresh_gallery_media()
     ADBClient.refresh_gallery_albums()
 
     PhotosPage().photo_long_click()
@@ -515,7 +515,7 @@ def test_gallery_photos_050():
     ADBClient.clear_gallery_cache()
     ADBClient.start_gallery_app()
     ADBClient.push_1_pic_to_camera()
-    ADBClient.refresh_gallery_camera()
+    ADBClient.refresh_gallery_media()
 
     PhotosPage().photo_long_click()
     PhotosPage().icon_more_click().btn_clone_click()
@@ -537,7 +537,7 @@ def test_gallery_photos_051():
     ADBClient.clear_gallery_cache()
     ADBClient.start_gallery_app()
     ADBClient.push_2_pic_to_camera()
-    ADBClient.refresh_gallery_camera()
+    ADBClient.refresh_gallery_media()
 
     PhotosPage().photo_long_click()
     PhotosPage().no_select_click()
@@ -560,7 +560,7 @@ def test_gallery_photos_054():
     ADBClient.clear_gallery_cache()
     ADBClient.start_gallery_app()
     ADBClient.push_2_pic_to_camera()
-    ADBClient.refresh_gallery_camera()
+    ADBClient.refresh_gallery_media()
 
     PhotosPage().photo_long_click()
     PhotosPage().no_select_click()
@@ -583,7 +583,7 @@ def test_gallery_photos_058():
     ADBClient.clear_gallery_cache()
     ADBClient.start_gallery_app()
     ADBClient.push_2_pic_to_camera()
-    ADBClient.refresh_gallery_camera()
+    ADBClient.refresh_gallery_media()
 
     PhotosPage().pinch_in()
     ADBClient.stop_gallery_app()
@@ -605,7 +605,7 @@ def test_gallery_photos_059():
     ADBClient.clear_gallery_cache()
     ADBClient.start_gallery_app()
     ADBClient.push_2_pic_to_camera()
-    ADBClient.refresh_gallery_camera()
+    ADBClient.refresh_gallery_media()
 
     PhotosPage().check_title("9 AUGUST 2024")
     PhotosPage().check_title("23 JULY 2024")
@@ -625,7 +625,7 @@ def test_gallery_photos_060():
     ADBClient.clear_gallery_cache()
     ADBClient.start_gallery_app()
     ADBClient.push_2_pic_to_camera()
-    ADBClient.refresh_gallery_camera()
+    ADBClient.refresh_gallery_media()
 
     PhotosPage().pinch_in()
     PhotosPage().check_title("AUGUST 2024")
@@ -646,7 +646,7 @@ def test_gallery_photos_070():
     ADBClient.clear_gallery_cache()
     ADBClient.start_gallery_app()
     ADBClient.push_data_to_device("data_1_video", "Camera")
-    ADBClient.refresh_gallery_camera()
+    ADBClient.refresh_gallery_media()
 
     PhotosPage().photo_video_click().icon_favorite_click()
     PhotoVideoAllViewPage().is_un_favorite_exists()
@@ -669,7 +669,7 @@ def test_gallery_photos_072():
     ADBClient.clear_gallery_cache()
     ADBClient.start_gallery_app()
     ADBClient.push_data_to_device("data_1_video", "Camera")
-    ADBClient.refresh_gallery_camera()
+    ADBClient.refresh_gallery_media()
 
     PhotosPage().photo_video_click().delete_click().btn_delete_click()
     PhotosPage().is_display_no_photos_text()
@@ -692,7 +692,7 @@ def test_gallery_photos_073():
     ADBClient.start_gallery_app()
     ADBClient.push_data_to_device("data_1_video", "Camera")
     ADBClient.push_data_to_albums()
-    ADBClient.refresh_gallery_camera()
+    ADBClient.refresh_gallery_media()
     ADBClient.refresh_gallery_albums()
 
     PhotosPage().photo_video_click().more_click().btn_copy_to_album_click().data_albums_click()
@@ -718,7 +718,7 @@ def test_gallery_photos_074():
     ADBClient.start_gallery_app()
     ADBClient.push_data_to_device("data_1_video", "Camera")
     ADBClient.push_data_to_albums()
-    ADBClient.refresh_gallery_camera()
+    ADBClient.refresh_gallery_media()
     ADBClient.refresh_gallery_albums()
 
     PhotosPage().photo_video_click().more_click().btn_move_to_album_click().data_albums_click()
@@ -742,7 +742,7 @@ def test_gallery_photos_075():
     ADBClient.clear_gallery_cache()
     ADBClient.start_gallery_app()
     ADBClient.push_data_to_device("data_1_video", "Camera")
-    ADBClient.refresh_gallery_camera()
+    ADBClient.refresh_gallery_media()
 
     PhotosPage().photo_video_click().more_click().btn_clone_click()
     GeneralPage().back()
@@ -768,7 +768,7 @@ def test_gallery_photos_082():
     ADBClient.clear_gallery_cache()
     ADBClient.start_gallery_app()
     ADBClient.push_data_to_device("data_burst", "Camera")
-    ADBClient.refresh_gallery_camera()
+    ADBClient.refresh_gallery_media()
 
     PhotosPage().photo_video_click()
     PhotoVideoAllViewPage().photo_click()
@@ -791,7 +791,7 @@ def test_gallery_photos_083():
     ADBClient.clear_gallery_cache()
     ADBClient.start_gallery_app()
     ADBClient.push_data_to_device("data_burst", "Camera")
-    ADBClient.refresh_gallery_camera()
+    ADBClient.refresh_gallery_media()
 
     ADBClient.disable_auto_rotate()
     ADBClient.set_rotate()
@@ -816,7 +816,7 @@ def test_gallery_photos_086():
     ADBClient.clear_gallery_cache()
     ADBClient.start_gallery_app()
     ADBClient.push_data_to_device("data_burst", "Camera")
-    ADBClient.refresh_gallery_camera()
+    ADBClient.refresh_gallery_media()
 
     PhotosPage().photo_video_click().is_burst_amount("+4")
     PhotoVideoAllViewPage().photo_click()
@@ -839,7 +839,7 @@ def test_gallery_photos_087():
     ADBClient.clear_gallery_cache()
     ADBClient.start_gallery_app()
     ADBClient.push_data_to_device("data_burst", "Camera")
-    ADBClient.refresh_gallery_camera()
+    ADBClient.refresh_gallery_media()
 
     ADBClient.disable_auto_rotate()
     ADBClient.set_rotate()
@@ -866,7 +866,7 @@ def test_gallery_photos_088():
     ADBClient.clear_gallery_cache()
     ADBClient.start_gallery_app()
     ADBClient.push_data_to_device("data_burst", "Camera")
-    ADBClient.refresh_gallery_camera()
+    ADBClient.refresh_gallery_media()
 
     PhotosPage().photo_video_click().is_burst_amount("+4")
     PhotoVideoAllViewPage().photo_click()
@@ -892,8 +892,180 @@ def test_gallery_photos_089():
     ADBClient.clear_gallery_cache()
     ADBClient.start_gallery_app()
     ADBClient.push_data_to_device("data_burst", "Camera")
-    ADBClient.refresh_gallery_camera()
+    ADBClient.refresh_gallery_media()
 
     PhotosPage().photo_video_click().photo_click()
     PhotoVideoAllViewPage().delete_click().btn_delete_click()
     PhotoVideoAllViewPage().check_crown_icon()
+
+
+@pytest.mark.P0
+def test_gallery_photos_090():
+    """
+    "1.已存在多組相簿
+    2.相機相簿內有照片"
+    步骤：
+    "1.打開Gallery應用，進入照片頁面。
+    2.點擊漢堡選單>settings>show in photos view
+    3.關閉全部相簿
+    4.返回觀察photos
+    5.點擊漢堡選單>settings>show in photos view
+    6.開啟任一相簿
+    7.返回觀察photos"
+    期望结果：
+    "2.不顯示相機相簿，固定會有最愛,影片,螢幕截圖
+    4.只顯示相機相簿中的相 片在photos
+    7.除了相機相簿內照片，會加上顯示開啟相簿的相片"
+    """
+    ADBClient.clear_gallery_cache()
+    ADBClient.start_gallery_app()
+    ADBClient.push_data_to_albums()
+    ADBClient.refresh_gallery_albums()
+
+    PhotosPage().is_display_no_photos_text()
+    PhotosPage().btn_more_options_click().btn_settings_click().btn_show_in_photos_view_click().is_camera_select()
+    ShowInPhotosViewPage().albums_select("data_albums")
+    GeneralPage().back()
+    GeneralPage().back()
+    PhotosPage().no_display_no_photos_text()
+
+
+@pytest.mark.P1
+def test_gallery_photos_091():
+    """
+    相機相簿內無照片
+    步骤：
+   "1.打開Gallery應用，進入照片頁面。
+    2.點擊漢堡選單>settings>show in photos view
+    3.關閉全部相簿
+    4.返回觀察photos"
+    期望结果：
+    "4.沒有顯示照片並顯示文案
+    "這裡沒有照片,去拍一些吧"
+    "No photos here. Take your first shot"
+    """
+    ADBClient.clear_gallery_cache()
+    ADBClient.start_gallery_app()
+    ADBClient.push_data_to_albums()
+    ADBClient.refresh_gallery_albums()
+
+    PhotosPage().is_display_no_photos_text()
+    PhotosPage().btn_more_options_click().btn_settings_click().btn_show_in_photos_view_click().albums_select_cancel(
+        "Screenshots")
+    GeneralPage().back()
+    GeneralPage().back()
+    PhotosPage().is_display_no_photos_text()
+
+
+@pytest.mark.P2
+def test_gallery_photos_092():
+    """
+    "1.相機相簿內無照片
+    2.影片相簿內有影片"
+    步骤：
+   "1.打開Gallery應用，進入照片頁面。
+    2.點擊漢堡選單>settings>show in photos view
+    3.開啟影片
+    4.返回觀察photos"
+    期望结果：
+    4.只有顯示影片相簿內的影片
+    """
+    ADBClient.clear_gallery_cache()
+    ADBClient.start_gallery_app()
+    ADBClient.push_data_to_albums()
+    ADBClient.refresh_gallery_albums()
+
+    PhotosPage().is_display_no_photos_text()
+    PhotosPage().btn_more_options_click().btn_settings_click().btn_show_in_photos_view_click().albums_select(
+        "Video")
+    GeneralPage().back()
+    GeneralPage().back()
+    PhotosPage().check_title("23 AUGUST 2024")
+
+
+@pytest.mark.P2
+def test_gallery_photos_093():
+    """
+    "1.已存在多組相簿
+    2.設置橫屏模式"
+    步骤：
+    "1.打開Gallery應用，進入照片頁面。
+    2.點擊漢堡選單>settings>show in photos view
+    3.關閉全部相簿
+    4.返回觀察photos
+    5.點擊漢堡選單>settings>show in photos view
+    6.開啟任一相簿
+    7.返回觀察photos"
+    期望结果：
+    "4.沒有任何相片顯示在photos
+    7.只會顯示開啟相簿的相片"
+    """
+    ADBClient.clear_gallery_cache()
+    ADBClient.start_gallery_app()
+    ADBClient.push_data_to_albums()
+    ADBClient.refresh_gallery_albums()
+    ADBClient.disable_auto_rotate()
+    ADBClient.set_rotate()
+
+    PhotosPage().is_display_no_photos_text()
+    PhotosPage().btn_more_options_click().btn_settings_click().btn_show_in_photos_view_click().albums_select(
+        "data_albums")
+    GeneralPage().back()
+    GeneralPage().back()
+    PhotosPage().no_display_no_photos_text()
+
+
+@pytest.mark.P0
+def test_gallery_photos_094():
+    """
+    連接網路
+    步骤：
+    "1.打開Gallery應用，進入照片頁面。
+    2.點擊漢堡選單>settings>about Gallery"
+    期望结果：
+    2.跳轉網頁顯示關於Gallery info
+    """
+    ADBClient.clear_gallery_cache()
+    ADBClient.start_gallery_app()
+
+    PhotosPage().btn_more_options_click().btn_settings_click().btn_about_gallery_click().is_gallery_info_html()
+
+
+@pytest.mark.P2
+def test_gallery_photos_095():
+    """
+    "1.設置橫屏模式
+    2.連接網路"
+    步骤：
+    "1.打開Gallery應用，進入照片頁面。
+    2.點擊漢堡選單>settings>about Gallery"
+    期望结果：
+    2.跳轉網頁顯示關於Gallery info
+    """
+    ADBClient.clear_gallery_cache()
+    ADBClient.start_gallery_app()
+    ADBClient.disable_auto_rotate()
+    ADBClient.set_rotate()
+
+    PhotosPage().btn_more_options_click().btn_settings_click().btn_about_gallery_click().is_gallery_info_html()
+
+
+@pytest.mark.P1
+def test_gallery_photos_097():
+    """
+开启wifi 并用手機拍一張照片(拍照需改定位权限)
+    步骤：
+    "1.打開Gallery應用，進入照片頁面。
+    2.双指缩放进入日视图
+    3.双指缩放进入月视图"
+    期望结果：
+    2.3. 右上角会显示拍照时定位地区
+    """
+    ADBClient.clear_gallery_cache()
+    ADBClient.start_gallery_app()
+    ADBClient.push_location_pic_to_camera()
+    ADBClient.refresh_gallery_media()
+
+    PhotosPage().check_summary("ÞINGEYJARSVEIT")
+    PhotosPage().change_to_month_display()
+    PhotosPage().check_summary("ÞINGEYJARSVEIT")

@@ -38,3 +38,19 @@ class ShowInPhotosViewPage:
             resourceId='com.nothing.gallery:id/switch_widget', selected='false')
         if no_select:
             self.d(resourceId="com.nothing.gallery:id/display_name", text="Video").click()
+
+    def albums_select(self, albums=str):
+        no_select = self.d(resourceId="com.nothing.gallery:id/display_name", text=albums).right(
+            resourceId='com.nothing.gallery:id/switch_widget', selected='false')
+        if no_select:
+            self.d(resourceId="com.nothing.gallery:id/display_name", text=albums).click()
+
+    def albums_select_cancel(self, albums=str):
+        select = self.d(resourceId="com.nothing.gallery:id/display_name", text=albums).right(
+            resourceId='com.nothing.gallery:id/switch_widget', selected='true')
+        if select:
+            self.d(resourceId="com.nothing.gallery:id/display_name", text=albums).click()
+
+    def is_camera_select(self):
+        if self.d(text="Camera").exists(timeout=2):
+            pytest.fail("有 Camera 選項")
