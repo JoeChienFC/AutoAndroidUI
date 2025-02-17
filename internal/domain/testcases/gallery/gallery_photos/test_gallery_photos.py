@@ -4,6 +4,7 @@ import pytest
 
 from internal.infra.adb.adb_function import ADBClient
 from internal.infra.pages.albums_page import AlbumsPage
+from internal.infra.pages.delete_mediaa_popup import DeleteMediaPopup
 from internal.infra.pages.general_page import GeneralPage
 from internal.infra.pages.photo_video_all_view_page import PhotoVideoAllViewPage
 from internal.infra.pages.photo_more_popover import PhotoMorePopover
@@ -1069,3 +1070,51 @@ def test_gallery_photos_097():
     PhotosPage().check_summary("ÞINGEYJARSVEIT")
     PhotosPage().change_to_month_display()
     PhotosPage().check_summary("ÞINGEYJARSVEIT")
+
+
+@pytest.mark.P1
+def test_gallery_photos_102():
+    """
+    1.相机相簿内有多张照片
+    步骤：
+    "1.长按照片
+    2.点删除图标
+    3.点任意地方"
+    期望结果：
+    "2.跳出删除弹窗
+    3.取消弹窗"
+    """
+    ADBClient.clear_gallery_cache()
+    ADBClient.start_gallery_app()
+    ADBClient.push_location_pic_to_camera()
+    ADBClient.refresh_gallery_media()
+
+    PhotosPage().photo_long_click()
+    PhotosPage().icon_delete_click().delete_panel_outside_click()
+    PhotosPage().check_not_delete_panel()
+
+
+@pytest.mark.P1
+def test_gallery_photos_103():
+    """
+    1.相机相簿内有多张照片
+    步骤：
+    "1.长按照片选取100张以上的照片
+    2.点删除图标
+    3.点删除按钮
+    4.点任意地方"
+    期望结果：
+    "2.跳出删除弹窗
+    3.弹出删除进度条
+    4.无法取消删除"
+    """
+    ADBClient.clear_gallery_cache()
+    ADBClient.start_gallery_app()
+    ADBClient.push_data_to_device("data_100", "Camera")
+    ADBClient.refresh_gallery_media()
+
+    PhotosPage().photo_long_click()
+    PhotosPage().all_select_click()
+    PhotosPage().icon_delete_click().btn_delete_click()
+    DeleteMediaPopup().delete_panel_outside_click()
+    PhotosPage().check_delete_panel()

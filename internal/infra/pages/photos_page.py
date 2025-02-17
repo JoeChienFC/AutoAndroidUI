@@ -12,6 +12,7 @@ class PhotosPage:
         self.btn_copy_to_album = "Copy to album"
         self.photo = "Thumbnail"
         self.btn_more_options = "More options"
+        self.delete_panel = "com.nothing.gallery:id/parentPanel"
 
         self.d = u2.connect()
 
@@ -201,3 +202,20 @@ class PhotosPage:
     def change_to_month_display(self):
         self.d(resourceId="com.nothing.gallery:id/entry_fragments").gesture((135, 622), (882, 1540), (525, 960),
                                                                             (613, 1121), 10)
+
+    def check_not_delete_panel(self):
+        if self.d(resourceId=self.delete_panel).exists(timeout=1):
+            pytest.fail("delete 視窗仍存在")
+
+    def check_delete_panel(self):
+        if not self.d(resourceId=self.delete_panel).exists(timeout=1):
+            pytest.fail("delete 視窗不存在")
+
+    def all_select_click(self):
+        try:
+            self.d(resourceId="com.nothing.gallery:id/selection", index="1").click()
+            time.sleep(1)
+
+        except Exception as e:
+            print(f"點擊 all_select_click 失败: {e}")
+            pytest.xfail("點擊 all_select_click 失败")

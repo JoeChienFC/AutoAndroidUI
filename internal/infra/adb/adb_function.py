@@ -76,10 +76,11 @@ class ADBClient:
         command = rf'adb push {relative_path} {destination_path}'
 
         try:
-            print(command)
             time.sleep(1)
             # 使用 subprocess 執行指令，加上 stdout=subprocess.PIPE
             subprocess.run(command, shell=True)
+            if data == "data_100":
+                time.sleep(2)
         except subprocess.CalledProcessError as e:
             print(f"Error executing command: {e}")
 
