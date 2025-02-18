@@ -71,8 +71,10 @@ class ADBClient:
         current_working_directory = os.getcwd()
         print(f"Current working directory: {current_working_directory}")
         relative_path = fr'data\{data}'
-        destination_path = f'/sdcard/DCIM/{album}'
-
+        if album == "Camera":
+            destination_path = f'/sdcard/DCIM/{album}'
+        else:
+            destination_path = f'/sdcard/Pictures/'
         command = rf'adb push {relative_path} {destination_path}'
 
         try:
@@ -80,7 +82,7 @@ class ADBClient:
             # 使用 subprocess 執行指令，加上 stdout=subprocess.PIPE
             subprocess.run(command, shell=True)
             if data == "data_100":
-                time.sleep(2)
+                time.sleep(0.5)
         except subprocess.CalledProcessError as e:
             print(f"Error executing command: {e}")
 

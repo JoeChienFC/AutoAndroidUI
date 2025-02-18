@@ -35,7 +35,7 @@ class DeleteMediaPopup:
                 x_outside = left - 10  # 點擊左側外圍
                 y_outside = top - 10  # 點擊上側外圍
                 self.d.click(x_outside, y_outside)  # 點擊外部空白處
-                time.sleep(1)
+                time.sleep(0.3)
             else:
                 print("未找到 parentPanel，無需點擊")
                 pytest.xfail("未找到 parentPanel，無需點擊")

@@ -73,7 +73,7 @@ class PhotosPage:
 
     def photo_video_click(self):
         try:
-            self.d(description=self.photo).click()
+            self.d(description=self.photo).click(timeout=1)
             time.sleep(1)
 
             from internal.infra.pages.photo_video_all_view_page import PhotoVideoAllViewPage
@@ -89,7 +89,7 @@ class PhotosPage:
 
     def photo_long_click(self):
         try:
-            self.d(description=self.photo).long_click()
+            self.d(description=self.photo).long_click(timeout=1)
             time.sleep(1)
 
         except Exception as e:
@@ -208,7 +208,7 @@ class PhotosPage:
             pytest.fail("delete 視窗仍存在")
 
     def check_delete_panel(self):
-        if not self.d(resourceId=self.delete_panel).exists(timeout=1):
+        if not self.d(resourceId=self.delete_panel).exists():
             pytest.fail("delete 視窗不存在")
 
     def all_select_click(self):

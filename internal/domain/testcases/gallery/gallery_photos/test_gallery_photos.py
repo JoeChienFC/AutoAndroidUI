@@ -1030,6 +1030,7 @@ def test_gallery_photos_094():
     ADBClient.start_gallery_app()
 
     PhotosPage().btn_more_options_click().btn_settings_click().btn_about_gallery_click().is_gallery_info_html()
+    ADBClient.stop_chrome_app()
 
 
 @pytest.mark.P2
@@ -1049,6 +1050,7 @@ def test_gallery_photos_095():
     ADBClient.set_rotate()
 
     PhotosPage().btn_more_options_click().btn_settings_click().btn_about_gallery_click().is_gallery_info_html()
+    ADBClient.stop_chrome_app()
 
 
 @pytest.mark.P1
@@ -1118,3 +1120,22 @@ def test_gallery_photos_103():
     PhotosPage().icon_delete_click().btn_delete_click()
     DeleteMediaPopup().delete_panel_outside_click()
     PhotosPage().check_delete_panel()
+
+
+@pytest.mark.P3
+def test_gallery_photos_115():
+    """
+    1.放進不能播放的視頻跟圖片
+    步骤：
+    "1.進入 Gallery 開啟 error_video_pic 的視頻和照片
+    2.手指往下滑動離開"
+    期望结果：
+    2.可以正常離開照片與視頻的大視圖
+    """
+    ADBClient.clear_gallery_cache()
+    ADBClient.start_gallery_app()
+    ADBClient.push_data_to_device("data_error_video_pic", "Camera")
+    ADBClient.refresh_gallery_media()
+
+    PhotosPage().photo_video_click().swipe_down_to_exit()
+    PhotosPage().is_photos_page()

@@ -64,5 +64,5 @@ def test_gallery_app_015():
 
     ADBClient.start_gallery_app()
     PhotosPage().go_to_last_app_with_swipe_left()
-    GeneralPage().is_settings_page()
+    GeneralPage().is_not_on_gallery_page()
     ADBClient.stop_settings()

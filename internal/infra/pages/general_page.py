@@ -46,3 +46,8 @@ class GeneralPage:
     def btn_search_click(self):
         self.d(description=self.btn_search).click()
         time.sleep(1)
+
+    def is_not_on_gallery_page(self):
+        if self.d(text="Photos").exists(timeout=3):
+            pytest.fail("還在 gallery photos 頁面")
+
