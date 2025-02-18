@@ -7,6 +7,7 @@ class DeleteMediaPopup:
     def __init__(self):
         self.d = u2.connect()
         self.delete_panel = "com.nothing.gallery:id/parentPanel"
+        self.delete_media_popup_title = "Delete media"
 
     def btn_delete_click(self):
         try:
@@ -43,3 +44,7 @@ class DeleteMediaPopup:
         except Exception as e:
             print(f"點擊 delete_panel_outside_click 失败: {e}")
             pytest.xfail("點擊 delete_panel_outside_click 失败")
+
+    def is_delete_media_popup(self):
+        if not self.d(text=self.delete_media_popup_title).exists:
+            pytest.fail("沒有出現 delete media 彈框")

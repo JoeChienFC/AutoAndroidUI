@@ -4,7 +4,7 @@ import pytest
 
 from internal.infra.adb.adb_function import ADBClient
 from internal.infra.pages.albums_page import AlbumsPage
-from internal.infra.pages.delete_mediaa_popup import DeleteMediaPopup
+from internal.infra.pages.delete_media_popup import DeleteMediaPopup
 from internal.infra.pages.general_page import GeneralPage
 from internal.infra.pages.photo_video_all_view_page import PhotoVideoAllViewPage
 from internal.infra.pages.photo_more_popover import PhotoMorePopover
@@ -1159,3 +1159,34 @@ def test_gallery_photos_115():
 
     PhotosPage().photo_video_click().swipe_down_to_exit()
     PhotosPage().is_photos_page()
+
+
+@pytest.mark.P3
+def test_gallery_photos_160():
+    """
+    至少有多张照片。
+    步骤：
+    "1.在Gallery应用中长按选中的照片進入多選模式。
+    2.切換橫豎屏
+    3.點擊下方功能按鈕"
+    期望结果：
+    3.每個按鈕點擊後皆有反應
+    """
+    ADBClient.clear_gallery_cache()
+    ADBClient.start_gallery_app()
+    ADBClient.push_location_pic_to_camera()
+    ADBClient.refresh_gallery_media()
+
+    PhotosPage().photo_long_click()
+    ADBClient.disable_auto_rotate()
+    ADBClient.set_rotate()
+    PhotosPage().icon_more_click().is_photo_more_popover()
+    GeneralPage().back()
+    PhotosPage().icon_delete_click().is_delete_media_popup()
+    GeneralPage().back()
+    PhotosPage().icon_share_click().is_share_image_popup()
+    GeneralPage().back()
+    PhotosPage().icon_copy_to_album_click().is_copy_to_album_page()
+    GeneralPage().back()
+    PhotosPage().icon_set_as_click().is_set_as_popup()
+    GeneralPage().back()

@@ -12,6 +12,7 @@ class SelectPhotoMorePopover:
         self.btn_move_to_album = "Move to album"
         self.btn_set_as = "Set as"
         self.btn_duplicate = "Duplicate"
+        self.btn_hide = "Hide"
         self.d = u2.connect()
 
     def btn_edit_click(self):
@@ -76,3 +77,8 @@ class SelectPhotoMorePopover:
     def check_set_as_button_disabled(self):
         if not self.d(description="Set as", enabled="false").exists:
             pytest.fail("Set as 按鈕沒有至灰被禁用")
+
+    def is_photo_more_popover(self):
+        if not self.d(description=self.btn_duplicate).exists and self.d(description=self.btn_hide).exists:
+            pytest.fail("沒有出現 more 提示框")
+

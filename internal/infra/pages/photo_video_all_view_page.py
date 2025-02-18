@@ -45,7 +45,7 @@ class PhotoVideoAllViewPage:
             self.d(description=self.delete_icon).click()
             time.sleep(1)
 
-            from internal.infra.pages.delete_mediaa_popup import DeleteMediaPopup
+            from internal.infra.pages.delete_media_popup import DeleteMediaPopup
             return DeleteMediaPopup()
         except Exception as e:
             print(f"點擊 delete_click 失败: {e}")

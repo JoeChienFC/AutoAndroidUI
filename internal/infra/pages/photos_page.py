@@ -13,6 +13,7 @@ class PhotosPage:
         self.photo = "Thumbnail"
         self.btn_more_options = "More options"
         self.delete_panel = "com.nothing.gallery:id/parentPanel"
+        self.btn_set_as = "Set as"
 
         self.d = u2.connect()
 
@@ -127,6 +128,8 @@ class PhotosPage:
         try:
             self.d(description=self.btn_share).click()
             time.sleep(1)
+            from internal.infra.pages.share_image_popup import ShareImagePopup
+            return ShareImagePopup()
 
         except Exception as e:
             print(f"點擊 btn_share_click 失败: {e}")
@@ -137,7 +140,7 @@ class PhotosPage:
             self.d(description=self.btn_delete).click()
             time.sleep(1)
 
-            from internal.infra.pages.delete_mediaa_popup import DeleteMediaPopup
+            from internal.infra.pages.delete_media_popup import DeleteMediaPopup
             return DeleteMediaPopup()
         except Exception as e:
             print(f"點擊 btn_delete_click 失败: {e}")
@@ -219,3 +222,14 @@ class PhotosPage:
         except Exception as e:
             print(f"點擊 all_select_click 失败: {e}")
             pytest.xfail("點擊 all_select_click 失败")
+
+    def icon_set_as_click(self):
+        try:
+            self.d(description=self.btn_set_as).click()
+            time.sleep(1)
+            from internal.infra.pages.set_as_popup import SetAsPopup
+            return SetAsPopup()
+
+        except Exception as e:
+            print(f"點擊 icon_set_as_click 失败: {e}")
+            pytest.xfail("點擊 icon_set_as_click 失败")
