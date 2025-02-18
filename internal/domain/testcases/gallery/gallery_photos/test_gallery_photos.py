@@ -1123,6 +1123,26 @@ def test_gallery_photos_103():
 
 
 @pytest.mark.P3
+def test_gallery_photos_114():
+    """
+    1.放進不能播放的視頻跟圖片
+    步骤：
+    1.進入 Gallery 開啟 error_video_pic 的影片和照片
+    期望结果：
+    1.下方會出現無法顯示照片/無法播放影片的提示語
+    """
+    ADBClient.clear_gallery_cache()
+    ADBClient.start_gallery_app()
+    ADBClient.push_data_to_device("data_error_video_pic", "Camera")
+    ADBClient.refresh_gallery_media()
+
+    PhotosPage().photo_video_click()
+    GeneralPage().check_text_on_screen_ocr("Cannot play the video")
+    PhotoVideoAllViewPage().swipe_left_to_next()
+    GeneralPage().check_text_on_screen_ocr("Cannot show the photo")
+
+
+@pytest.mark.P3
 def test_gallery_photos_115():
     """
     1.放進不能播放的視頻跟圖片

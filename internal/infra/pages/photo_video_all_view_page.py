@@ -132,3 +132,14 @@ class PhotoVideoAllViewPage:
         except Exception as e:
             print(f"點擊 swipe_down_to_exit 失败: {e}")
             pytest.xfail("點擊 swipe_down_to_exit 失败")
+
+    def swipe_left_to_next(self):
+        try:
+            time.sleep(1)
+            self.d.swipe(0.654, 0.465, 0.367, 0.465, duration=0.03)
+            time.sleep(1)
+
+        except Exception as e:
+            print(f"點擊 swipe_left_to_next 失败: {e}")
+            pytest.xfail("點擊 swipe_left_to_next 失败")
+
