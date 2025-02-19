@@ -74,7 +74,7 @@ class PhotosPage:
 
     def photo_video_click(self):
         try:
-            self.d(description=self.photo).click(timeout=1)
+            self.d(description=self.photo).click(timeout=2)
             time.sleep(1)
 
             from internal.infra.pages.photo_video_all_view_page import PhotoVideoAllViewPage
@@ -90,6 +90,7 @@ class PhotosPage:
 
     def photo_long_click(self):
         try:
+            time.sleep(2)
             self.d(description=self.photo).long_click(timeout=1)
             time.sleep(1)
 

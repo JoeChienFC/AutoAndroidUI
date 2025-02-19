@@ -150,7 +150,7 @@ class ADBClient:
         # 使用 subprocess 執行指令
         try:
             subprocess.run(refresh_gallery_command, shell=True)
-            time.sleep(1)
+            time.sleep(2)
         except subprocess.CalledProcessError as e:
             print(f"Error executing command: {e}")
 

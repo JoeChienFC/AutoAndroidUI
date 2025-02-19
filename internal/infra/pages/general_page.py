@@ -73,9 +73,7 @@ class GeneralPage:
             if text_to_find in ocr_text:
                 pass
             else:
-                print(f"OCR 找到的文字:{ocr_text}")
-                print(f"未找到題目要的文字: {text_to_find}")
-                pytest.fail(f"未找到題目要的文字: {text_to_find}")
+                pytest.fail(f"OCR 找到的文字:{ocr_text} ，未找到題目要的文字: {text_to_find}")
 
         except Exception as e:
             print(f"OCR 檢查失敗: {e}")

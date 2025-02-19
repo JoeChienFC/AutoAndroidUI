@@ -136,7 +136,7 @@ class PhotoVideoAllViewPage:
     def swipe_left_to_next(self):
         try:
             time.sleep(1)
-            self.d.swipe(0.654, 0.465, 0.367, 0.465, duration=0.03)
+            self.d.swipe(0.754, 0.465, 0.267, 0.465, duration=0.03)
             time.sleep(1)
 
         except Exception as e:
