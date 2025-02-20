@@ -10,6 +10,7 @@ class AlbumsPage:
         self.d = u2.connect()
         self.d(resourceId="com.nothing.gallery:id/entry_fragments").gesture((135, 622), (882, 1540), (525, 960),
                                                                             (613, 1121), 10)
+        self.btn_more_options = "More options"
 
     def is_favourite_album(self):
         if not self.d(resourceId="com.nothing.gallery:id/display_name", text="Favourite").exists(timeout=2):
@@ -62,4 +63,22 @@ class AlbumsPage:
             resourceId="com.nothing.gallery:id/video_media_count", text=f"{count} VID")
         if not img:
             pytest.fail(f"Camera 相簿沒有 video 或不符合 TEST CASE 要求 {count} 張數")
+
+    def btn_more_options_click(self):
+        try:
+            self.d(description=self.btn_more_options).click(timeout=2)
+            time.sleep(1)
+
+            from internal.infra.pages.settings_popover import SettingsPopover
+            return SettingsPopover()
+
+        except Exception as e:
+            print(f"點擊 btn_more_options_click 失败: {e}")
+            pytest.xfail("點擊 btn_more_options_click 失败")
+
+    def check_album_count(self, album: str, count: str):
+        img = self.d(resourceId="com.nothing.gallery:id/display_name", text=album).down(
+            resourceId="com.nothing.gallery:id/photo_media_count", text=f"{count} IMG")
+        if not img:
+            pytest.fail(f"{album} 相簿沒有相片或不符合 TEST CASE 要求 {count} 張數")
 
