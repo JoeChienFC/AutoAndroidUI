@@ -15,14 +15,14 @@ class ADBClient:
     def push_data_to_camera():
         # 使用相对路径构建 adb push 命令
         current_working_directory = os.getcwd()
-        print(f"Current working directory: {current_working_directory}")
+        # print(f"Current working directory: {current_working_directory}")
         relative_path = r'data\data_camera'
         destination_path = '/sdcard/DCIM/Camera'
 
         command = rf'adb push {relative_path} {destination_path}'
 
         try:
-            print(command)
+            # print(command)
             time.sleep(1)
             # 使用 subprocess 執行指令，加上 stdout=subprocess.PIPE
             subprocess.run(command, shell=True)
@@ -33,14 +33,14 @@ class ADBClient:
     def push_1_pic_to_camera():
         # 使用相对路径构建 adb push 命令
         current_working_directory = os.getcwd()
-        print(f"Current working directory: {current_working_directory}")
+        # print(f"Current working directory: {current_working_directory}")
         relative_path = r'data\data_1_pic'
         destination_path = '/sdcard/DCIM/Camera'
 
         command = rf'adb push {relative_path} {destination_path}'
 
         try:
-            print(command)
+            # print(command)
             time.sleep(1)
             # 使用 subprocess 執行指令，加上 stdout=subprocess.PIPE
             subprocess.run(command, shell=True)
@@ -51,14 +51,14 @@ class ADBClient:
     def push_2_pic_to_camera():
         # 使用相对路径构建 adb push 命令
         current_working_directory = os.getcwd()
-        print(f"Current working directory: {current_working_directory}")
+        # print(f"Current working directory: {current_working_directory}")
         relative_path = r'data\data_2_pic'
         destination_path = '/sdcard/DCIM/Camera'
 
         command = rf'adb push {relative_path} {destination_path}'
 
         try:
-            print(command)
+            # print(command)
             time.sleep(1)
             # 使用 subprocess 執行指令，加上 stdout=subprocess.PIPE
             subprocess.run(command, shell=True)
@@ -66,31 +66,51 @@ class ADBClient:
             print(f"Error executing command: {e}")
 
     @staticmethod
-    def push_data_to_device(data=str, album=str):
-        # 使用相对路径构建 adb push 命令
+    def push_data_to_device(data: str, album: str):
+        """推送測試數據到設備的相應相簿資料夾"""
+        if not data or not album:
+            print("Error: 'data' and 'album' parameters cannot be empty.")
+            return
+
+        # 取得當前工作目錄
         current_working_directory = os.getcwd()
-        print(f"Current working directory: {current_working_directory}")
-        relative_path = fr'data\{data}'
-        if album == "Camera":
-            destination_path = f'/sdcard/DCIM/{album}'
+        # print(f"Current working directory: {current_working_directory}")
+
+        # 構造相對路徑與目標路徑
+        relative_path = os.path.join("data", data)
+        if album.lower() == "camera":
+            destination_path = f"/sdcard/DCIM/{album}"
         else:
-            destination_path = f'/sdcard/Pictures/'
-        command = rf'adb push {relative_path} {destination_path}'
+            destination_path = "/sdcard/Pictures/"
+
+        # 構造 ADB push 命令
+        command = ["adb", "push", relative_path, destination_path]
 
         try:
-            time.sleep(1)
-            # 使用 subprocess 執行指令，加上 stdout=subprocess.PIPE
-            subprocess.run(command, shell=True)
+            # 先確保設備連線
+            subprocess.run(["adb", "wait-for-device"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+            # 執行 push 命令並捕獲結果
+            result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+
+            if result.returncode == 0:
+                pass
+            else:
+                print(f"❌ Failed to push {data}. Error:\n{result.stderr}")
+
+            # 特殊情況處理
             if data == "data_100":
-                time.sleep(0.5)
-        except subprocess.CalledProcessError as e:
-            print(f"Error executing command: {e}")
+                print("🔄 Waiting extra time for 'data_100' sync...")
+                time.sleep(1)
+
+        except Exception as e:
+            print(f"🚨 Error executing adb command: {e}")
 
     @staticmethod
     def push_location_pic_to_camera():
         # 使用相对路径构建 adb push 命令
         current_working_directory = os.getcwd()
-        print(f"Current working directory: {current_working_directory}")
+        # print(f"Current working directory: {current_working_directory}")
         relative_path = r'data\data_location'
         destination_path = '/sdcard/DCIM/Camera'
 
@@ -114,7 +134,7 @@ class ADBClient:
 
         # 使用 subprocess 執行指令
         try:
-            print(command)
+            # print(command)
             # 使用 subprocess 執行指令，加上 stdout=subprocess.PIPE
             subprocess.run(command, shell=True)
 
@@ -134,42 +154,58 @@ class ADBClient:
 
     @staticmethod
     def refresh_gallery_albums():
-        refresh_gallery_command = (
-            'adb shell am broadcast -a android.intent.action.MEDIA_SCANNER_SCAN_FILE -d file:///sdcard')
-        # 使用 subprocess 執行指令
+        """發送 MediaScanner 掃描指令，隱藏 adb 輸出"""
+        refresh_gallery_command = [
+            "adb", "shell", "am", "broadcast", "-a", "android.intent.action.MEDIA_SCANNER_SCAN_FILE", "-d",
+            "file:///sdcard"
+        ]
         try:
-            subprocess.run(refresh_gallery_command, shell=True)
+            subprocess.run(refresh_gallery_command, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             time.sleep(1)
         except subprocess.CalledProcessError as e:
             print(f"Error executing command: {e}")
 
     @staticmethod
     def refresh_gallery_media():
-        refresh_gallery_command = (
-            'adb shell am broadcast -a android.intent.action.MEDIA_SCANNER_SCAN_FILE -d file:///sdcard')
+        """發送 MediaScanner 掃描指令，隱藏 adb 輸出"""
+        refresh_gallery_command = [
+            "adb", "shell", "am", "broadcast", "-a", "android.intent.action.MEDIA_SCANNER_SCAN_FILE", "-d",
+            "file:///sdcard"
+        ]
         # 使用 subprocess 執行指令
         try:
-            subprocess.run(refresh_gallery_command, shell=True)
+            subprocess.run(refresh_gallery_command, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             time.sleep(2)
         except subprocess.CalledProcessError as e:
             print(f"Error executing command: {e}")
 
     @staticmethod
     def clear_gallery_cache():
-        clear_gallery_cache_command = 'adb shell pm clear com.nothing.gallery'
-        # 使用 subprocess 執行指令
+        """清除 Gallery 應用的快取，並隱藏 ADB 輸出"""
+        command = ["adb", "shell", "pm", "clear", "com.nothing.gallery"]
+
         try:
-            subprocess.run(clear_gallery_cache_command, shell=True)
-        except subprocess.CalledProcessError as e:
-            print(f"Error executing command: {e}")
+            # 執行 adb 指令，隱藏標準輸出和錯誤輸出
+            result = subprocess.run(command, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+            # 確保 adb 成功執行
+            if result.returncode == 0:
+                # print("Gallery cache cleared successfully.")
+                pass
+            else:
+                print("Failed to clear gallery cache. Please check ADB connection.")
+        except Exception as e:
+            print(f"Error executing adb command: {e}")
 
     @staticmethod
     def start_gallery_app():
         # ADB command to start the app by package name
-        cmd = "adb shell am start -a android.intent.action.MAIN -n com.nothing.gallery/.activity.EntryActivity"
+        # cmd = "adb shell am start -a android.intent.action.MAIN -n com.nothing.gallery/.activity.EntryActivity"
+        """清除 Gallery 應用的快取，並隱藏 ADB 輸出"""
+        command = ["adb", "shell", "am", "start", "-a", "android.intent.action.MAIN", "-n", "com.nothing.gallery/.activity.EntryActivity"]
 
-        # Execute the ADB command
-        subprocess.run(cmd, shell=True)
+        # 執行 adb 指令，隱藏標準輸出和錯誤輸出
+        subprocess.run(command, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         time.sleep(2)
         from internal.infra.pages.welcom_gallery_page import WelcomeGalleryPage
         from internal.infra.pages.photos_video_access_page import PhotosVideoAccessPage
