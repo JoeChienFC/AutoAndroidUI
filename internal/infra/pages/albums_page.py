@@ -11,6 +11,7 @@ class AlbumsPage:
         self.d(resourceId="com.nothing.gallery:id/entry_fragments").gesture((135, 622), (882, 1540), (525, 960),
                                                                             (613, 1121), 10)
         self.btn_more_options = "More options"
+        self.icon_rename = "Rename"
 
     def is_favourite_album(self):
         if not self.d(resourceId="com.nothing.gallery:id/display_name", text="Favourite").exists(timeout=2):
@@ -77,8 +78,41 @@ class AlbumsPage:
             pytest.xfail("點擊 btn_more_options_click 失败")
 
     def check_album_count(self, album: str, count: str):
-        img = self.d(resourceId="com.nothing.gallery:id/display_name", text=album).down(
-            resourceId="com.nothing.gallery:id/photo_media_count", text=f"{count} IMG")
-        if not img:
+        if not self.d(text=album).exists:
+            pytest.fail(f"沒有找到 {album} 相簿")
+        if not self.d(text=album).down(text=f"{count} IMG").exists:
             pytest.fail(f"{album} 相簿沒有相片或不符合 TEST CASE 要求 {count} 張數")
 
+    def albums_long_click(self, album: str):
+        try:
+            time.sleep(2)
+            self.d(text=album).long_click(timeout=1)
+            time.sleep(1)
+
+        except Exception as e:
+            print(f"長按 {album} 相簿失败: {e}")
+            pytest.xfail(f"長按 {album} 相簿失败")
+
+    def icon_rename_click(self):
+        try:
+            self.d(description=self.icon_rename).click(timeout=1)
+            time.sleep(1)
+
+            from internal.infra.pages.create_rename_album_popup import CreateRenameAlbumPopup
+            return CreateRenameAlbumPopup()
+
+        except Exception as e:
+            print(f"點擊 icon_rename_click 失败: {e}")
+            pytest.xfail("點擊 icon_rename_click 失败")
+
+    def enter_albums(self, album: str):
+        try:
+            time.sleep(2)
+            self.d(text=album).click(timeout=1)
+            time.sleep(1)
+
+            from internal.infra.pages.albums_detail_page import AlbumDetailPage
+            return AlbumDetailPage()
+        except Exception as e:
+            print(f"點擊 {album} 相簿失败: {e}")
+            pytest.xfail(f"點擊 {album} 相簿失败")

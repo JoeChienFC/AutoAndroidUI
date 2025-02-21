@@ -2,7 +2,7 @@ import uiautomator2 as u2
 import time, pytest
 
 
-class CreateAlbumPopup:
+class CreateRenameAlbumPopup:
 
     def __init__(self):
         self.btn_cancel = "Cancel"
@@ -47,3 +47,13 @@ class CreateAlbumPopup:
     def is_texts_exists(self, text: str):
         if not self.d(text=text).exists:
             pytest.xfail(f"文字_{text}_沒有出現")
+
+    def clear_text(self):
+        try:
+            time.sleep(1)
+            self.d.keyevent('del')
+            time.sleep(1)
+
+        except Exception as e:
+            print(f"clear_text 失败: {e}")
+            pytest.xfail("clear_text 失败")

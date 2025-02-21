@@ -23,8 +23,8 @@ class SettingsPopover:
         try:
             self.d(text="Create").click()
             time.sleep(1)
-            from internal.infra.pages.create_album_popup import CreateAlbumPopup
-            return CreateAlbumPopup()
+            from internal.infra.pages.create_rename_album_popup import CreateRenameAlbumPopup
+            return CreateRenameAlbumPopup()
 
         except Exception as e:
             print(f"點擊 btn_create_click 失败: {e}")
